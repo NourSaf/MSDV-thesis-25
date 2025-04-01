@@ -96,9 +96,6 @@
       toggleSort() {
         this.sortBy === true ? false : true;
       },
-      handleWordClick(word) {
-        alert(`You clicked: ${word.Word} (Count: ${word.Count})`);
-      },
       emotionColor(emotion) {
         const colorScale = {
           anger: '#e74c3c',
@@ -119,7 +116,6 @@
   </script>
   
 <style>
-
 
   .viz-container {
     display: flex;
@@ -168,7 +164,6 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    /* border: 1px solid #ccc; */
     background-color: rgb(255, 255, 255);
     position: relative;
     cursor: pointer;

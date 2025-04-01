@@ -1,21 +1,22 @@
 <template>
   <Modal :scrollPosition="scrollTop"></Modal>
 
-      <el-button class="con-btn"
-        @click="show_all_text_info = !show_all_text_info" 
-         circle
-         >
-          <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
-          <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
-      </el-button>
+  <div class="you-they">
+    <div class="you-section">YOU</div>
+    <div class="they-section">THEY</div>
+  </div>
+  <el-button class="con-btn"
+    @click="show_all_text_info = !show_all_text_info" 
+      circle
+      >
+      <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
+      <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
+  </el-button>
 
-      <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
-        <ConcordancePlot :script_data="split_array"/>
-      </div>
-          
-  
-  <!-- Create a div and hide it with a reveresed logic to hide everything when info is displayed -->
-  <!-- TODO Clean class names -->
+  <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
+    <ConcordancePlot :script_data="split_array"/>
+  </div>
+
   <div class="main-section">
     <div class="component-chart-section">
       <BubbelChart :data="grouped_words"/>
@@ -127,6 +128,25 @@ export default {
 
 .main-section{
   z-index: 0;
+}
+
+.you-they{
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  font-size: large;
+}
+
+
+.they-section{
+  padding: 60px;
+}
+.you-section{
+  padding: 60px;
 }
 
 .con-section{

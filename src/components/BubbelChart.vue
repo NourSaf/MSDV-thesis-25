@@ -134,8 +134,8 @@
                     .force("x", d3.forceX().strength(0.2).x(d => this.xscale(d.group)))
                     .force("y", d3.forceY().strength(0.1).y(this.height / 2))
                     .force("center", d3.forceCenter(this.width / 2, this.height / 2))
-                    .force("charge", d3.forceManyBody().strength(1))
-                    .force("collide", d3.forceCollide().strength(1).radius(40).iterations(1));
+                    .force("charge", d3.forceManyBody().strength(1.2))
+                    .force("collide", d3.forceCollide().strength(1.3).radius(40).iterations(1));
 
                 simulation.nodes(data).on("tick", () => {
                     node
