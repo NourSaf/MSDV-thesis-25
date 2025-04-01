@@ -118,21 +118,20 @@
   };
   </script>
   
-  <style scoped>
+<style>
+
+
   .viz-container {
     display: flex;
     flex-direction: column;
-    /* gap: .1rem; */
     width: 1200px;
-    height: 100vh;
     align-items: center;
     justify-content: center;
     justify-content: space-around
-
-
   }
   
   .button-container {
+    font-family: "Funnel Display", sans-serif;
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
@@ -142,8 +141,8 @@
   .emotion-btn,
   .sort-btn,
   .reset-btn {
+    font-family: "Funnel Display", sans-serif;
     padding: 0.5rem 1rem;
-    background: rgb(166, 166, 166);
     border: 2px solid #ffffff;
     border-radius: 20px;
     cursor: pointer;
@@ -155,7 +154,7 @@
   .sort-btn,
   .reset-btn {
     background: #f0f0f0;
-    font-weight: bold;
+    font-weight: normal;
   }
   
   .circle-container {
@@ -173,7 +172,7 @@
     background-color: rgb(255, 255, 255);
     position: relative;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s;
   }
   
   .word-circle:hover .tooltip {
@@ -186,7 +185,7 @@
     opacity: 0;
     background: rgba(0, 0, 0, 0.85);
     color: #fff;
-    font-size: 12px;
+    font-size: 16px;
     padding: 5px 8px;
     border-radius: 4px;
     position: absolute;
