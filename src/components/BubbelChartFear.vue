@@ -41,8 +41,13 @@ export default {
         xscale_threat(){
             return d3.scalePoint()
                 .domain(["threat"])
-                .range([this.width/2, this.width/2])
+                .range([this.width, this.width])
         },
+        rScale(){
+            return d3.scaleLinear()
+                .domain(d3.extent(this.lotteriesWithStats, d => d.aggregates.numOfUnits))
+                .range([5, 20])
+    }
     }, 
     watch:{
         data(newData){
@@ -63,26 +68,19 @@ export default {
                     .attr("width", this.width)
                     .attr("height", this.height)
                     .append("g")
-                        .attr("class", "threat-g");
+                    .attr("class", "bubbel");
 
                 const toolTip = d3.select('#tool-tip-bubble')
 
-                svg.selectAll("circle")
+                const node = svg.selectAll("circle")
                     .data(data)
                     .enter()
                     .append("circle")
                     .attr("class", d => `threat-${d.word}`)
-                    .attr("r", (d) => d.count *4)        
-                    .attr("cx", (d) =>  d.count)
-                    .attr("cy", this.height /2)
+                    .attr("r", (d) => d.count *7)        
                     .style("fill", d => this.color_scale_threat(d.group))
                     .attr("stroke", "black")
                     .style("stroke-width", 2)
-                    // .call(d3.drag()
-                    //     .on("start", this.dragstarted_threat)
-                    //     .on("drag", this.dragged_threat)
-                    //     .on("end", this.dragended_threat)
-                    // )
                     .on('mouseover', (event, data) =>{
                             toolTip
                                 .transition()
@@ -93,7 +91,6 @@ export default {
                                 .html(
                                     `
                                     <strong> Word: </strong> ${data.word} <br>
-                                    
                                     `
                                 )
                                 .style('left', (event.pageX+10) + 'px')
@@ -124,17 +121,30 @@ export default {
                         
                         });
 
-                // const simulation_threat = d3.forceSimulation()
-                //     .force("x", d3.forceX().strength(0.3).x(d => this.xscale_threat(d.group)))
-                //     .force("y", d3.forceY().strength(0.3).y(this.height / 2))
-                //     .force("center", d3.forceCenter(this.width / 2, this.height / 2))
-                //     .force("charge", d3.forceManyBody().strength(1))
-                //     .force("collide", d3.forceCollide().strength(1).radius(50).iterations(5));
+                function tick() {
+                    node.attr("cx", d => d.x).attr("cy", d => d.y);
+                }
+                
+                const center = [this.width / 2, this.height / 2];
+
+                const simulation_threat = d3.forceSimulation(data)
+                    .on("tick", tick)
+                    .force("collide", d3.forceCollide().radius(d => 100 + d.r))
+                    .force("center", d3.forceCenter(this.width / 2, this.height / 2))
+                    .force("x", d3.forceX(center[0]).strength(0.01))
+                    .force("y", d3.forceY(center[1]).strength(0.01))
+                
+                simulation_threat.restart();
+
+                    // .force("x", d3.forceX(this.width/2).strength(0.3).x(d => this.xscale_threat(d.group)))
+                    // .force("y", d3.forceY(this.height/2).strength(0.3).y(this.height / 2))
+                    // .force("center", d3.forceCenter(this.width / 2, this.height / 2))
+                    // .force("collide", d3.forceCollide().radius(d => 1 + d.r))
 
                 // simulation_threat.nodes(data).on("tick", () => {
                 //     node
                 //         .attr("cx", d => d.x)
-                //         .attr("cy", d => d.y);
+                //         // .attr("cy", d => d.y);
                 //     });
                 // this.simulation_threat = simulation_threat
                 

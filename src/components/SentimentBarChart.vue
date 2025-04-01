@@ -31,14 +31,12 @@
           .append("g")
           .attr("transform", `translate(${margin.left},${margin.top})`);
   
-        // Aggregate total word count per emotion
         const aggregated = d3.rollups(
           this.data,
           v => d3.sum(v, d => +d.Count),
           d => d.Emotion
         ).map(([emotion, total]) => ({ emotion, total }));
   
-        // Scales
         const x = d3.scaleBand()
           .domain(aggregated.map(d => d.emotion))
           .range([0, width])
@@ -49,7 +47,6 @@
           .nice()
           .range([height, 0]);
   
-        // Axes
         svg.append("g")
           .attr("transform", `translate(0,${height})`)
           .call(d3.axisBottom(x).tickSize(0))
@@ -61,7 +58,6 @@
           .selectAll("text")
           .style("font-size", "14px");
   
-        // Bars
         svg.selectAll(".bar")
           .data(aggregated)
           .enter()
@@ -73,7 +69,6 @@
           .attr("fill", "#ffffff")
           .attr("stroke", "#000");
   
-        // Labels
         svg.selectAll(".bar-label")
           .data(aggregated)
           .enter()
@@ -101,7 +96,7 @@
   }
   </script>
   
-  <style scoped>
+<style>
   .chart-container {
     width: 1200px;
     margin-left: auto;
@@ -117,15 +112,15 @@
   }
 
 
-.title {
-font-size: 30px;
-font-weight: 800;
-}
+  .title {
+  font-size: 30px;
+  font-weight: 800;
+  }
 
-.sub-title {
-font-size: 16px;
-color: #bbbbbb;
-}
+  .sub-title {
+  font-size: 16px;
+  color: #bbbbbb;
+  }
 
-  </style>
+</style>
   
