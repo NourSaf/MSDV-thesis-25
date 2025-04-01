@@ -63,7 +63,7 @@
     data() {
       return {
         selectedEmotions: [],
-        sortBy: true // true == count or false 'alphabetical'
+        sortBy: false // true == count or false 'alphabetical'
       };
     },
     computed: {
@@ -75,7 +75,7 @@
       allWords() {
         const base = this.data || [];
   
-        if (this.sortBy) {
+        if (!this.sortBy) {
           return base.slice().sort((a, b) => +b.Count - +a.Count);
         } else {
           return base.slice().sort((a, b) => a.Word.localeCompare(b.Word));
@@ -94,7 +94,7 @@
         this.selectedEmotions = [];
       },
       toggleSort() {
-        this.sortBy = this.sortBy === true ? false : true;
+        this.sortBy === true ? false : true;
       },
       handleWordClick(word) {
         alert(`You clicked: ${word.Word} (Count: ${word.Count})`);
