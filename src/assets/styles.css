@@ -1,0 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #161819;
+}
+
+.custom-switch .el-switch__label.is-active{
+    color: #e1e1e1 !important;
+  }
