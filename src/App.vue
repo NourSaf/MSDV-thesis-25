@@ -22,6 +22,14 @@
     </div>
 
     <div class="component-chart-section">
+      <BubbelChartMostCount :data="grouped_words"/>
+    </div>
+
+    <div class="component-chart-section">
+      <BubbelChartFear :data="grouped_words"/>
+    </div>
+
+    <div class="component-chart-section">
       <SentimentBarChart :data = "emotion_data"/>
     </div>
 
@@ -39,6 +47,9 @@ import ConcordancePlot from './components/ConcordancePlot.vue'
 import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
 import SentimentFilter from './components/SentimentFilter.vue'
+import BubbelChartFear from './components/BubbelChartFear.vue'
+import BubbelChartMostCount from './components/BubbelChartMostCount.vue'
+
 
 import * as d3 from 'd3'
 
@@ -76,6 +87,8 @@ export default {
     Modal, 
     ConcordancePlot,
     BubbelChart,
+    BubbelChartMostCount,
+    BubbelChartFear,
     SentimentBarChart,
     SentimentFilter,
   },
@@ -112,8 +125,6 @@ export default {
 
 <style>
 
-
-
 .main-section{
   z-index: 0;
 }
@@ -145,8 +156,8 @@ export default {
   margin: 20px;
 }
 
-/* .component-chart-section{
+.component-chart-section{
   height: 100vh;
-} */
+}
 
 </style>
