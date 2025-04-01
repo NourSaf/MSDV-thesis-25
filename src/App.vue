@@ -9,36 +9,10 @@
           <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
       </el-button>
 
-      <!-- <div class="con-section" id="con-div" 
-        v-if="show_all_text_info"
-        style="
-          width: 100v;
-          height: 100vh;
-          position: absolute;
-          right:-100% ;
-          background-color: #161819;
-          "
-      ></div>
-      <div v-else 
-          class="con-section" id="con-div" 
-          style="
-            position: fixed;
-            z-index: 10;
-            overflow-y: scroll;
-            left:0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #161819;
-            transition: left 0.5s forwards;
-          "
-        > -->
-
-        <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
-          <ConcordancePlot :script_data="split_array"/>
-        </div>
+      <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
+        <ConcordancePlot :script_data="split_array"/>
+      </div>
           
-      <!-- </div> -->
-
   
   <!-- Create a div and hide it with a reveresed logic to hide everything when info is displayed -->
   <!-- TODO Clean class names -->

@@ -166,8 +166,8 @@
   }
   
   .word-circle {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     /* border: 1px solid #ccc; */
     background-color: rgb(255, 255, 255);
