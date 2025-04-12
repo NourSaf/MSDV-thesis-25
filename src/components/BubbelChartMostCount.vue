@@ -9,6 +9,7 @@
             </div>
         </div>
         <div id="by-size"></div>
+        <div id="tool-tip-most-bubble" class="tool-tip"></div>
     </div>
 </template>
 <script>
@@ -79,7 +80,7 @@ export default{
                     .append("g")
                     .attr("class", "top-words");
 
-                const toolTip = d3.select('#tool-tip-bubble')
+                const toolTip = d3.select('#tool-tip-most-bubble')
 
                 const node = svg.selectAll("circle")
                     .data(data)

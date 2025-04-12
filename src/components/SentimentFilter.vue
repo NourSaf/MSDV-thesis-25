@@ -83,13 +83,13 @@
       }
     },
     methods: {
-        toggleEmotion(emotion) {
-            if (this.selectedEmotions.includes(emotion)) {
-            this.selectedEmotions = this.selectedEmotions.filter(e => e !== emotion);
-            } else {
-            this.selectedEmotions.push(emotion);
-            }
-        },
+      toggleEmotion(emotion) {
+          if (this.selectedEmotions.includes(emotion)) {
+          this.selectedEmotions = this.selectedEmotions.filter(e => e !== emotion);
+          } else {
+          this.selectedEmotions.push(emotion);
+          }
+      },
       resetSelection() {
         this.selectedEmotions = [];
       },
