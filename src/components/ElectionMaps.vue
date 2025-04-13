@@ -21,16 +21,16 @@ export default {
           d3.json('maps/201_land.geojson')
         ]);
 
-        console.log('Data loaded successfully:', {
-          electionFeatures: electionData?.features?.length,
-          stateFeatures: stateData?.features?.length
-        });
+        // console.log('Data loaded successfully:', {
+        //   electionFeatures: electionData?.features?.length,
+        //   stateFeatures: stateData?.features?.length
+        // });
 
         // Debug check for coordinates
-        if (electionData?.features?.length) {
-          const coord = electionData.features[0].geometry.coordinates;
-          console.log('Sample coordinates:', coord);
-        }
+        // if (electionData?.features?.length) {
+        //   const coord = electionData.features[0].geometry.coordinates;
+        //   console.log('Sample coordinates:', coord);
+        // }
 
         this.drawMap(electionData, stateData);
       } catch (error) {
@@ -69,10 +69,10 @@ export default {
         const path = d3.geoPath().projection(projection);
 
         // Check if path functions work for some coordinates
-        if (wahlkreis.features.length) {
-          const testPath = path(wahlkreis.features[0]);
-          console.log('Test path generation:', testPath);
-        }
+        // if (wahlkreis.features.length) {
+        //   const testPath = path(wahlkreis.features[0]);
+        //   console.log('Test path generation:', testPath);
+        // }
 
         // Draw election district fills with AfD highlighting
         svg.selectAll('.wahlkreis')

@@ -1,14 +1,29 @@
 <template>
-        <div id="plot-container"></div>
-        <div id="tool-tip" class="tool-tip"></div>
-        <div id="plot-title"></div>
+    <div class="section-all-scripts">
+        <div class="title">All speeches</div>
+        <div class="main-text-wrapper" v-if="script_data && script_data.length > 0">
+            <div class="speech-wrapper" v-for="(speech, index) in script_data" :key="index">
+                <div class="speech-title">{{ speech.title }}</div>
+                <div class="speech-id">ID: {{ speech.id }}</div>
+                <div class="speech-duration">Duration: {{ speech.duration }}</div>
+                <div class="view-count">Views: {{ speech.viewCount }}</div>
+                <div class="speech-url">
+                    <a :href="speech.url" target="_blank">Watch Video</a>
+                </div>
+                <div class="speech-script-en">{{ speech.translated }}</div>
+            </div>
+        </div>
+        <div v-else class="no-data">
+            No speech data available
+        </div>
+    </div>
 </template>
 
 <script>
-import * as d3 from 'd3'
+// import * as d3 from 'd3'
 
 export default {
-    name:'ConcordancePlot',
+    name:'AllScripts',
     data(){
         return {
             othering_we_group: ["we", "us", "our", "germans", "patriots", "homeland", "people", "german","home","citizens", "citizen", "patriot"],
@@ -25,184 +40,96 @@ export default {
         }
     }, 
     props:{
-        script_data: Array,
+        script_data: Object,
     },
     computed:{
-        //processing the text
-        text_filter() {
+        data_filter(){
             if (!this.script_data || !Array.isArray(this.script_data)) return [];
-            console.log("This is script",this.script_data)
-            const result = this.script_data.flatMap((array, arrayIndex) => {
-                const filteredArray = array.map((word, wordIndex) => ({
-                    word,
-                    arrayIndex,
-                    wordIndex, 
-                    arrayLength: array.length,
-                    
-                }))
-                .filter(d => {
-                    const cleanedWord = d.word.toLowerCase().replace(/[^a-zA-Z]/g, '');
-                    return this.othering_we_group.includes(cleanedWord) || this.othering_they_group.includes(cleanedWord) || this.threat.includes(cleanedWord);
-                });
+            const title = this.script_data.map(d => d.title);
 
-                // console.log(`Array ${arrayIndex}:`, filteredArray);
-
-                return filteredArray;
-            });
-
-            // console.log("Final filtered result:", result);
-            return result;
-        },
+            return console.log("This is title",title)
+            // return console.log("This is script",this.script_data)
+        }
     },
     methods:{
-        drawPlots(){
-            const plotContainer = d3.selectAll('#plot-container')
-            plotContainer.selectAll('svg').remove();
-            
-            const toolTip = d3.select('#tool-tip')
-
-            const allData = this.text_filter;
-
-            const groupedData = d3.group(allData, d => d.arrayIndex)
-
-            // console.log("ThIS IS GOURP",groupedData)
-            groupedData.forEach((dataArray, plotIndex) => {
-                const svg = plotContainer
-                    .append('svg')
-                    .attr('width', this.width)
-                    .attr('height', this.height)
-                    .attr('class', `con-plot plot-${plotIndex}`)
-                    .style('margin-bottom','20px')
-
-                // const position = dataArray.map(d => d.wordIndex)
-                // console.log("THIS IS POSITION",position)
-
-                const textLength = dataArray.map(d => d.arrayLength)
-                
-                const scaler = d3.scaleLinear()
-                    .domain([0, d3.max(textLength)])
-                    .range([this.margin.left, this.width - this.margin.right]);
-
-                svg.selectAll('line')
-                    .data(dataArray)
-                    .enter().append('line')
-                    .attr('x1', d => scaler(d.wordIndex))
-                    .attr('x2', d => scaler(d.wordIndex))
-                    .attr('y1', this.margin.top)
-                    .attr('y2', this.height - this.margin.bottom)
-                    .attr('stroke', d => 
-                        d.word && this.othering_we_group.includes(d.word.toLowerCase().replace(/[^a-zA-Z]/g, '')) ? "blue" : //We
-                        d.word && this.othering_they_group.includes(d.word.toLowerCase().replace(/[^a-zA-Z]/g, '')) ? "red" :
-                        d.word && this.threat.includes(d.word.toLowerCase().replace(/[^a-zA-Z]/g, '')) ? "green" :
-                        "black"
-                    )
-                    .attr('stroke-width', 5)
-                    .on('mouseover', (event, data) => { 
-                        const tooltipX = event.clientX + 10;
-                        const tooltipY = event.clientY + 10;
-                        toolTip
-                            .transition()
-                            .duration(200)
-                            .style('opacity', 1)
-                            .style('cursor','pointer');
-                        toolTip
-                            .html(
-                                `
-                                <strong> Word: </strong> ${data.word} <br>
-                                <strong> Word Index: </strong> ${data.wordIndex} <br>
-                                `
-                            )
-                            .style('left', tooltipX  + 'px')
-                            .style('top', tooltipY + 'px')
-                        
-                        d3.select(event.target)
-                            .transition()
-                            .duration(200)
-                            .style('opacity', 0.6)
-                            .style('cursor','pointer');
-                    })
-                    .on('mousemove', (event) => {
-                        toolTip
-                            .style('cursor','pointer')  
-                            .style('left', (event.tooltipX + 10)+'px')
-                            .style('top', (event.tooltipY + 10)+'px')
-                            
-                    })
-                    .on('mouseout', (event) =>{
-                        toolTip
-                            .transition()
-                            .duration(200)
-                            .style('opacity',0)
-                        d3.select(event.target)
-                            .transition()
-                            .duration(200)
-                            .style('opacity', 1)
-                       
-                    });
-
-                // const xAxis = d3.axisBottom(scaler).tickFormat(d => d);
-               
-                svg.append('text')
-                    .text(`Array Index: ${plotIndex}`)
-                    .attr('x', this.margin.left)
-                    .attr('y', this.margin.top)
-                    .attr('class', 'text-svg')
-                    .style('fill', 'white')
-                    .style('font-size', '14px');
-
-                svg.append('g')
-                    .attr("transform", `translate(0,${this.height - this.margin.bottom})`);
-            });
-
-        },
 
     },
     mounted(){
-        this.drawPlots();
+
     }, 
-    updated(){
-        this.drawPlots();
+    updated(){        
+        
     }
 }
 
-
 </script>
-<style>
 
-.con-plot{
-    border: solid 0.001REM;
-    align-items: left;
+<style scoped>
+.section-all-scripts{
+
+    width: 1200px;
+    padding-left: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-.plot-text{
-    font-size: large;
-}
-
-.tool-tip {
-    position: absolute;
-    opacity: 0;
-    padding: 10px;
-    background-color: rgb(215, 215, 215);
-    pointer-events: none;    
-    color:#252525; 
-    text-align: left;
-}
-
-.tool-tip:hover{
-    cursor: pointer;
-}
-
-.text-svg{
-    margin-top: 110px;
-    color: white;
-    background-color: red;
-}
-
-#plot-container{
+.main-text-wrapper{
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 50px;
+    width: 1200px;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+}
+.speech-wrapper {
+    width: 22.5%;
+    height: 300px;
+    border: 0.5px solid #8f8f8f;
+    overflow-y: scroll;
+    padding: 8px;
+}
+
+.speech-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.speech-id, .speech-duration, .view-count {
+  font-size: 0.5rem;
+  color: #888;
+  margin-bottom: 1px;
+}
+
+.speech-url {
+  margin: 3px 0;
+  font-size: 0.6rem;
+}
+
+.speech-url a {
+  color:  #888;
+  text-decoration: none;
+}
+
+.speech-url a:hover {
+  text-decoration: underline;
+}
+
+.speech-script-en {
+    font-size: 0.6rem;
+    line-height: 1.6;
+    
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 4px;
+    text-align: justify;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
 }
 
 </style>

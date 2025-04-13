@@ -20,7 +20,7 @@
   
 
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
-    <AllScripts :script_data="split_array"/>
+    <AllScripts :script_data="speeches_data"/>
   </div>
 
 
@@ -70,7 +70,8 @@ export default {
       scrollTop: 0,
       scripts: null,
       grouped_words: null,
-      emotion_data:null, 
+      emotion_data:null,
+      speeches_data: null,
       show_all_text_info: true,
     }
   },
@@ -107,12 +108,14 @@ export default {
     Promise.all([
       d3.csv('translated_scripts.csv'),
       d3.csv('Grouped_Word_Frequencies.csv'),
-      d3.csv('Emotion_Words.csv')
+      d3.csv('Emotion_Words.csv'),
+      d3.json('speeches_de_en.json')
     ])
       .then(data => {
         this.scripts = data[0];
         this.grouped_words = data[1];
         this.emotion_data = data[2];
+        this.speeches_data = data[3];
       })
     
     window.addEventListener("scroll", this.onScroll);
