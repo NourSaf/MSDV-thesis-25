@@ -14,13 +14,13 @@
       <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
   </el-button>
 
-  <div class="main-section-landing">
+  <div class="component-chart-section">
     <Landing/>
   </div>
   
 
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
-    <ConcordancePlot :script_data="split_array"/>
+    <AllScripts :script_data="split_array"/>
   </div>
 
 
@@ -53,7 +53,7 @@
 <script>
 import Landing from './components/Landing.vue'
 import Modal from './components/Modal.vue'
-import ConcordancePlot from './components/ConcordancePlot.vue'
+import AllScripts from './components/AllScripts.vue'
 import ElectionMaps from './components/ElectionMaps.vue'
 import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
@@ -96,7 +96,7 @@ export default {
   components: {
     Landing,
     Modal, 
-    ConcordancePlot,
+    AllScripts,
     ElectionMaps,
     BubbelChart,
     BubbelChartFear,
@@ -150,7 +150,6 @@ export default {
   pointer-events: none;
   font-size: large;
 }
-
 
 .they-section{
   padding: 60px;
