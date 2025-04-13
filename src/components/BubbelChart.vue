@@ -238,7 +238,7 @@
                     .enter()
                     .append("circle")
                     .attr("class", d => `top-words-${d.word}`)
-                    .attr("r", (d) => d.count - 240)        
+                    .attr("r", (d) => d.count - 230)        
                     .attr("cx", this.width/2)
                     .attr("cy", this.height /2)
                     .style("fill", d => this.color_scale(d.group))
@@ -351,7 +351,7 @@
     }
 
     .title{
-        font-size: 30px;
+        font-size: 32px;
         font-weight: 800;
     }
 
@@ -360,7 +360,7 @@
     }
     
     .chart-toggle {
-        margin-top: 20px;
+        margin-top: 16px;
     }
 
     #chart-container {
@@ -371,7 +371,7 @@
     .tool-tip {
         position: absolute;
         opacity: 0;
-        padding: 10px;
+        padding: 8px;
         background-color: rgb(126, 126, 126);
         pointer-events: none;    
         color:#fff; 
