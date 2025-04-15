@@ -1,15 +1,16 @@
 <template>
     <div class="chart-container">
-            <div class="text">
-                <div class="title">
-                    Words that reflects THREAT
-                </div>
-                <div class="sub-title">
-                    Words in Alice Weidel Speeches that represtents threat and makes people afraid of the "other"
-                </div>
+        <div class="text">
+            <div class="title">
+                Words that reflects THREAT
             </div>
-            <div id="by-threat"></div>
+            <div class="sub-title">
+                Words in Speeches that represent threat and make people afraid of the "other"
+            </div>
         </div>
+        <div id="by-threat"></div>
+        <div id="tool-tip-bubble" class="tool-tip"></div>
+    </div>
 </template>
 
 <script>
@@ -19,228 +20,193 @@ export default {
     name: 'BubbelChartFear', 
     data(){
         return{
-            width: 1200, 
-            height:800, 
+            width: 800, 
+            height: 600, 
             margin:{
-                top:20, 
-                right:20, 
-                bottom:20, 
-                left:20
+                top: 20, 
+                right: 20, 
+                bottom: 20, 
+                left: 20
             },
         }
     }, 
     props:{
         data: Array,
-    }, 
-    computed:{
-        color_scale_threat() {
-                return d3.scaleOrdinal()
-                    .domain(["threat"])
-                    .range(["#ffffff"])
-        },
-        xscale_threat(){
-            return d3.scalePoint()
-                .domain(["threat"])
-                .range([this.width, this.width])
-        },
-        rScale(){
-            return d3.scaleLinear()
-                .domain(d3.extent(this.lotteriesWithStats, d => d.aggregates.numOfUnits))
-                .range([5, 20])
-    }
-    }, 
+    },
     watch:{
         data(newData){
             if (newData && newData.length){
                 const threat_group = this.data
                     .filter(d => d.group == "threat")
-                    .sort( (a , b) => b.count - a.count)
-                this.threat_bubbel(threat_group)
-                }
+                    .sort((a, b) => b.count - a.count)
+                this.createTreemap(threat_group)
+            }
         }
     }, 
     methods: {
-        threat_bubbel(data) {
-                d3.select("#by-threat svg").remove();
+        createTreemap(data) {
+            // Remove any existing SVG
+            d3.select("#by-threat svg").remove();
 
-                const svg = d3.select("#by-threat")
-                    .append("svg")
-                    .attr("width", this.width)
-                    .attr("height", this.height)
-                    .append("g")
-                    .attr("class", "bubbel");
+            // Create the SVG container
+            const svg = d3.select("#by-threat")
+                .append("svg")
+                .attr("width", this.width)
+                .attr("height", this.height)
+                .append("g")
+                .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
 
-                const toolTip = d3.select('#tool-tip-bubble')
+            // Create hierarchical data structure required for treemap
+            const hierarchyData = {
+                name: "threat",
+                children: data.map(d => ({
+                    name: d.word,
+                    value: d.count,
+                    originalData: d // Keep original data for tooltip
+                }))
+            };
 
-                const node = svg.selectAll("circle")
-                    .data(data)
-                    .enter()
-                    .append("circle")
-                    .attr("class", d => `threat-${d.word}`)
-                    .attr("r", (d) => d.count *7)        
-                    .style("fill", d => this.color_scale_threat(d.group))
-                    .attr("stroke", "black")
-                    .style("stroke-width", 2)
-                    .on('mouseover', (event, data) =>{
-                            toolTip
-                                .transition()
-                                .duration(200)
-                                .style('opacity',1)
-                                .style('cursor','pointer');
-                            toolTip
-                                .html(
-                                    `
-                                    <strong> Word: </strong> ${data.word} <br>
-                                    `
-                                )
-                                .style('left', (event.pageX+10) + 'px')
-                                .style('top', (event.pageY+10)+ 'px')
-                            
-                            d3.select(event.target)
-                                .transition()
-                                .duration(200)
-                                .style('fill', "gray")
-                                .style('cursor','pointer');                        
-                        })
-                        .on('mousemove', (event) => {
-                            toolTip
-                                .style('cursor','pointer')  
-                                .style('left', (event.pageX+10)+'px')
-                                .style('top', (event.pageY+10)+'px')
-                                
-                        })
-                        .on('mouseout', (event) =>{
-                            toolTip
-                                .transition()
-                                .duration(200)
-                                .style('opacity',0)
-                            d3.select(event.target)
-                                .transition()
-                                .duration(200)
-                                .style('fill', "white")
-                        
-                        });
+            // Create treemap layout
+            const root = d3.hierarchy(hierarchyData)
+                .sum(d => d.value)
+                .sort((a, b) => b.value - a.value);
 
-                function tick() {
-                    node.attr("cx", d => d.x).attr("cy", d => d.y);
-                }
-                
-                const center = [this.width / 2, this.height / 2];
+            // Define the treemap layout
+            const treemapLayout = d3.treemap()
+                .size([this.width - this.margin.left - this.margin.right, 
+                       this.height - this.margin.top - this.margin.bottom])
+                .paddingOuter(10)
+                .paddingInner(4);
 
-                const simulation_threat = d3.forceSimulation(data)
-                    .on("tick", tick)
-                    .force("collide", d3.forceCollide().radius(d => 100 + d.r))
-                    .force("center", d3.forceCenter(this.width / 2, this.height / 2))
-                    .force("x", d3.forceX(center[0]).strength(0.01))
-                    .force("y", d3.forceY(center[1]).strength(0.01))
-                
-                simulation_threat.restart();
+            // Generate the treemap
+            treemapLayout(root);
 
-                    // .force("x", d3.forceX(this.width/2).strength(0.3).x(d => this.xscale_threat(d.group)))
-                    // .force("y", d3.forceY(this.height/2).strength(0.3).y(this.height / 2))
-                    // .force("center", d3.forceCenter(this.width / 2, this.height / 2))
-                    // .force("collide", d3.forceCollide().radius(d => 1 + d.r))
+            // Tooltip reference
+            const toolTip = d3.select('#tool-tip-bubble');
 
-                // simulation_threat.nodes(data).on("tick", () => {
-                //     node
-                //         .attr("cx", d => d.x)
-                //         // .attr("cy", d => d.y);
-                //     });
-                // this.simulation_threat = simulation_threat
-                
-            },
-            dragstarted_threat(event, d) {
-                if (!event.active) this.simulation_threat.alphaTarget(0.03).restart();
-                d.fx = event.x;
-                d.fy = event.y;
-            },
-            dragged_threat(event, d) {
-                d.fx = event.x;
-                d.fy = event.y;
-            },
-            dragended_threat(event, d) {
-                if (!event.active) this.simulation_threat.alphaTarget(0);
-                d.fx = null;
-                d.fy = null;
-            },
-    }, 
-    mounted(){
-        // d3.select('#by-threat')
-        //             .append('svg')
-        //             .attr('class', "svg-container")
-        //             .attr('height', this.height)
-        //             .attr('width', this.width);
-    }, 
-    updated(){
+            // Create the treemap cells
+            const cells = svg.selectAll("g")
+                .data(root.leaves())
+                .enter()
+                .append("g")
+                .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
+            // Add rectangles for each cell
+            cells.append("rect")
+                .attr("width", d => d.x1 - d.x0)
+                .attr("height", d => d.y1 - d.y0)
+                .attr("fill", "white")
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .on('mouseover', (event, d) => {
+                    toolTip
+                        .transition()
+                        .duration(200)
+                        .style('opacity', 1);
+                    toolTip
+                        .html(`
+                            <strong>Word:</strong> ${d.data.name} <br>
+                            <strong>Count:</strong> ${d.data.value}
+                        `)
+                        .style('left', (event.pageX + 10) + 'px')
+                        .style('top', (event.pageY + 10) + 'px');
+                    
+                    d3.select(event.target)
+                        .transition()
+                        .duration(200)
+                        .attr("fill", "#f0f0f0") // Slight gray highlight on hover
+                        .style('cursor', 'pointer');
+                })
+                .on('mousemove', (event) => {
+                    toolTip
+                        .style('left', (event.pageX + 10) + 'px')
+                        .style('top', (event.pageY + 10) + 'px');
+                })
+                .on('mouseout', (event) => {
+                    toolTip
+                        .transition()
+                        .duration(200)
+                        .style('opacity', 0);
+                    d3.select(event.target)
+                        .transition()
+                        .duration(200)
+                        .attr("fill", "white");
+                });
+
+            // Add text labels to the cells
+            cells.append("text")
+                .attr("x", 5)
+                .attr("y", 15)
+                .text(d => d.data.name)
+                .attr("font-size", d => {
+                    // Dynamically adjust text size based on cell dimensions
+                    const cellWidth = d.x1 - d.x0;
+                    const cellHeight = d.y1 - d.y0;
+                    const cellSize = Math.min(cellWidth, cellHeight);
+                    
+                    // Only show text if there's enough space
+                    if (cellSize < 30) return 0;
+                    if (cellSize < 50) return 10;
+                    if (cellSize < 80) return 12;
+                    return 14;
+                })
+                .attr("fill", "black")
+                .style("pointer-events", "none"); // Prevent text from interfering with hover
+        }
+    },
+    mounted() {
+        // Create tooltip if it doesn't exist
+        if (!document.getElementById('tool-tip-bubble')) {
+            d3.select('body').append('div')
+                .attr('id', 'tool-tip-bubble')
+                .attr('class', 'tool-tip');
+        }
     }
 }
 </script>
 
-<style>
-    .chart-container{
-        width: 1200px;
-        height: 100vh;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
+<style scoped>
+.chart-container {
+    width: 800px;
+    height: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .title{
-        font-size: 30px;
-        font-weight: 800;
-    }
-    .sub-title{
-        font-size: 16px;
-    }
-    
-    #tool-tip-bubble {
-        position: absolute;
-        opacity: 0;
-        padding: 10px;
-        background-color: rgb(126, 126, 126);
-        pointer-events: none;    
-        color:#fff; 
-        text-align: left;
-    }
+.title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-align: center;
+}
 
-    .tool-tip:hover{
-        cursor: pointer;
-    }
+.sub-title {
+    font-size: 16px;
+    margin-bottom: 30px;
+    text-align: center;
+}
 
-    .text-svg{
-        margin-top: 110px;
-        color: white;
-        background-color: rgb(197, 197, 197);
-    }
+#by-threat {
+    width: 800px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    #you-chart{
-        width: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #by-size{
-        width: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #by-threat{
-        width: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
+/* Make the tooltip position absolute and ensure it's scoped */
+:deep(#tool-tip-bubble) {
+    position: absolute;
+    opacity: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    color: #fff;
+    text-align: left;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    max-width: 200px;
+}
 </style>

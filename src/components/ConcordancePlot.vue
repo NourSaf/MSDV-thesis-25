@@ -169,8 +169,6 @@ export default {
 </script>
 <style>
 
-
-
 .con-plot{
     border: solid 0.001REM;
     align-items: left;

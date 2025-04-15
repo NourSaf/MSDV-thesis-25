@@ -14,20 +14,40 @@
       <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
   </el-button>
 
-  <div class="component-chart-section">
-    <Landing/>
-  </div>
-  
-
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
     <AllScripts :script_data="speeches_data"/>
   </div>
-
-
-
+  
+  
   <div class="main-section">
     <div class="component-chart-section">
-    <ElectionMaps/>
+      <Landing/>
+    </div>
+
+    <!-- 
+      <div class="component-chart-section">
+        <div class="story-section">
+          <div class="story-title">
+            <h3>Title</h3>  
+          </div>
+
+          <div class="story-title">
+            Title  
+          </div>
+        </div>
+      </div> 
+    -->
+
+    <div class="component-chart-section">
+      <ElectionMap17/>
+    </div>
+    
+    <div class="component-chart-section">
+      <ElectionMap21/>
+    </div>
+    
+    <div class="component-chart-section">
+      <ElectionMap25/>
     </div>
 
     <div class="component-chart-section">
@@ -54,7 +74,9 @@
 import Landing from './components/Landing.vue'
 import Modal from './components/Modal.vue'
 import AllScripts from './components/AllScripts.vue'
-import ElectionMaps from './components/ElectionMaps.vue'
+import ElectionMap17 from './components/ElectionMap17.vue'
+import ElectionMap21 from './components/ElectionMap21.vue'
+import ElectionMap25 from './components/ElectionMap25.vue'
 import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
 import SentimentFilter from './components/SentimentFilter.vue'
@@ -98,7 +120,9 @@ export default {
     Landing,
     Modal, 
     AllScripts,
-    ElectionMaps,
+    ElectionMap17,
+    ElectionMap21,
+    ElectionMap25,
     BubbelChart,
     BubbelChartFear,
     SentimentBarChart,
@@ -169,7 +193,7 @@ export default {
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: #161819;
+  background-color: #121212;
   transition: transform 0.5s ease;
   z-index: 10;
   flex-direction: column;
