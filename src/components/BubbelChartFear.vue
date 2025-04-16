@@ -8,7 +8,9 @@
                 Words in Speeches that represent threat and make people afraid of the "other"
             </div>
         </div>
-        <div id="by-threat"></div>
+        <div class="chart-container">
+            <div id="by-threat"></div>
+        </div>
         <div id="tool-tip-bubble" class="tool-tip"></div>
     </div>
 </template>
@@ -167,29 +169,28 @@ export default {
 
 <style scoped>
 .chart-container {
-    width: 800px;
-    height: 700px;
-    margin: 0 auto;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
 }
 
 .title {
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 8px;
-    text-align: center;
 }
 
 .sub-title {
     font-size: 16px;
     margin-bottom: 30px;
-    text-align: center;
+    
 }
 
 #by-threat {
-    width: 800px;
+    width: 1200px;
     height: 600px;
     display: flex;
     justify-content: center;

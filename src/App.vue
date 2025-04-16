@@ -184,7 +184,7 @@ export default {
         scroller
           .setup({
             step: ".step",
-            offset: 0.8,
+            offset: 0.5,
             debug: false,
           })
           .onStepEnter(response => {
@@ -267,6 +267,8 @@ export default {
 
 .component-chart-section{
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .story-section{
@@ -285,7 +287,8 @@ article {
   position: relative;
   padding: 0;
   margin: 0;
-  min-height: 90vh;
+  min-height: 115vh;
+  z-index: 2;
 }
 
 figure {
@@ -298,10 +301,9 @@ figure {
 }
 
 .step {
-  margin-left: 258px;
   padding: auto 0;
-  min-height: 60vh;
-  z-index: 10;
+  min-height: 50vh;
+  z-index: 1000;
 
 }
 
@@ -311,6 +313,8 @@ figure {
   border-radius: 5px;
   color: #fff;
   max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 </style>
