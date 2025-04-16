@@ -1,6 +1,6 @@
 <template>
   <div class="map-container">
-    <div class="map-description">
+    <!-- <div class="map-description">
       <div class="description-section">
         <div class="title">
           2017 Election Results
@@ -9,7 +9,7 @@
           in 2017 the AfD won 10% of the votes
         </div>
       </div>
-    </div>
+    </div> -->
       <div id="map-2017-container"></div>
     <div id="map-tool-tip" class="map-tool-tip"></div>
   </div>
@@ -31,29 +31,47 @@ export default {
         bottom: 10,
         left: 10
       },
-      electionData: null,
-      landData: null
+     
     };
+  },
+  props: {
+    electionData: {
+      type: Object, // Changed from Array to Object
+      required: true
+    },
+    landData: {
+      type: Object, 
+      required: true
+    }
+  },
+  watch: {
+    electionData: {
+      handler() {
+        if (this.electionData && this.landData) {
+          this.renderMap();
+        }
+      },
+      immediate: true
+    },
+    landData: {
+      handler() {
+        if (this.electionData && this.landData) {
+          this.renderMap();
+        }
+      },
+      immediate: true
+    }
   },
   mounted() {
     this.loadMapData();
   },
   methods: {
     async loadMapData() {
-      try {
-        // Load both GeoJSON files in parallel
-        const [electionData, landData] = await Promise.all([
-          d3.json(`maps/202017_election_results.geojson`),
-          d3.json(`maps/germany_land.geojson`)
-        ]);
-
-        this.electionData = electionData;
-        this.landData = landData;
-
-        // Render the map once the data is loaded
+      // Don't reload the data - it's coming from props
+      if (this.electionData && this.landData) {
         this.renderMap();
-      } catch (error) {
-        console.error('Error loading map data:', error);
+      } else {
+        console.error('ElectionMap17: Missing required data');
       }
     },
 
@@ -225,6 +243,7 @@ export default {
 }
 
 .description-section{
+  opacity: 0;
   display: flex;
   justify-content: center;
   flex-direction:column ;
@@ -236,6 +255,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: transparent;
+  justify-content: center;
 }
 
 .map-tool-tip {

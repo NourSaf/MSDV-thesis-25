@@ -1,6 +1,6 @@
 <template>
   <div class="map-container">
-    <div class="map-description">
+    <!-- <div class="map-description">
       <div class="description-section">
         <div class="title">
           2021 Election Results
@@ -9,7 +9,7 @@
           in 2021 the AfD won 10% of the votes
         </div>
       </div>
-    </div>
+    </div> -->
     <div id="map-2021-container"></div>
     <div id="map-tool-tip" class="map-tool-tip"></div>
   </div>
@@ -20,7 +20,7 @@ import * as d3 from 'd3';
 import { geoMercator, geoPath } from 'd3-geo';
 
 export default {
-  name: 'ElectionMap17',
+  name: 'ElectionMap21', // Fix the component name
   data() {
     return {
       width: 600,
@@ -30,33 +30,50 @@ export default {
         right: 10,
         bottom: 10,
         left: 10
-      },
-      electionData: null,
-      landData: null
+      }
     };
+  },
+  props: {
+    electionData: {
+      type: Object,
+      required: true
+    },
+    landData: {
+      type: Object, 
+      required: true
+    }
+  },
+  watch: {
+    electionData: {
+      handler() {
+        if (this.electionData && this.landData) {
+          this.renderMap();
+        }
+      },
+      immediate: true
+    },
+    landData: {
+      handler() {
+        if (this.electionData && this.landData) {
+          this.renderMap();
+        }
+      },
+      immediate: true
+    }
   },
   mounted() {
     this.loadMapData();
   },
   methods: {
     async loadMapData() {
-      try {
-        // Load both GeoJSON files in parallel
-        const [electionData, landData] = await Promise.all([
-          d3.json(`maps/032021_election_results.geojson`),
-          d3.json(`maps/germany_land.geojson`)
-        ]);
-
-        this.electionData = electionData;
-        this.landData = landData;
-
-        // Render the map once the data is loaded
+      // Don't reload the data - it's coming from props
+      if (this.electionData && this.landData) {
         this.renderMap();
-      } catch (error) {
-        console.error('Error loading map data:', error);
+      } else {
+        console.error('ElectionMap21: Missing required data');
       }
     },
-
+    
     renderMap() {
       if (!this.electionData) {
         console.error('Election data not available for rendering map');
@@ -218,6 +235,7 @@ export default {
 }
 
 .description-section{
+  opacity: 0;
   display: flex;
   justify-content: center;
   flex-direction:column ;
@@ -229,6 +247,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: transparent;
+  justify-content: center;
 }
 
 .map-tool-tip {
