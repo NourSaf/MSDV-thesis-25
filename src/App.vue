@@ -5,25 +5,29 @@
     <div class="you-section">YOU</div>
     <div class="they-section">THEY</div>
   </div>
+  
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
-      circle
-      >
-      <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
-      <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
+    circle>
+    <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
+    <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
   </el-button>
+  
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
     <AllScripts :script_data="speeches_data"/>
   </div>
   
   <div class="main-section">
+    
+    <!-- LANDING HERO -->
     <div class="component-chart-section">
       <Landing/>
     </div>
-    
+
+    <!-- SCROLLAMA -->
     <div id="scrolly">
+      <!-- SCROLLAMA FIGURES/MAPS -->
       <figure>
-        
         <ElectionMap17 
           v-if="currentStep === 0 && election_results_17 && land_data" 
           :electionData="election_results_17" 
@@ -49,8 +53,9 @@
         />
       </figure>
 
+      <!-- SCROLLAMA STEPS -->
       <article>
-        <div class="step">
+        <div class="step" data-step="0">
           <div class="step-content">
             <h3>2017 Election Results</h3>
             <p>In 2017, the AfD won 10% of the votes, marking their initial rise to prominence in German politics.</p>
@@ -76,22 +81,14 @@
         </div>
       </article>
     </div>
-
-    <div class="component-chart-section">
-      <BubbelChart :data="grouped_words"/>
-    </div>
-
-    <div class="component-chart-section">
-      <BubbelChartFear :data="grouped_words"/>
-    </div>
-
-    <div class="component-chart-section">
-      <SentimentBarChart :data = "emotion_data"/>
-    </div>
-
-    <div class="component-chart-section">
-      <SentimentFilter :data = "emotion_data"/>
-    </div>
+    
+  </div>
+  <div class="section-separator"></div>
+  <div id="fullpage-container" v-if="dataLoaded">
+    <FullpageCharts 
+      :groupedWords="grouped_words" 
+      :emotionData="emotion_data" 
+    />
   </div>
 </template>
 
@@ -102,11 +99,9 @@ import AllScripts from './components/AllScripts.vue'
 import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
-import BubbelChart from './components/BubbelChart.vue'
-import SentimentBarChart from './components/SentimentBarChart.vue'
-import SentimentFilter from './components/SentimentFilter.vue'
-import BubbelChartFear from './components/BubbelChartFear.vue'
+import FullpageCharts from './components/FullpageCharts.vue'
 
+// Import scrollama
 import * as d3 from 'd3'
 import scrollama from "scrollama";
 const scroller = scrollama();
@@ -126,6 +121,7 @@ export default {
       election_results_21: null,
       election_results_25: null,
       land_data: null,
+      dataLoaded: false, // Add this to control rendering
     }
   },
   computed:{
@@ -154,10 +150,7 @@ export default {
     ElectionMap17,
     ElectionMap21,
     ElectionMap25,
-    BubbelChart,
-    BubbelChartFear,
-    SentimentBarChart,
-    SentimentFilter,
+    FullpageCharts // Add the new component here
   },
   mounted(){
     Promise.all([
@@ -179,8 +172,9 @@ export default {
         this.election_results_21 = data[5];
         this.election_results_25 = data[6];
         this.land_data = data[7];
+        this.dataLoaded = true; // Set this after data loads
       })
-      .then (() =>{
+      .then(() => {
         scroller
           .setup({
             step: ".step",
@@ -194,7 +188,7 @@ export default {
           .onStepExit(response => {
             console.log('Step Exit:', response.index, response.direction);
           });
-      })
+      });
     
     window.addEventListener("scroll", this.onScroll);
   },
@@ -265,10 +259,20 @@ export default {
   margin: 20px; 
 }
 
-.component-chart-section{
+/* .component-chart-section{
   height: 100vh;
   display: flex;
   align-items: center;
+} */
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  background: #333;
+  height: 100vh;
 }
 
 .story-section{
@@ -289,6 +293,7 @@ article {
   margin: 0;
   min-height: 115vh;
   z-index: 2;
+  pointer-events: none;
 }
 
 figure {
@@ -315,6 +320,40 @@ figure {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.section-separator {
+  height: 100px;
+  width: 100%;
+  clear: both;
+}
+
+#fullpage-container {
+  position: relative;
+  z-index: 5; 
+  height: 100vh; 
+}
+/* Adjust the scrolly section */
+#scrolly {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow: visible; /* Allow content to flow */
+}
+
+/* Ensure Landing component doesn't take up too much space */
+.component-chart-section:first-child {
+  min-height: 100vh;
+  height: auto;
+  margin-bottom: 50px; /* Add space after Landing */
+}
+
+.fp-watermark{
+    display: none !important;
+}
+
+.fp-warning, .fp-watermark{
+    display: none !important;
 }
 
 </style>
