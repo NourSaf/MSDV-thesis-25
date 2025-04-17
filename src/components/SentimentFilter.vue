@@ -43,8 +43,8 @@
               :key="word.ArrayID"
               class="word-circle"
               :style="{
-                  backgroundColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#fff',
-                  borderColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#ccc'
+                  backgroundColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#828282',
+                  // borderColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#ccc'
               }"
               >
               <span class="tooltip">{{ word.Word }} ({{ word.Count }})</span>
@@ -130,8 +130,9 @@
     font-family: "Funnel Display", sans-serif;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.5rem;
     justify-content: center;
+    margin-bottom: 18px;
   }
 
   .emotion-btn,
@@ -139,11 +140,11 @@
   .reset-btn {
     font-family: "Funnel Display", sans-serif;
     padding: 0.5rem 1rem;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
+    transition: all 0.5s ease;
+    font-size: 12px;
     text-transform: capitalize;
   }
   
@@ -156,15 +157,15 @@
   .circle-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     justify-content: center;
   }
   
   .word-circle {
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(63, 63, 63);
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s;

@@ -5,29 +5,24 @@
     <div class="you-section">YOU</div>
     <div class="they-section">THEY</div>
   </div>
-  
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
-    circle>
-    <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
-    <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
+      circle
+      >
+      <el-icon class="plus" v-if="show_all_text_info"><CirclePlusFilled /></el-icon>
+      <el-icon class="plus" v-else><RemoveFilled /></el-icon>  
   </el-button>
-  
+
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
     <AllScripts :script_data="speeches_data"/>
   </div>
   
   <div class="main-section">
-    
-    <!-- LANDING HERO -->
     <div class="component-chart-section">
       <Landing/>
     </div>
-
-    <!-- SCROLLAMA -->
     <div id="scrolly">
-      <!-- SCROLLAMA FIGURES/MAPS -->
-      <figure>
+      <figure >
         <ElectionMap17 
           v-if="currentStep === 0 && election_results_17 && land_data" 
           :electionData="election_results_17" 
@@ -51,11 +46,12 @@
           key="map-2025" 
           class="map" 
         />
+        
+
       </figure>
 
-      <!-- SCROLLAMA STEPS -->
       <article>
-        <div class="step" data-step="0">
+        <div class="step">
           <div class="step-content">
             <h3>2017 Election Results</h3>
             <p>In 2017, the AfD won 10% of the votes, marking their initial rise to prominence in German politics.</p>
@@ -81,15 +77,31 @@
         </div>
       </article>
     </div>
+
+    <div class="scroll-snap-container">
+      <div class="snap-section">
+        WHY ARE THEY SO POPULAR? <br>
+        To invistigate the rise of the AfD, we will analyze the speeches of the party leaders and their supporters.
+      </div>
+      <div class="snap-section">
+        <BubbelChart :data="grouped_words"/>
+      </div>
+
+      <div class="snap-section">
+        <BubbelChartFear :data="grouped_words"/>
+      </div>
+
+      <div class="snap-section">
+        <SentimentBarChart :data="emotion_data"/>
+      </div>
+
+      <div class="snap-section">
+        <SentimentFilter :data="emotion_data"/>
+      </div>
+    </div>
     
   </div>
-  <div class="section-separator"></div>
-  <div id="fullpage-container" v-if="dataLoaded">
-    <FullpageCharts 
-      :groupedWords="grouped_words" 
-      :emotionData="emotion_data" 
-    />
-  </div>
+
 </template>
 
 <script>
@@ -99,9 +111,15 @@ import AllScripts from './components/AllScripts.vue'
 import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
-import FullpageCharts from './components/FullpageCharts.vue'
+import BubbelChart from './components/BubbelChart.vue'
+import SentimentBarChart from './components/SentimentBarChart.vue'
+import SentimentFilter from './components/SentimentFilter.vue'
+import BubbelChartFear from './components/BubbelChartFear.vue'
 
-// Import scrollama
+
+
+// import { nextTick } from 'vue';
+
 import * as d3 from 'd3'
 import scrollama from "scrollama";
 const scroller = scrollama();
@@ -121,7 +139,6 @@ export default {
       election_results_21: null,
       election_results_25: null,
       land_data: null,
-      dataLoaded: false, // Add this to control rendering
     }
   },
   computed:{
@@ -150,7 +167,10 @@ export default {
     ElectionMap17,
     ElectionMap21,
     ElectionMap25,
-    FullpageCharts // Add the new component here
+    BubbelChart,
+    BubbelChartFear,
+    SentimentBarChart,
+    SentimentFilter,
   },
   mounted(){
     Promise.all([
@@ -172,9 +192,11 @@ export default {
         this.election_results_21 = data[5];
         this.election_results_25 = data[6];
         this.land_data = data[7];
-        this.dataLoaded = true; // Set this after data loads
+        
+        // Initialize fullpage.js after data is loaded
+        
       })
-      .then(() => {
+      .then (() =>{
         scroller
           .setup({
             step: ".step",
@@ -189,6 +211,7 @@ export default {
             console.log('Step Exit:', response.index, response.direction);
           });
       });
+      
     
     window.addEventListener("scroll", this.onScroll);
   },
@@ -259,27 +282,12 @@ export default {
   margin: 20px; 
 }
 
-/* .component-chart-section{
+.component-chart-section{
   height: 100vh;
   display: flex;
   align-items: center;
-} */
-
-.section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-  background: #333;
-  height: 100vh;
 }
 
-.story-section{
-  width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 #scrolly {
   position: relative;
@@ -293,7 +301,6 @@ article {
   margin: 0;
   min-height: 115vh;
   z-index: 2;
-  pointer-events: none;
 }
 
 figure {
@@ -309,7 +316,6 @@ figure {
   padding: auto 0;
   min-height: 50vh;
   z-index: 1000;
-
 }
 
 .step-content {
@@ -322,38 +328,97 @@ figure {
   margin-right: auto;
 }
 
-.section-separator {
-  height: 100px;
-  width: 100%;
-  clear: both;
+.scroll-snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-#fullpage-container {
+.snap-section {
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  z-index: 5; 
-  height: 100vh; 
 }
-/* Adjust the scrolly section */
+
+/* Override any component-specific height settings */
+.snap-section > * {
+  height: 100%;
+}
+
+.omponent-chart-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Add these styles to your existing CSS */
+
+/* Make main section a scroll container with snap points */
+.main-section {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* Make all direct children of main-section snap to viewport */
+.main-section > * {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Special handling for scrollama section */
 #scrolly {
   position: relative;
-  z-index: 1;
+  height: auto; /* Let it take natural height for all steps */
+  min-height: 300vh; /* Approximately 3 steps worth of height */
+  padding: 0;
   max-width: 100%;
-  overflow: visible; /* Allow content to flow */
+  /* Don't add scroll-snap inside scrolly to avoid conflicts with scrollama */
 }
 
-/* Ensure Landing component doesn't take up too much space */
-.component-chart-section:first-child {
-  min-height: 100vh;
-  height: auto;
-  margin-bottom: 50px; /* Add space after Landing */
+/* Keep figure sticky while maintaining scrollama behavior */
+#scrolly figure {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  z-index: 1;
 }
 
-.fp-watermark{
-    display: none !important;
+/* Make scroll-snap-container properly snap inside main-section */
+.scroll-snap-container {
+  height: 100vh; /* Ensure container takes full height */
+  overflow-y: auto;
 }
 
-.fp-warning, .fp-watermark{
-    display: none !important;
+/* Don't let nested snapping interfere with page snapping */
+.main-section .scroll-snap-container {
+  pointer-events: auto;
+  scroll-snap-align: start;
 }
+
+/* Fix the typo in your class name and ensure it matches component-chart-section */
+.component-chart-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Add smooth transition between sections */
+html {
+  scroll-behavior: smooth;
+}
+
 
 </style>

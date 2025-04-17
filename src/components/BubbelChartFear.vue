@@ -1,5 +1,6 @@
 <template>
-    <div class="chart-container">
+
+    <div class="component-wrapper">
         <div class="text">
             <div class="title">
                 Words that reflects THREAT
@@ -167,7 +168,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.component-wrapper{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .chart-container {
     width: 1200px;
     margin-left: auto;
@@ -186,7 +195,6 @@ export default {
 .sub-title {
     font-size: 16px;
     margin-bottom: 30px;
-    
 }
 
 #by-threat {
@@ -210,4 +218,5 @@ export default {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     max-width: 200px;
 }
+
 </style>
