@@ -1,10 +1,12 @@
 <template>
-    <div class="chart-container">
+    <div class="component-wrapper">
       <div class="text">
         <div class="title">Emotional Emphasis</div>
         <div class="sub-title">Total word usage per emotion category</div>
       </div>
-      <div id="sentiment-bar"></div>
+      <div id="chart-container">
+        <div id="sentiment-bar"></div>
+      </div>
     </div>
   </template>
   
@@ -20,9 +22,9 @@
       drawBarChart() {
         d3.select("#sentiment-bar").selectAll("*").remove();
   
-        const margin = { top: 50, right: 20, bottom: 50, left: 100 };
-        const width = 1000 - margin.left - margin.right;
-        const height = 500 - margin.top - margin.bottom;
+        const margin = { top: 50, right: 20, bottom: 50, left: 150 }; // Increased left margin for emotion labels
+        const width = 1200 - margin.left - margin.right;
+        const height = 700 - margin.top - margin.bottom;
   
         const svg = d3.select("#sentiment-bar")
           .append("svg")
@@ -37,47 +39,63 @@
           d => d.Emotion
         ).map(([emotion, total]) => ({ emotion, total }));
   
-        const x = d3.scaleBand()
+        // Flip the scales - y is now a band scale for emotions
+        const y = d3.scaleBand()
           .domain(aggregated.map(d => d.emotion))
-          .range([0, width])
+          .range([0, height]) // Note the range starts from 0
           .padding(0.2);
   
-        const y = d3.scaleLinear()
+        // x is now a linear scale for counts
+        const x = d3.scaleLinear()
           .domain([0, d3.max(aggregated, d => d.total)])
           .nice()
-          .range([height, 0]);
+          .range([0, width]);
   
+        // Draw x-axis (counts) at the bottom
         svg.append("g")
           .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x).tickSize(0))
-          .selectAll("text")
-          .style("font-size", "16px");
-  
-        svg.append("g")
-          .call(d3.axisLeft(y).ticks(10))
+          .call(d3.axisBottom(x).ticks(10))
           .selectAll("text")
           .style("font-size", "14px");
+        
+        // Add x-axis label
+        svg.append("text")
+          .attr("transform", `translate(${width/2}, ${height + 40})`)
+          .style("text-anchor", "middle")
+          .style("fill", "#ffffff")
+          .style("font-size", "16px")
   
+        // Draw y-axis (emotions) on the left
+        svg.append("g")
+          .call(d3.axisLeft(y).tickSize(0))
+          .selectAll("text")
+          .style("font-size", "16px")
+          .style("fill", "#ffffff");
+  
+        // Draw horizontal bars
         svg.selectAll(".bar")
           .data(aggregated)
           .enter()
           .append("rect")
-          .attr("x", d => x(d.emotion))
-          .attr("y", d => y(d.total))
-          .attr("width", x.bandwidth())
-          .attr("height", d => height - y(d.total))
+          .attr("class", "bar")
+          .attr("y", d => y(d.emotion)) // Y position based on emotion
+          .attr("x", 0) // Start from left edge (0)
+          .attr("height", y.bandwidth()) // Height based on band scale
+          .attr("width", d => x(d.total)) // Width based on count value
           .attr("fill", "#ffffff")
           .attr("stroke", "#000");
   
+        // Add value labels at the end of each bar
         svg.selectAll(".bar-label")
           .data(aggregated)
           .enter()
           .append("text")
-          .attr("x", d => x(d.emotion) + x.bandwidth() / 2)
-          .attr("y", d => y(d.total) - 10)
-          .attr("text-anchor", "middle")
+          .attr("class", "bar-label")
+          .attr("y", d => y(d.emotion) + y.bandwidth() / 2) // Center vertically in bar
+          .attr("x", d => x(d.total) + 5) // Position just after bar end
+          .attr("dominant-baseline", "middle") // Center text vertically
           .text(d => d.total)
-          .style("font-size", "12px")
+          .style("font-size", "14px")
           .style("fill", "#ffffff");
       }
     },
@@ -97,18 +115,14 @@
   </script>
   
 <style>
-  .chart-container {
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
 
   #sentiment-bar{
-    display:flex;
-    justify-content: center
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 
@@ -123,4 +137,3 @@
   }
 
 </style>
-  

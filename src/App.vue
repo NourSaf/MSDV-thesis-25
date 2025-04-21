@@ -1,10 +1,10 @@
 <template>
   <Modal :scrollPosition="scrollTop"></Modal>
 
-  <div class="you-they">
+  <!-- <div class="you-they">
     <div class="you-section">YOU</div>
     <div class="they-section">THEY</div>
-  </div>
+  </div> -->
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
       circle
@@ -16,11 +16,19 @@
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
     <AllScripts :script_data="speeches_data"/>
   </div>
+
   
   <div class="main-section">
     <div class="component-chart-section">
       <Landing/>
     </div>
+    <div class="snap-section">
+        <h3 class="seperater-section">
+          PART 01 - MOTIVATION
+        THE RISE OF THE RIGHT-WING PARTY IN GERMANY 
+        </h3>
+        
+      </div>
     <div id="scrolly">
       <figure >
         <ElectionMap17 
@@ -46,8 +54,6 @@
           key="map-2025" 
           class="map" 
         />
-        
-
       </figure>
 
       <article>
@@ -80,8 +86,9 @@
 
     <div class="scroll-snap-container">
       <div class="snap-section">
-        WHY ARE THEY SO POPULAR? <br>
-        To invistigate the rise of the AfD, we will analyze the speeches of the party leaders and their supporters.
+        <h3 class="seperater-section">
+          PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY 
+        </h3>
       </div>
       <div class="snap-section">
         <BubbelChart :data="grouped_words"/>
@@ -90,10 +97,16 @@
       <div class="snap-section">
         <BubbelChartFear :data="grouped_words"/>
       </div>
+      <div class="snap-section">
+        <h3 class="seperater-section">
+          PART 3 - SPEECH ANALYSIS: SENTIMENT ANALYSIS <br>
+        </h3>
+      </div>
 
       <div class="snap-section">
         <SentimentBarChart :data="emotion_data"/>
       </div>
+      
 
       <div class="snap-section">
         <SentimentFilter :data="emotion_data"/>
@@ -115,10 +128,6 @@ import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
 import SentimentFilter from './components/SentimentFilter.vue'
 import BubbelChartFear from './components/BubbelChartFear.vue'
-
-
-
-// import { nextTick } from 'vue';
 
 import * as d3 from 'd3'
 import scrollama from "scrollama";
@@ -337,8 +346,6 @@ figure {
 
 .snap-section {
   height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
   scroll-snap-align: start;
   display: flex;
   justify-content: center;
@@ -357,9 +364,6 @@ figure {
   align-items: center;
 }
 
-/* Add these styles to your existing CSS */
-
-/* Make main section a scroll container with snap points */
 .main-section {
   height: 100vh;
   overflow-y: scroll;
@@ -369,7 +373,6 @@ figure {
   position: relative;
 }
 
-/* Make all direct children of main-section snap to viewport */
 .main-section > * {
   scroll-snap-align: start;
   height: 100vh;
@@ -418,6 +421,11 @@ figure {
 /* Add smooth transition between sections */
 html {
   scroll-behavior: smooth;
+}
+.seperater-section{
+  display: flex;
+  align-items: center;
+  font-size: 24px;
 }
 
 

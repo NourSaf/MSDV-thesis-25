@@ -1,57 +1,58 @@
 <template>
-    <div class="chart-container">
+    <div class="component-wrapper">
       <div class="chart-container-title">
         <div class="text">
           <div class="title">Emotional Emphasis</div>
           <div class="sub-title">Total word usage per emotion category</div>
         </div>
-        <div id="sentiment-bar"></div>
       </div>
-      <div class="viz-container">
-        <!-- Top: Emotion Filter Buttons -->
-        <div class="button-container">
-          <button
-              v-for="emotion in uniqueEmotions"
-              :key="emotion"
-              :class="['emotion-btn', { active: selectedEmotions.includes(emotion) }]"
-              @click="toggleEmotion(emotion)"
-              :style="{
-                  backgroundColor: selectedEmotions.includes(emotion) ? emotionColor(emotion) : '#fff',
-                  color: selectedEmotions.includes(emotion) ? '#fff' : '#000'
-              }"
-              >
-              {{ emotion }}
-              </button>
-          
-          <button class="reset-btn" @click="resetSelection">Reset</button>
+      <div id="chart-container">
+        <div class="viz-container">
+          <!-- Top: Emotion Filter Buttons -->
+          <div class="button-container">
+            <button
+                v-for="emotion in uniqueEmotions"
+                :key="emotion"
+                :class="['emotion-btn', { active: selectedEmotions.includes(emotion) }]"
+                @click="toggleEmotion(emotion)"
+                :style="{
+                    backgroundColor: selectedEmotions.includes(emotion) ? emotionColor(emotion) : '#fff',
+                    color: selectedEmotions.includes(emotion) ? '#fff' : '#000'
+                }"
+                >
+                {{ emotion }}
+                </button>
+            
+            <button class="reset-btn" @click="resetSelection">Reset</button>
 
-            <el-switch
-                v-model="sortBy"
-                class="custom-switch"
-                style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-                active-text="Alphabetic order"
-                inactive-text="Frequency order"
-                active-color="gray"
-                inactive-color="gray"
-            />
-        </div>
-    
-        <!-- Bottom: Word Circles -->
-        <div class="circle-container">
-            <div
-              v-for="word in allWords"
-              :key="word.ArrayID"
-              class="word-circle"
-              :style="{
-                  backgroundColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#828282',
-                  // borderColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#ccc'
-              }"
-              >
-              <span class="tooltip">{{ word.Word }} ({{ word.Count }})</span>
-            </div>
+              <el-switch
+                  v-model="sortBy"
+                  class="custom-switch"
+                  style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+                  active-text="Alphabetic order"
+                  inactive-text="Frequency order"
+                  active-color="gray"
+                  inactive-color="gray"
+              />
+          </div>
+      
+          <!-- Bottom: Word Circles -->
+          <div class="circle-container">
+              <div
+                v-for="word in allWords"
+                :key="word.ArrayID"
+                class="word-circle"
+                :style="{
+                    backgroundColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#828282',
+                    // borderColor: selectedEmotions.includes(word.Emotion) ? emotionColor(word.Emotion) : '#ccc'
+                }"
+                >
+                <span class="tooltip">{{ word.Word }} ({{ word.Count }})</span>
+              </div>
+          </div>
         </div>
       </div>
-      </div>
+    </div>
   </template>
   
   <script>

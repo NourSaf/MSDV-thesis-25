@@ -1,15 +1,5 @@
 <template>
   <div class="map-container">
-    <!-- <div class="map-description">
-      <div class="description-section">
-        <div class="title">
-          2017 Election Results
-        </div>
-        <div class="text">
-          in 2017 the AfD won 10% of the votes
-        </div>
-      </div>
-    </div> -->
       <div id="map-2017-container"></div>
     <div id="map-tool-tip" class="map-tool-tip"></div>
   </div>

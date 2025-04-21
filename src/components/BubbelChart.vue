@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container">
+    <div class="component-wrapper"> 
         <div class="text">
             <div class="title">
                 Separating groups
@@ -340,7 +340,7 @@
 </script>
 
 <style>
-    .chart-container{
+    /* .chart-container{
         width: 1200px;
         height: 100vh;
         margin-left: auto;
@@ -348,7 +348,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-    }
+    } */
 
     .title{
         font-size: 32px;

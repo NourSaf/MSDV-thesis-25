@@ -9,10 +9,11 @@
                 Words in Speeches that represent threat and make people afraid of the "other"
             </div>
         </div>
-        <div class="chart-container">
+        <div id="chart-container">
             <div id="by-threat"></div>
         </div>
-        <div id="tool-tip-bubble" class="tool-tip"></div>
+
+        <div id="tool-tip-fear" class="tool-tip"></div>
     </div>
 </template>
 
@@ -23,8 +24,8 @@ export default {
     name: 'BubbelChartFear', 
     data(){
         return{
-            width: 800, 
-            height: 600, 
+            width: 1200, 
+            height: 800, 
             margin:{
                 top: 20, 
                 right: 20, 
@@ -85,7 +86,7 @@ export default {
             treemapLayout(root);
 
             // Tooltip reference
-            const toolTip = d3.select('#tool-tip-bubble');
+            const toolTip = d3.select('#tool-tip-fear');
 
             // Create the treemap cells
             const cells = svg.selectAll("g")
@@ -159,9 +160,9 @@ export default {
     },
     mounted() {
         // Create tooltip if it doesn't exist
-        if (!document.getElementById('tool-tip-bubble')) {
+        if (!document.getElementById('tool-tip-fear')) {
             d3.select('body').append('div')
-                .attr('id', 'tool-tip-bubble')
+                .attr('id', 'tool-tip-fear')
                 .attr('class', 'tool-tip');
         }
     }
@@ -175,8 +176,13 @@ export default {
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
+
+.text{
+    padding-top:24px
+}
+
 .chart-container {
     width: 1200px;
     margin-left: auto;
@@ -198,15 +204,16 @@ export default {
 }
 
 #by-threat {
-    width: 1200px;
-    height: 600px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* Make the tooltip position absolute and ensure it's scoped */
-:deep(#tool-tip-bubble) {
+:deep(#tool-tip-fear) {
     position: absolute;
     opacity: 0;
     padding: 10px;
