@@ -23,7 +23,7 @@
       <Landing/>
     </div>
     <div class="snap-section">
-        <h3 class="seperater-section">
+        <h3 class="separator-section">
           PART 01 - MOTIVATION
         THE RISE OF THE RIGHT-WING PARTY IN GERMANY 
         </h3>
@@ -86,7 +86,7 @@
 
     <div class="scroll-snap-container">
       <div class="snap-section">
-        <h3 class="seperater-section">
+        <h3 class="separator-section">
           PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY 
         </h3>
       </div>
@@ -98,7 +98,7 @@
         <BubbelChartFear :data="grouped_words"/>
       </div>
       <div class="snap-section">
-        <h3 class="seperater-section">
+        <h3 class="separator-section">
           PART 3 - SPEECH ANALYSIS: SENTIMENT ANALYSIS <br>
         </h3>
       </div>
@@ -422,7 +422,7 @@ figure {
 html {
   scroll-behavior: smooth;
 }
-.seperater-section{
+.separator-section{
   display: flex;
   align-items: center;
   font-size: 24px;
