@@ -97,8 +97,8 @@ export default {
                 .attr('pointer-events', d => !d.children ? 'none' : null)
                 .on('mouseover', function() {
                     d3.select(this)
-                        .attr('stroke', '#E16036')
-                        .attr('stroke-width', 3);
+                        .attr('stroke', 'blue')
+                        .attr('stroke-width', 5);
                 })
                 .on('mouseout', function() {
                     d3.select(this)
@@ -114,7 +114,7 @@ export default {
             
             // Create theme labels
             const label = svg.append('g')
-                .style('font', '14px sans-serif')
+                .style('font-size', '20px')
                 .attr('pointer-events', 'none')
                 .attr('text-anchor', 'middle')
                 .selectAll('text')
@@ -123,19 +123,19 @@ export default {
                 .style('fill', 'black')
                 .style('fill-opacity', d => d.parent === root ? 1 : 0)
                 .style('display', d => d.parent === root ? 'inline' : 'none')
-                .style('font-weight', d => d.children ? 'bold' : 'normal')
+                .style('font-weight', d => d.children ? 'normal' : 'normal')
                 .text(d => d.data.name);
             
             // Create word count labels (only for leaf nodes)
             const wordCount = svg.append('g')
-                .style('font', '12px sans-serif')
+                .style('font-size', '20px')
                 .attr('pointer-events', 'none')
                 .attr('text-anchor', 'middle')
                 .selectAll('text')
                 .data(root.descendants().filter(d => !d.children))
                 .join('text')
                 .attr('dy', '1.2em') // Position below the word name
-                .style('fill', '#fff')
+                .style('fill', 'black')
                 .style('fill-opacity', 0)
                 .style('display', 'none')
                 .text(d => d.value);
