@@ -17,7 +17,6 @@
     <AllScripts :script_data="speeches_data"/>
   </div>
 
-  
   <div class="main-section">
     <div class="component-chart-section">
       <Landing/>
@@ -87,8 +86,18 @@
     <div class="scroll-snap-container">
       <div class="snap-section">
         <h3 class="separator-section">
-          PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY 
+          PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY
         </h3>
+      </div>
+      <div class="snap-section">
+        <Pos 
+          :data="filteredPosData" 
+        />
+      </div>
+      <div class="snap-section">
+        <ThematicDictionary 
+          :data="thematic_dictionary" 
+        />
       </div>
       <div class="snap-section">
         <BubbelChart :data="grouped_words"/>
@@ -107,12 +116,13 @@
         <SentimentBarChart :data="emotion_data"/>
       </div>
       
-
       <div class="snap-section">
         <SentimentFilter :data="emotion_data"/>
       </div>
+      
+
+      
     </div>
-    
   </div>
 
 </template>
@@ -128,6 +138,9 @@ import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
 import SentimentFilter from './components/SentimentFilter.vue'
 import BubbelChartFear from './components/BubbelChartFear.vue'
+import Pos from './components/Pos.vue'
+import ThematicDictionary from './components/ThematicDictionary.vue'
+
 
 import * as d3 from 'd3'
 import scrollama from "scrollama";
@@ -148,6 +161,8 @@ export default {
       election_results_21: null,
       election_results_25: null,
       land_data: null,
+      filteredPosData: null,
+      thematic_dictionary: null,
     }
   },
   computed:{
@@ -180,6 +195,8 @@ export default {
     BubbelChartFear,
     SentimentBarChart,
     SentimentFilter,
+    Pos,
+    ThematicDictionary,
   },
   mounted(){
     Promise.all([
@@ -190,7 +207,9 @@ export default {
       d3.json(`maps/202017_election_results.geojson`),
       d3.json(`maps/032021_election_results.geojson`),
       d3.json(`maps/012025_election_results.geojson`),
-      d3.json(`maps/germany_land.geojson`)
+      d3.json(`maps/germany_land.geojson`),
+      d3.json(`thematic_dictionary.json`),
+      d3.json(`POSFiltered.json`)
     ])
       .then(data => {
         this.scripts = data[0];
@@ -201,6 +220,9 @@ export default {
         this.election_results_21 = data[5];
         this.election_results_25 = data[6];
         this.land_data = data[7];
+        this.thematic_dictionary = data[8];
+        this.filteredPosData = data[9];
+        console.log("POS filtered data loaded:", this.pos_data, this.filteredPosData);
         
         // Initialize fullpage.js after data is loaded
         
@@ -219,6 +241,9 @@ export default {
           .onStepExit(response => {
             console.log('Step Exit:', response.index, response.direction);
           });
+      })
+      .catch(error => {
+        console.error("Error loading data:", error);
       });
       
     

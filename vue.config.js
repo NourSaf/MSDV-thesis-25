@@ -2,5 +2,6 @@ module.exports = {
   devServer: {
     disableHostCheck: true
   },
-  publicPath: '/MSDV-thesis-25/'
+  publicPath: '/MSDV-thesis-25/',
+
 };
