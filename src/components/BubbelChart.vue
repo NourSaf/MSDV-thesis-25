@@ -26,18 +26,20 @@
             </div>
             
             <div class="chart-toggle">
-                <el-switch
-                    v-model="showAlphabeticOrder"
-                    class="custom-switch"
-                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-                    active-text="Most Frequent words"
-                    inactive-text="Seperating words"
-                    active-color="gray"
-                    inactive-color="gray"
-                    :active-value="false"
-                    :inactive-value="true"
-                    @change="handleChartToggle"
-                />
+                <button 
+                    class="toggle-btn" 
+                    :class="{ 'active': showAlphabeticOrder }"
+                    @click="setChartType(true)"
+                >
+                    Seperating words
+                </button>
+                <button 
+                    class="toggle-btn" 
+                    :class="{ 'active': !showAlphabeticOrder }"
+                    @click="setChartType(false)"
+                >
+                    Most Frequent words
+                </button>
             </div>
         </div>
         
@@ -106,17 +108,20 @@
                 }
             },
             
-            handleChartToggle() {
-                this.toggleCount++;
-                console.log(`Switched to ${this.showAlphabeticOrder ? 'Alphabetic' : 'Frequency'} chart`);
-                
-                // Clear any existing SVGs
-                this.clearCharts();
-                
-                // Draw the active chart
-                this.$nextTick(() => {
-                    this.renderActiveChart();
-                });
+            setChartType(isAlphabetic) {
+                if (this.showAlphabeticOrder !== isAlphabetic) {
+                    this.showAlphabeticOrder = isAlphabetic;
+                    this.toggleCount++;
+                    console.log(`Switched to ${isAlphabetic ? 'Alphabetic' : 'Frequency'} chart`);
+                    
+                    // Clear any existing SVGs
+                    this.clearCharts();
+                    
+                    // Draw the active chart
+                    this.$nextTick(() => {
+                        this.renderActiveChart();
+                    });
+                }
             },
             
             clearCharts() {
@@ -125,84 +130,219 @@
             },
             
             seperatingGroupChart() {
+                // Filter data and split by group
                 const filteredData = this.data
-                    .filter(d => d.group === "you" || d.group === "they")
-                    .sort((a, b) => d3.ascending(a.word, b.word));
-
+                    .filter(d => d.group === "you" || d.group === "they");
+                
+                // Split into two groups
+                const youData = filteredData.filter(d => d.group === "you")
+                    .sort((a, b) => d3.descending(a.count, b.count));
+                
+                const theyData = filteredData.filter(d => d.group === "they")
+                    .sort((a, b) => d3.descending(a.count, b.count));
+                
+                // Clear any existing SVG
                 d3.select("#you-chart svg").remove(); 
 
+                // Create SVG
                 const svg = d3.select("#you-chart")
                     .append("svg")
                     .attr("width", this.width)
-                    .attr("height", this.height)
-                    .append("g");
-
-                const toolTip = d3.select('#tool-tip-bubble')
-
-                const node = svg.selectAll("circle")
-                    .data(filteredData)
+                    .attr("height", this.height);
+                
+                // Define chart dimensions
+                const chartWidth = this.width / 2 - 60;  // Half width for each chart minus padding
+                const chartHeight = this.height - 100;   // Height minus padding for axis labels
+                
+                // Create scales for "you" chart
+                const youXScale = d3.scaleBand()
+                    .domain(youData.map(d => d.word))
+                    .range([0, chartWidth])
+                    .padding(0.2);
+                
+                // USE FIXED Y-SCALE FOR BOTH CHARTS - MAX 600
+                const fixedYScale = d3.scaleLinear()
+                    .domain([0, 600]) // Fixed y-scale with max of 600
+                    .range([chartHeight, 0]);
+                
+                // Create scales for "they" chart - X scale only, Y scale is shared
+                const theyXScale = d3.scaleBand()
+                    .domain(theyData.map(d => d.word))
+                    .range([0, chartWidth])
+                    .padding(0.2);
+                
+                // Create tooltip
+                const toolTip = d3.select('#tool-tip-bubble');
+                
+                // Create "you" chart group
+                const youChart = svg.append("g")
+                    .attr("transform", `translate(40, 40)`);
+                
+                // Add label for "you" chart
+                youChart.append("text")
+                    .attr("x", chartWidth / 2)
+                    .attr("y", -15)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "16px")
+                    .style("fill", "white")
+                    .text("YOU");
+                
+                // Add Y axis to "you" chart - using the fixed scale
+                youChart.append("g")
+                    .call(d3.axisLeft(fixedYScale).ticks(5).tickFormat(d => d))
+                    .style("font-size", "12px")
+                    .style("color", "white");
+                
+                // Add X axis to "you" chart - rotated labels
+                youChart.append("g")
+                    .attr("transform", `translate(0, ${chartHeight})`)
+                    .call(d3.axisBottom(youXScale))
+                    .selectAll("text")
+                    .style("text-anchor", "end")
+                    .style("font-size", "12px")
+                    .style("fill", "white")
+                    .attr("transform", "rotate(-45)")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em");
+                
+                // Add "you" data points with animation
+                youChart.selectAll(".data-point")
+                    .data(youData)
                     .enter()
                     .append("circle")
-                    .attr("class", d => `regular-${d.word}`)
-                    .attr("r", 40)
-                    .attr("cx", this.width/2)
-                    .attr("cy", this.height /2)
-                    .style("fill", d => this.color_scale(d.group))
+                    .attr("class", d => `data-point-${d.word}`)
+                    .attr("cx", d => youXScale(d.word) + youXScale.bandwidth() / 2)
+                    .attr("cy", chartHeight) // Start at bottom of chart
+                    .attr("r", 0) // Start with radius 0
+                    .attr("fill", "white")
                     .attr("stroke", "black")
-                    .style("stroke-width", 2)
-                    .call(d3.drag()
-                        .on("start", this.dragstarted)
-                        .on("drag", this.dragged)
-                        .on("end", this.dragended)
-                    )
-                    .on('mouseover', (event, data) =>{
-                        toolTip
-                            .transition()
-                            .duration(200)
-                            .style('opacity',1)
-                            .style('cursor','pointer');
-                        toolTip
-                            .html(`<strong> Word: </strong> ${data.word} <br>`)
-                            .style('left', (event.pageX+10) + 'px')
-                            .style('top', (event.pageY+10)+ 'px')
-                        
-                        d3.select(event.target)
-                            .transition()
-                            .duration(200)
-                            .style('fill', "gray")
-                            .style('cursor','pointer');                        
-                    })
-                    .on('mousemove', (event) => {
-                        toolTip
-                            .style('cursor','pointer')  
-                            .style('left', (event.pageX+10)+'px')
-                            .style('top', (event.pageY+10)+'px')
-                    })
-                    .on('mouseout', (event) =>{
-                        toolTip
-                            .transition()
-                            .duration(200)
-                            .style('opacity',0)
-                        d3.select(event.target)
-                            .transition()
-                            .duration(200)
-                            .style('fill', "white") 
+                    .attr("stroke-width", 1.5)
+                    // Add staggered animation
+                    .transition()
+                    .duration(800)
+                    .delay((d, i) => i * 20) // Staggered delay based on index
+                    .attr("cy", d => fixedYScale(+d.count)) // Animate to actual position
+                    .attr("r", 8) // Grow to full size
+                    .on('end', function() {
+                        // After animation completes, attach event handlers
+                        d3.select(this)
+                            .on('mouseover', function(event) {
+                                const data = d3.select(this).datum();
+                                toolTip
+                                    .transition()
+                                    .duration(200)
+                                    .style('opacity', 1)
+                                    .style('cursor', 'pointer');
+                                toolTip
+                                    .html(`<strong>Word:</strong> ${data.word}<br><strong>Count:</strong> ${data.count}`)
+                                    .style('left', (event.pageX+10) + 'px')
+                                    .style('top', (event.pageY+10) + 'px');
+                                
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .attr("r", 12)
+                                    .attr("fill", "gray")
+                                    .style('cursor', 'pointer');
+                            })
+                            .on('mouseout', function() {
+                                toolTip
+                                    .transition()
+                                    .duration(200)
+                                    .style('opacity', 0);
+                                
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .attr("r", 8)
+                                    .attr("fill", "white");
+                            });
                     });
                 
-                const simulation = d3.forceSimulation()
-                    .force("x", d3.forceX().strength(0.25).x(d => this.xscale(d.group)))
-                    .force("y", d3.forceY().strength(0.2).y(this.height / 2))
-                    .force("center", d3.forceCenter(this.width / 2, this.height / 2))
-                    .force("charge", d3.forceManyBody().strength(8))
-                    .force("collide", d3.forceCollide().strength(0.7).radius(42).iterations(1));
-
-                simulation.nodes(filteredData).on("tick", () => {
-                    node
-                        .attr("cx", d => d.x)
-                        .attr("cy", d => d.y);
-                });
+                // Create "they" chart group
+                const theyChart = svg.append("g")
+                    .attr("transform", `translate(${chartWidth + 80}, 40)`);
                 
-                this.simulation = simulation;
+                // Add label for "they" chart
+                theyChart.append("text")
+                    .attr("x", chartWidth / 2)
+                    .attr("y", -15)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "16px")
+                    .style("fill", "white")
+                    .text("THEY");
+                
+                // Add Y axis to "they" chart - using the same fixed scale
+                theyChart.append("g")
+                    .call(d3.axisLeft(fixedYScale).ticks(5).tickFormat(d => d))
+                    .style("font-size", "12px")
+                    .style("color", "white");
+                
+                // Add X axis to "they" chart - rotated labels
+                theyChart.append("g")
+                    .attr("transform", `translate(0, ${chartHeight})`)
+                    .call(d3.axisBottom(theyXScale))
+                    .selectAll("text")
+                    .style("text-anchor", "end")
+                    .style("font-size", "12px")
+                    .style("fill", "white") 
+                    .attr("transform", "rotate(-45)")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em");
+                
+                // Add "they" data points with animation
+                theyChart.selectAll(".data-point")
+                    .data(theyData)
+                    .enter()
+                    .append("circle")
+                    .attr("class", d => `data-point-${d.word}`)
+                    .attr("cx", d => theyXScale(d.word) + theyXScale.bandwidth() / 2)
+                    .attr("cy", chartHeight) // Start at bottom of chart
+                    .attr("r", 0) // Start with radius 0
+                    .attr("fill", "white")
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1.5)
+                    // Add staggered animation
+                    .transition()
+                    .duration(800)
+                    .delay((d, i) => i * 20 + youData.length * 20) // Start after "you" animations
+                    .attr("cy", d => fixedYScale(+d.count)) // Animate to actual position
+                    .attr("r", 8) // Grow to full size
+                    .on('end', function() {
+                        // After animation completes, attach event handlers
+                        d3.select(this)
+                            .on('mouseover', function(event) {
+                                const data = d3.select(this).datum();
+                                toolTip
+                                    .transition()
+                                    .duration(200)
+                                    .style('opacity', 1)
+                                    .style('cursor', 'pointer');
+                                toolTip
+                                    .html(`<strong>Word:</strong> ${data.word}<br><strong>Count:</strong> ${data.count}`)
+                                    .style('left', (event.pageX+10) + 'px')
+                                    .style('top', (event.pageY+10) + 'px');
+                                
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .attr("r", 12)
+                                    .attr("fill", "gray")
+                                    .style('cursor', 'pointer');
+                            })
+                            .on('mouseout', function() {
+                                toolTip
+                                    .transition()
+                                    .duration(200)
+                                    .style('opacity', 0);
+                                
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .attr("r", 8)
+                                    .attr("fill", "white");
+                            });
+                    });
             },
             
             mostUsedWord() {
@@ -249,14 +389,14 @@
                         .on("drag", this.dragged_top)
                         .on("end", this.dragended_top)
                     )
-                    .on('mouseover', (event, data) =>{
+                    .on('mouseover', (event, data) => {
                         toolTip
                             .transition()
                             .duration(200)
                             .style('opacity',1)
                             .style('cursor','pointer');
                         toolTip
-                            .html(`<strong> Word: </strong> ${data.word} <br>`)
+                            .html(`<strong>Word:</strong> ${data.word}<br><strong>Count:</strong> ${data.count}`)
                             .style('left', (event.pageX+10) + 'px')
                             .style('top', (event.pageY+10)+ 'px')
                         
@@ -340,16 +480,6 @@
 </script>
 
 <style>
-    /* .chart-container{
-        width: 1200px;
-        height: 100vh;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    } */
-
     .title{
         font-size: 32px;
         font-weight: 800;
@@ -361,6 +491,31 @@
     
     .chart-toggle {
         margin-top: 16px;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .toggle-btn {
+        padding: 8px 16px;
+        border: 1px solid #ffffff;
+        background: transparent;
+        color: #ffffff;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-btn.active {
+        background-color: #ffffff;
+        color: #000000;
+        font-weight: 500;
     }
 
     #chart-container {
@@ -371,11 +526,13 @@
     .tool-tip {
         position: absolute;
         opacity: 0;
-        padding: 8px;
+        padding: 10px;
+        min-width: 120px;
         background-color: rgb(126, 126, 126);
         pointer-events: none;    
         color:#fff; 
         text-align: left;
+        border-radius: 4px;
     }
 
     .tool-tip:hover{

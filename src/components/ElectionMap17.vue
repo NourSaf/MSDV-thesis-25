@@ -87,7 +87,7 @@ export default {
        
       
       // Create tooltip reference
-      const tooltip = d3.select('#map-tool-tip');
+      // const tooltip = d3.select('#map-tool-tip');
       
       try {
         // Create projection and path generator
@@ -108,65 +108,65 @@ export default {
             return d.properties['17_winners_Winner'] === 'AfD' ? '#36A7E4' : '#CCCCCC';
           })
           .attr('stroke', '#000000')
-          .attr('stroke-width', 0.3)
-          .on('mouseover', (event, d) => {
-            // Position tooltip using client coordinates
-            const tooltipX = event.clientX + 10;
-            const tooltipY = event.clientY + 10;
-            const middleScreen = window.innerWidth / 2;
-            console.log("this is middle of view", middleScreen)
-            console.log("This is Y mouse posisition", tooltipY -10)
-            console.log("This is X mouse posisition", tooltipX -10)
+          .attr('stroke-width', 0.3);
+        //   .on('mouseover', (event, d) => {
+        //     // Position tooltip using client coordinates
+        //     const tooltipX = event.clientX + 10;
+        //     const tooltipY = event.clientY + 10;
+        //     const middleScreen = window.innerWidth / 2;
+        //     console.log("this is middle of view", middleScreen)
+        //     console.log("This is Y mouse posisition", tooltipY -10)
+        //     console.log("This is X mouse posisition", tooltipX -10)
             
-            // Show tooltip with district information
-            tooltip.transition()
-              .duration(200)
-              .style('opacity', 0.8);
+        //     // Show tooltip with district information
+        //     tooltip.transition()
+        //       .duration(200)
+        //       .style('opacity', 0.8);
             
-            tooltip.html(`
-              <strong>${d.properties.WKR_NAME || 'N/A'}</strong><br>
-              <strong>District #:</strong> ${d.properties.WKR_NR || 'N/A'}<br>
-              <strong>Winner:</strong> ${d.properties['17_winners_Winner'] || 'N/A'}<br>
-              <strong>Percent:</strong> ${d.properties['17_winners_Percent'] || 'N/A'}%
-            `)
-              .style('left', `${tooltipX}px`)
-              .style('top', () => {
-                if (tooltipY > 500){
-                  return `${tooltipY - 500}px`  
-                }else 
-                 return `${tooltipY}px`
-              }
-              );
+        //     tooltip.html(`
+        //       <strong>${d.properties.WKR_NAME || 'N/A'}</strong><br>
+        //       <strong>District #:</strong> ${d.properties.WKR_NR || 'N/A'}<br>
+        //       <strong>Winner:</strong> ${d.properties['17_winners_Winner'] || 'N/A'}<br>
+        //       <strong>Percent:</strong> ${d.properties['17_winners_Percent'] || 'N/A'}%
+        //     `)
+        //       .style('left', `${tooltipX}px`)
+        //       .style('top', () => {
+        //         if (tooltipY > 500){
+        //           return `${tooltipY - 500}px`  
+        //         }else 
+        //          return `${tooltipY}px`
+        //       }
+        //       );
               
-            // Highlight the hovered district
-            d3.select(event.target)
-                .style("cursor", "pointer")
-                .style('opacity', 0.5)
-          })
-          .on('mousemove', (event) => {
-            // Update tooltip position as mouse moves
-            tooltip
-              .style('left', (event.clientX + 15) + 'px')
-              .style('top', () => {
-                if (event.clientY > 500){
-                  return `${event.clientY - 90}px`  
-                }else 
-                 return `${event.clientY}px`
-              });
+        //     // Highlight the hovered district
+        //     d3.select(event.target)
+        //         .style("cursor", "pointer")
+        //         .style('opacity', 0.5)
+        //   })
+        //   .on('mousemove', (event) => {
+        //     // Update tooltip position as mouse moves
+        //     tooltip
+        //       .style('left', (event.clientX + 15) + 'px')
+        //       .style('top', () => {
+        //         if (event.clientY > 500){
+        //           return `${event.clientY - 90}px`  
+        //         }else 
+        //          return `${event.clientY}px`
+        //       });
             
-            d3.select(event.target)
-                .style("cursor", "pointer")
-                .style('opacity', 0.5)
-        })
-          .on('mouseout', (event) => {
-            // Hide tooltip and remove highlight
-            tooltip.transition()
-              .duration(500)
-              .style('opacity', 0);
+        //     d3.select(event.target)
+        //         .style("cursor", "pointer")
+        //         .style('opacity', 0.5)
+        // })
+        //   .on('mouseout', (event) => {
+        //     // Hide tooltip and remove highlight
+        //     tooltip.transition()
+        //       .duration(500)
+        //       .style('opacity', 0);
               
-            d3.select(event.target)
-                .style('opacity', 1)
-          });
+        //     d3.select(event.target)
+        //         .style('opacity', 1)
+        //   });
           
         // Draw state boundaries if land data is available
         if (this.landData) {

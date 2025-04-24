@@ -1,10 +1,10 @@
 <template>
   <Modal :scrollPosition="scrollTop"></Modal>
 
-  <!-- <div class="you-they">
+  <div class="you-they">
     <div class="you-section">YOU</div>
     <div class="they-section">THEY</div>
-  </div> -->
+  </div>
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
       circle
@@ -89,23 +89,21 @@
           PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY
         </h3>
       </div>
-      <div class="snap-section">
-        <Pos 
-          :data="filteredPosData" 
-        />
+    
+     
+      
+      <div class="snap-section" ref="identitySection">
+        <IdentityComponent 
+          v-if="isIdentitySectionVisible"
+          :data="identity_analysis"/>
       </div>
+      
       <div class="snap-section">
         <ThematicDictionary 
           :data="thematic_dictionary" 
         />
       </div>
-      <div class="snap-section">
-        <BubbelChart :data="grouped_words"/>
-      </div>
 
-      <div class="snap-section">
-        <BubbelChartFear :data="grouped_words"/>
-      </div>
       <div class="snap-section">
         <h3 class="separator-section">
           PART 3 - SPEECH ANALYSIS: SENTIMENT ANALYSIS <br>
@@ -115,10 +113,27 @@
       <div class="snap-section">
         <SentimentBarChart :data="emotion_data"/>
       </div>
-      
-      <div class="snap-section">
-        <SentimentFilter :data="emotion_data"/>
+
+      <div class="snap-section" ref="keySentimentSection">
+        <KeyTermSentiment 
+          v-if="isKeySentimentSectionVisible"
+          :data="key_sentiment"/>
       </div>
+
+
+      <div class="snap-section">
+        <h3 class="separator-section">
+          PART 4 - The Right Detector <br>
+          This model is traind on 1912 speeches. 
+          The shortest speech was XX words 
+          The logest was XX words. 
+        </h3>
+      </div>
+      <div class="snap-section">
+        <RightDetector/>
+      </div>
+      
+     
       
 
       
@@ -134,12 +149,11 @@ import AllScripts from './components/AllScripts.vue'
 import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
-import BubbelChart from './components/BubbelChart.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
-import SentimentFilter from './components/SentimentFilter.vue'
-import BubbelChartFear from './components/BubbelChartFear.vue'
-import Pos from './components/Pos.vue'
 import ThematicDictionary from './components/ThematicDictionary.vue'
+import IdentityComponent from './components/IdentityComponent.vue'
+import RightDetector from './components/RightDetector.vue'
+import KeyTermSentiment from './components/KeyTermSentiment.vue'
 
 
 import * as d3 from 'd3'
@@ -163,6 +177,12 @@ export default {
       land_data: null,
       filteredPosData: null,
       thematic_dictionary: null,
+      identity_analysis: null,
+      isIdentitySectionVisible: false,
+      identityObserver: null,
+      key_sentiment: null,
+      isKeySentimentSectionVisible: false,
+      keySentimentObserver: null,
     }
   },
   computed:{
@@ -191,14 +211,16 @@ export default {
     ElectionMap17,
     ElectionMap21,
     ElectionMap25,
-    BubbelChart,
-    BubbelChartFear,
     SentimentBarChart,
-    SentimentFilter,
-    Pos,
     ThematicDictionary,
+    IdentityComponent,
+    RightDetector,
+    KeyTermSentiment,
   },
   mounted(){
+    this.setupIdentityObserver();
+    this.setupKeySentimentObserver();
+    
     Promise.all([
       d3.csv('translated_scripts.csv'),
       d3.csv('Grouped_Word_Frequencies.csv'),
@@ -209,7 +231,6 @@ export default {
       d3.json(`maps/012025_election_results.geojson`),
       d3.json(`maps/germany_land.geojson`),
       d3.json(`thematic_dictionary.json`),
-      d3.json(`POSFiltered.json`)
     ])
       .then(data => {
         this.scripts = data[0];
@@ -221,11 +242,6 @@ export default {
         this.election_results_25 = data[6];
         this.land_data = data[7];
         this.thematic_dictionary = data[8];
-        this.filteredPosData = data[9];
-        console.log("POS filtered data loaded:", this.pos_data, this.filteredPosData);
-        
-        // Initialize fullpage.js after data is loaded
-        
       })
       .then (() =>{
         scroller
@@ -251,6 +267,14 @@ export default {
   },
   unmounted() {
     window.removeEventListener("scroll", this.onScroll);
+    
+    if (this.identityObserver) {
+      this.identityObserver.disconnect();
+    }
+    
+    if (this.keySentimentObserver) {
+      this.keySentimentObserver.disconnect();
+    }
   },
   methods: {
     onScroll(/*event*/){
@@ -260,7 +284,75 @@ export default {
       !this.show_all_text_info ? this.show_all_text_info = true : this.show_all_text_info = false;
       console.log(this.show_all_text_info)
     },
-   
+    setupIdentityObserver() {
+      this.$nextTick(() => {
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+        
+        this.identityObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.identity_analysis) {
+              this.isIdentitySectionVisible = true;
+              this.loadIdentityData();
+            }
+          });
+        }, options);
+        
+        if (this.$refs.identitySection) {
+          this.identityObserver.observe(this.$refs.identitySection);
+        }
+      });
+    },
+    loadIdentityData() {
+      if (!this.identity_analysis) {
+        d3.json(`identity_analysis.json`)
+          .then(data => {
+            console.log('Identity data loaded');
+            this.identity_analysis = data;
+          })
+          .catch(error => {
+            console.error("Error loading identity data:", error);
+          });
+      }
+    },
+    setupKeySentimentObserver() {
+      this.$nextTick(() => {
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+        
+        this.keySentimentObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.key_sentiment) {
+              console.log('Key Sentiment section is visible, loading data...');
+              this.isKeySentimentSectionVisible = true;
+              this.loadKeySentimentData();
+            }
+          });
+        }, options);
+        
+        if (this.$refs.keySentimentSection) {
+          this.keySentimentObserver.observe(this.$refs.keySentimentSection);
+        }
+      });
+    },
+    loadKeySentimentData() {
+      if (!this.key_sentiment) {
+        d3.json(`combined_key_terms.json`)
+          .then(data => {
+            console.log('Key sentiment data loaded');
+            this.key_sentiment = data;
+          })
+          .catch(error => {
+            console.error("Error loading key sentiment data:", error);
+          });
+      }
+    }
   }
 }
 </script>
@@ -350,6 +442,7 @@ figure {
   padding: auto 0;
   min-height: 50vh;
   z-index: 1000;
+  opacity: 1;
 }
 
 .step-content {
@@ -378,7 +471,6 @@ figure {
   position: relative;
 }
 
-/* Override any component-specific height settings */
 .snap-section > * {
   height: 100%;
 }
@@ -404,14 +496,13 @@ figure {
   width: 100%;
 }
 
-/* Special handling for scrollama section */
 #scrolly {
   position: relative;
-  height: auto; /* Let it take natural height for all steps */
-  min-height: 300vh; /* Approximately 3 steps worth of height */
+  height: auto;
+  min-height: 300vh;
   padding: 0;
   max-width: 100%;
-  /* Don't add scroll-snap inside scrolly to avoid conflicts with scrollama */
+  
 }
 
 /* Keep figure sticky while maintaining scrollama behavior */
@@ -424,19 +515,16 @@ figure {
   z-index: 1;
 }
 
-/* Make scroll-snap-container properly snap inside main-section */
 .scroll-snap-container {
   height: 100vh; /* Ensure container takes full height */
   overflow-y: auto;
 }
 
-/* Don't let nested snapping interfere with page snapping */
 .main-section .scroll-snap-container {
   pointer-events: auto;
   scroll-snap-align: start;
 }
 
-/* Fix the typo in your class name and ensure it matches component-chart-section */
 .component-chart-section {
   height: 100vh;
   display: flex;

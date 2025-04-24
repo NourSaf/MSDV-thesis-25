@@ -1,0 +1,1430 @@
+[
+    {
+        "word": "german",
+        "theme": "identity",
+        "sentiment": 0.03364324528301887,
+        "frequency": 1325
+    },
+    {
+        "word": "germans",
+        "theme": "identity",
+        "sentiment": -0.11247586206896552,
+        "frequency": 58
+    },
+    {
+        "word": "immigrant",
+        "theme": "identity",
+        "sentiment": -0.2974375,
+        "frequency": 8
+    },
+    {
+        "word": "immigrants",
+        "theme": "identity",
+        "sentiment": -0.21078333333333332,
+        "frequency": 6
+    },
+    {
+        "word": "refugee",
+        "theme": "identity",
+        "sentiment": -0.18549166666666664,
+        "frequency": 24
+    },
+    {
+        "word": "refugees",
+        "theme": "identity",
+        "sentiment": -0.175005,
+        "frequency": 20
+    },
+    {
+        "word": "foreigner",
+        "theme": "identity",
+        "sentiment": -0.01355714285714286,
+        "frequency": 14
+    },
+    {
+        "word": "foreigners",
+        "theme": "identity",
+        "sentiment": 0.029392307692307686,
+        "frequency": 13
+    },
+    {
+        "word": "asylum",
+        "theme": "identity",
+        "sentiment": -0.05931081081081081,
+        "frequency": 37
+    },
+    {
+        "word": "asylum seeker",
+        "theme": "identity",
+        "sentiment": -0.00020000000000000435,
+        "frequency": 15
+    },
+    {
+        "word": "muslim",
+        "theme": "identity",
+        "sentiment": -0.05223684210526316,
+        "frequency": 19
+    },
+    {
+        "word": "muslims",
+        "theme": "identity",
+        "sentiment": 0.10042999999999999,
+        "frequency": 10
+    },
+    {
+        "word": "islam",
+        "theme": "identity",
+        "sentiment": -0.07930799999999999,
+        "frequency": 50
+    },
+    {
+        "word": "christian",
+        "theme": "identity",
+        "sentiment": 0.21805652173913043,
+        "frequency": 23
+    },
+    {
+        "word": "christians",
+        "theme": "identity",
+        "sentiment": 0.41616666666666663,
+        "frequency": 3
+    },
+    {
+        "word": "jewish",
+        "theme": "identity",
+        "sentiment": -0.048043333333333334,
+        "frequency": 30
+    },
+    {
+        "word": "jews",
+        "theme": "identity",
+        "sentiment": -0.12455818181818182,
+        "frequency": 55
+    },
+    {
+        "word": "european",
+        "theme": "identity",
+        "sentiment": 0.136733,
+        "frequency": 100
+    },
+    {
+        "word": "citizen",
+        "theme": "identity",
+        "sentiment": 0.06948338108882522,
+        "frequency": 349
+    },
+    {
+        "word": "citizens",
+        "theme": "identity",
+        "sentiment": 0.08915068027210885,
+        "frequency": 294
+    },
+    {
+        "word": "minority",
+        "theme": "identity",
+        "sentiment": 0.014169230769230767,
+        "frequency": 13
+    },
+    {
+        "word": "minorities",
+        "theme": "identity",
+        "sentiment": 0.4101,
+        "frequency": 2
+    },
+    {
+        "word": "majority",
+        "theme": "identity",
+        "sentiment": 0.02774090909090909,
+        "frequency": 110
+    },
+    {
+        "word": "community",
+        "theme": "identity",
+        "sentiment": 0.13379666666666665,
+        "frequency": 30
+    },
+    {
+        "word": "communities",
+        "theme": "identity",
+        "sentiment": 0.003579999999999992,
+        "frequency": 15
+    },
+    {
+        "word": "culture",
+        "theme": "identity",
+        "sentiment": 0.07877955801104973,
+        "frequency": 181
+    },
+    {
+        "word": "cultural",
+        "theme": "identity",
+        "sentiment": 0.04543309352517986,
+        "frequency": 139
+    },
+    {
+        "word": "identity",
+        "theme": "identity",
+        "sentiment": 0.31356666666666666,
+        "frequency": 6
+    },
+    {
+        "word": "religion",
+        "theme": "identity",
+        "sentiment": -0.248475,
+        "frequency": 4
+    },
+    {
+        "word": "religious",
+        "theme": "identity",
+        "sentiment": 0.1836888888888889,
+        "frequency": 9
+    },
+    {
+        "word": "tradition",
+        "theme": "identity",
+        "sentiment": 0.07734516129032258,
+        "frequency": 31
+    },
+    {
+        "word": "traditional",
+        "theme": "identity",
+        "sentiment": 0.005961538461538471,
+        "frequency": 13
+    },
+    {
+        "word": "nationality",
+        "theme": "identity",
+        "sentiment": -0.5226,
+        "frequency": 1
+    },
+    {
+        "word": "nation",
+        "theme": "identity",
+        "sentiment": 0.013079890310786107,
+        "frequency": 547
+    },
+    {
+        "word": "ethnic",
+        "theme": "identity",
+        "sentiment": 0.3715,
+        "frequency": 2
+    },
+    {
+        "word": "integration",
+        "theme": "identity",
+        "sentiment": 0.036958333333333336,
+        "frequency": 12
+    },
+    {
+        "word": "diversity",
+        "theme": "identity",
+        "sentiment": 0.15087916666666668,
+        "frequency": 24
+    },
+    {
+        "word": "racism",
+        "theme": "identity",
+        "sentiment": -0.5423,
+        "frequency": 1
+    },
+    {
+        "word": "nationalism",
+        "theme": "identity",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "population",
+        "theme": "identity",
+        "sentiment": 0.016362500000000002,
+        "frequency": 88
+    },
+    {
+        "word": "economy",
+        "theme": "economic",
+        "sentiment": 0.02675971223021583,
+        "frequency": 139
+    },
+    {
+        "word": "economic",
+        "theme": "economic",
+        "sentiment": -0.00832090395480226,
+        "frequency": 177
+    },
+    {
+        "word": "euro",
+        "theme": "economic",
+        "sentiment": 0.04964045174537988,
+        "frequency": 487
+    },
+    {
+        "word": "budget",
+        "theme": "economic",
+        "sentiment": 0.052162162162162164,
+        "frequency": 111
+    },
+    {
+        "word": "tax",
+        "theme": "economic",
+        "sentiment": 0.0685227027027027,
+        "frequency": 370
+    },
+    {
+        "word": "taxation",
+        "theme": "economic",
+        "sentiment": 0.0664625,
+        "frequency": 8
+    },
+    {
+        "word": "taxpayer",
+        "theme": "economic",
+        "sentiment": 0.10768727272727271,
+        "frequency": 55
+    },
+    {
+        "word": "deficit",
+        "theme": "economic",
+        "sentiment": -0.2811,
+        "frequency": 5
+    },
+    {
+        "word": "surplus",
+        "theme": "economic",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "debt",
+        "theme": "economic",
+        "sentiment": -0.1653453947368421,
+        "frequency": 152
+    },
+    {
+        "word": "financial",
+        "theme": "economic",
+        "sentiment": 0.0428,
+        "frequency": 52
+    },
+    {
+        "word": "finance",
+        "theme": "economic",
+        "sentiment": 0.08178253968253969,
+        "frequency": 63
+    },
+    {
+        "word": "fiscal",
+        "theme": "economic",
+        "sentiment": -0.7003,
+        "frequency": 1
+    },
+    {
+        "word": "money",
+        "theme": "economic",
+        "sentiment": -0.021631950207468876,
+        "frequency": 241
+    },
+    {
+        "word": "spending",
+        "theme": "economic",
+        "sentiment": -0.10820857142857143,
+        "frequency": 35
+    },
+    {
+        "word": "expenditure",
+        "theme": "economic",
+        "sentiment": -0.11532499999999998,
+        "frequency": 8
+    },
+    {
+        "word": "investment",
+        "theme": "economic",
+        "sentiment": 0.16382424242424243,
+        "frequency": 33
+    },
+    {
+        "word": "investments",
+        "theme": "economic",
+        "sentiment": 0.20566,
+        "frequency": 10
+    },
+    {
+        "word": "investor",
+        "theme": "economic",
+        "sentiment": 0.2864333333333333,
+        "frequency": 9
+    },
+    {
+        "word": "bank",
+        "theme": "economic",
+        "sentiment": -0.05999375,
+        "frequency": 32
+    },
+    {
+        "word": "banking",
+        "theme": "economic",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "inflation",
+        "theme": "economic",
+        "sentiment": -0.09126799999999999,
+        "frequency": 25
+    },
+    {
+        "word": "market",
+        "theme": "economic",
+        "sentiment": 0.05062592592592592,
+        "frequency": 162
+    },
+    {
+        "word": "markets",
+        "theme": "economic",
+        "sentiment": -0.02775,
+        "frequency": 16
+    },
+    {
+        "word": "currency",
+        "theme": "economic",
+        "sentiment": 0.0974,
+        "frequency": 5
+    },
+    {
+        "word": "trade",
+        "theme": "economic",
+        "sentiment": 0.14741363636363636,
+        "frequency": 66
+    },
+    {
+        "word": "industry",
+        "theme": "economic",
+        "sentiment": -0.04184811320754717,
+        "frequency": 106
+    },
+    {
+        "word": "industrial",
+        "theme": "economic",
+        "sentiment": -0.06085961538461539,
+        "frequency": 52
+    },
+    {
+        "word": "growth",
+        "theme": "economic",
+        "sentiment": 0.2618235294117647,
+        "frequency": 17
+    },
+    {
+        "word": "economic growth",
+        "theme": "economic",
+        "sentiment": 0.48385,
+        "frequency": 2
+    },
+    {
+        "word": "recession",
+        "theme": "economic",
+        "sentiment": -0.33744166666666664,
+        "frequency": 12
+    },
+    {
+        "word": "employment",
+        "theme": "economic",
+        "sentiment": -0.2295058823529412,
+        "frequency": 17
+    },
+    {
+        "word": "unemployment",
+        "theme": "economic",
+        "sentiment": -0.251,
+        "frequency": 8
+    },
+    {
+        "word": "jobs",
+        "theme": "economic",
+        "sentiment": 0.029770370370370374,
+        "frequency": 27
+    },
+    {
+        "word": "income",
+        "theme": "economic",
+        "sentiment": 0.0009973684210526324,
+        "frequency": 76
+    },
+    {
+        "word": "salary",
+        "theme": "economic",
+        "sentiment": 0.07708571428571429,
+        "frequency": 7
+    },
+    {
+        "word": "wage",
+        "theme": "economic",
+        "sentiment": 0.14324074074074075,
+        "frequency": 27
+    },
+    {
+        "word": "wealth",
+        "theme": "economic",
+        "sentiment": 0.6564625,
+        "frequency": 8
+    },
+    {
+        "word": "poverty",
+        "theme": "economic",
+        "sentiment": -0.6335333333333334,
+        "frequency": 3
+    },
+    {
+        "word": "inequality",
+        "theme": "economic",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "capital",
+        "theme": "economic",
+        "sentiment": 0.1453157894736842,
+        "frequency": 19
+    },
+    {
+        "word": "capitalism",
+        "theme": "economic",
+        "sentiment": -0.25,
+        "frequency": 1
+    },
+    {
+        "word": "socialism",
+        "theme": "economic",
+        "sentiment": 0.10057058823529413,
+        "frequency": 17
+    },
+    {
+        "word": "public",
+        "theme": "economic",
+        "sentiment": -0.011457761732851986,
+        "frequency": 277
+    },
+    {
+        "word": "sector",
+        "theme": "economic",
+        "sentiment": 0.04622291666666667,
+        "frequency": 48
+    },
+    {
+        "word": "gdp",
+        "theme": "economic",
+        "sentiment": -0.2439,
+        "frequency": 3
+    },
+    {
+        "word": "environment",
+        "theme": "environment",
+        "sentiment": -0.05942,
+        "frequency": 50
+    },
+    {
+        "word": "environmental",
+        "theme": "environment",
+        "sentiment": -0.016380000000000006,
+        "frequency": 15
+    },
+    {
+        "word": "climate",
+        "theme": "environment",
+        "sentiment": -0.05076808510638298,
+        "frequency": 141
+    },
+    {
+        "word": "climate change",
+        "theme": "environment",
+        "sentiment": -0.09146470588235295,
+        "frequency": 17
+    },
+    {
+        "word": "global warming",
+        "theme": "environment",
+        "sentiment": 0.4404,
+        "frequency": 2
+    },
+    {
+        "word": "pollution",
+        "theme": "environment",
+        "sentiment": -0.28595,
+        "frequency": 2
+    },
+    {
+        "word": "emission",
+        "theme": "environment",
+        "sentiment": 0.00539523809523809,
+        "frequency": 21
+    },
+    {
+        "word": "carbon",
+        "theme": "environment",
+        "sentiment": 0.06428,
+        "frequency": 5
+    },
+    {
+        "word": "renewable",
+        "theme": "environment",
+        "sentiment": 0.25352,
+        "frequency": 10
+    },
+    {
+        "word": "sustainable",
+        "theme": "environment",
+        "sentiment": -0.004019999999999996,
+        "frequency": 10
+    },
+    {
+        "word": "energy",
+        "theme": "environment",
+        "sentiment": 0.15479936305732483,
+        "frequency": 157
+    },
+    {
+        "word": "green energy",
+        "theme": "environment",
+        "sentiment": 0.27746666666666664,
+        "frequency": 3
+    },
+    {
+        "word": "coal",
+        "theme": "environment",
+        "sentiment": 0.00842542372881356,
+        "frequency": 118
+    },
+    {
+        "word": "gas",
+        "theme": "environment",
+        "sentiment": -1.600000000000129e-05,
+        "frequency": 50
+    },
+    {
+        "word": "oil",
+        "theme": "environment",
+        "sentiment": 0.012033846153846157,
+        "frequency": 65
+    },
+    {
+        "word": "ecosystem",
+        "theme": "environment",
+        "sentiment": 0.3612,
+        "frequency": 2
+    },
+    {
+        "word": "nature",
+        "theme": "environment",
+        "sentiment": 0.12156521739130434,
+        "frequency": 23
+    },
+    {
+        "word": "natural",
+        "theme": "environment",
+        "sentiment": 0.16690465116279068,
+        "frequency": 43
+    },
+    {
+        "word": "conservation",
+        "theme": "environment",
+        "sentiment": 0.08538571428571429,
+        "frequency": 7
+    },
+    {
+        "word": "preserve",
+        "theme": "environment",
+        "sentiment": 0.17384,
+        "frequency": 5
+    },
+    {
+        "word": "biodiversity",
+        "theme": "environment",
+        "sentiment": -0.1366,
+        "frequency": 2
+    },
+    {
+        "word": "sustainability",
+        "theme": "environment",
+        "sentiment": 0.03896428571428572,
+        "frequency": 14
+    },
+    {
+        "word": "resource",
+        "theme": "environment",
+        "sentiment": 0.1890933333333333,
+        "frequency": 15
+    },
+    {
+        "word": "resources",
+        "theme": "environment",
+        "sentiment": 0.24433846153846156,
+        "frequency": 13
+    },
+    {
+        "word": "waste",
+        "theme": "environment",
+        "sentiment": -0.16543636363636363,
+        "frequency": 11
+    },
+    {
+        "word": "deforestation",
+        "theme": "environment",
+        "sentiment": -0.3612,
+        "frequency": 1
+    },
+    {
+        "word": "agriculture",
+        "theme": "environment",
+        "sentiment": 0.10460472972972973,
+        "frequency": 148
+    },
+    {
+        "word": "water",
+        "theme": "environment",
+        "sentiment": 0.09039230769230769,
+        "frequency": 26
+    },
+    {
+        "word": "ecological",
+        "theme": "environment",
+        "sentiment": -0.022842857142857134,
+        "frequency": 7
+    },
+    {
+        "word": "afd",
+        "theme": "political",
+        "sentiment": 0.11270995475113121,
+        "frequency": 663
+    },
+    {
+        "word": "cdu",
+        "theme": "political",
+        "sentiment": 0.04103118811881188,
+        "frequency": 606
+    },
+    {
+        "word": "csu",
+        "theme": "political",
+        "sentiment": 0.043618861209964416,
+        "frequency": 281
+    },
+    {
+        "word": "spd",
+        "theme": "political",
+        "sentiment": 0.07277251908396946,
+        "frequency": 262
+    },
+    {
+        "word": "greens",
+        "theme": "political",
+        "sentiment": 0.07618823529411764,
+        "frequency": 187
+    },
+    {
+        "word": "left",
+        "theme": "political",
+        "sentiment": 0.04627537993920973,
+        "frequency": 329
+    },
+    {
+        "word": "right",
+        "theme": "political",
+        "sentiment": 0.020986311787072245,
+        "frequency": 526
+    },
+    {
+        "word": "far-right",
+        "theme": "political",
+        "sentiment": -0.042666666666666665,
+        "frequency": 3
+    },
+    {
+        "word": "center",
+        "theme": "political",
+        "sentiment": 0.021798275862068964,
+        "frequency": 58
+    },
+    {
+        "word": "centrist",
+        "theme": "political",
+        "sentiment": -0.5106,
+        "frequency": 1
+    },
+    {
+        "word": "conservative",
+        "theme": "political",
+        "sentiment": 0.20225428571428572,
+        "frequency": 35
+    },
+    {
+        "word": "liberal",
+        "theme": "political",
+        "sentiment": -0.020694444444444442,
+        "frequency": 18
+    },
+    {
+        "word": "socialist",
+        "theme": "political",
+        "sentiment": -0.04132972972972973,
+        "frequency": 37
+    },
+    {
+        "word": "progressive",
+        "theme": "political",
+        "sentiment": 0.15253333333333333,
+        "frequency": 3
+    },
+    {
+        "word": "nationalist",
+        "theme": "political",
+        "sentiment": -0.053325,
+        "frequency": 4
+    },
+    {
+        "word": "populist",
+        "theme": "political",
+        "sentiment": -0.0772,
+        "frequency": 1
+    },
+    {
+        "word": "democratic",
+        "theme": "political",
+        "sentiment": 0.03414634146341463,
+        "frequency": 82
+    },
+    {
+        "word": "democracy",
+        "theme": "political",
+        "sentiment": -0.008762237762237762,
+        "frequency": 143
+    },
+    {
+        "word": "republic",
+        "theme": "political",
+        "sentiment": -0.03869166666666667,
+        "frequency": 48
+    },
+    {
+        "word": "opposition",
+        "theme": "political",
+        "sentiment": 0.006664761904761907,
+        "frequency": 105
+    },
+    {
+        "word": "coalition",
+        "theme": "political",
+        "sentiment": 0.006380530973451327,
+        "frequency": 113
+    },
+    {
+        "word": "party",
+        "theme": "political",
+        "sentiment": 0.36736296296296295,
+        "frequency": 243
+    },
+    {
+        "word": "parties",
+        "theme": "political",
+        "sentiment": 0.410458125,
+        "frequency": 160
+    },
+    {
+        "word": "ideology",
+        "theme": "political",
+        "sentiment": -0.03755357142857142,
+        "frequency": 28
+    },
+    {
+        "word": "political",
+        "theme": "political",
+        "sentiment": 0.046816015625,
+        "frequency": 256
+    },
+    {
+        "word": "election",
+        "theme": "political",
+        "sentiment": 0.10344201954397393,
+        "frequency": 307
+    },
+    {
+        "word": "vote",
+        "theme": "political",
+        "sentiment": 0.06417672209026128,
+        "frequency": 421
+    },
+    {
+        "word": "voter",
+        "theme": "political",
+        "sentiment": -0.053414788732394365,
+        "frequency": 142
+    },
+    {
+        "word": "campaign",
+        "theme": "political",
+        "sentiment": 0.08521747572815534,
+        "frequency": 103
+    },
+    {
+        "word": "policy",
+        "theme": "political",
+        "sentiment": 0.011817868338557996,
+        "frequency": 319
+    },
+    {
+        "word": "policies",
+        "theme": "political",
+        "sentiment": -0.015938333333333336,
+        "frequency": 60
+    },
+    {
+        "word": "candidate",
+        "theme": "political",
+        "sentiment": 0.03869756097560976,
+        "frequency": 41
+    },
+    {
+        "word": "parliament",
+        "theme": "political",
+        "sentiment": 0.07865356415478614,
+        "frequency": 491
+    },
+    {
+        "word": "legislation",
+        "theme": "political",
+        "sentiment": 0.09285555555555555,
+        "frequency": 18
+    },
+    {
+        "word": "government",
+        "theme": "political",
+        "sentiment": -0.012639333333333332,
+        "frequency": 450
+    },
+    {
+        "word": "governance",
+        "theme": "political",
+        "sentiment": 0.1591,
+        "frequency": 2
+    },
+    {
+        "word": "authority",
+        "theme": "political",
+        "sentiment": 0.09934761904761905,
+        "frequency": 42
+    },
+    {
+        "word": "corruption",
+        "theme": "political",
+        "sentiment": -0.24792,
+        "frequency": 10
+    },
+    {
+        "word": "transparency",
+        "theme": "political",
+        "sentiment": 0.24792727272727272,
+        "frequency": 11
+    },
+    {
+        "word": "leadership",
+        "theme": "political",
+        "sentiment": 0.009885714285714286,
+        "frequency": 21
+    },
+    {
+        "word": "reform",
+        "theme": "political",
+        "sentiment": 0.05360508474576271,
+        "frequency": 59
+    },
+    {
+        "word": "radical",
+        "theme": "political",
+        "sentiment": -0.06442941176470587,
+        "frequency": 17
+    },
+    {
+        "word": "moderate",
+        "theme": "political",
+        "sentiment": -0.060883333333333324,
+        "frequency": 6
+    },
+    {
+        "word": "extremist",
+        "theme": "political",
+        "sentiment": -0.0046961538461538456,
+        "frequency": 26
+    },
+    {
+        "word": "polarization",
+        "theme": "political",
+        "sentiment": 0.0,
+        "frequency": 2
+    },
+    {
+        "word": "security",
+        "theme": "security",
+        "sentiment": 0.2533256097560976,
+        "frequency": 164
+    },
+    {
+        "word": "border",
+        "theme": "security",
+        "sentiment": -0.10726271186440678,
+        "frequency": 118
+    },
+    {
+        "word": "borders",
+        "theme": "security",
+        "sentiment": -0.08578474576271186,
+        "frequency": 59
+    },
+    {
+        "word": "police",
+        "theme": "security",
+        "sentiment": -0.08814545454545455,
+        "frequency": 77
+    },
+    {
+        "word": "military",
+        "theme": "security",
+        "sentiment": -0.030766,
+        "frequency": 50
+    },
+    {
+        "word": "army",
+        "theme": "security",
+        "sentiment": 0.1729235294117647,
+        "frequency": 17
+    },
+    {
+        "word": "defense",
+        "theme": "security",
+        "sentiment": 0.17743636363636364,
+        "frequency": 77
+    },
+    {
+        "word": "terrorism",
+        "theme": "security",
+        "sentiment": -0.7557777777777778,
+        "frequency": 9
+    },
+    {
+        "word": "terrorist",
+        "theme": "security",
+        "sentiment": -0.7977315789473685,
+        "frequency": 19
+    },
+    {
+        "word": "crime",
+        "theme": "security",
+        "sentiment": -0.3396253164556962,
+        "frequency": 79
+    },
+    {
+        "word": "criminal",
+        "theme": "security",
+        "sentiment": -0.5217543307086614,
+        "frequency": 127
+    },
+    {
+        "word": "safety",
+        "theme": "security",
+        "sentiment": 0.27702352941176467,
+        "frequency": 34
+    },
+    {
+        "word": "safe",
+        "theme": "security",
+        "sentiment": 0.37832,
+        "frequency": 75
+    },
+    {
+        "word": "threat",
+        "theme": "security",
+        "sentiment": -0.4227478260869565,
+        "frequency": 69
+    },
+    {
+        "word": "threaten",
+        "theme": "security",
+        "sentiment": -0.41965172413793106,
+        "frequency": 29
+    },
+    {
+        "word": "protection",
+        "theme": "security",
+        "sentiment": -0.026807734806629832,
+        "frequency": 181
+    },
+    {
+        "word": "protect",
+        "theme": "security",
+        "sentiment": 0.0693840830449827,
+        "frequency": 289
+    },
+    {
+        "word": "sovereignty",
+        "theme": "security",
+        "sentiment": 0.1269,
+        "frequency": 11
+    },
+    {
+        "word": "control",
+        "theme": "security",
+        "sentiment": 0.0017000000000000001,
+        "frequency": 88
+    },
+    {
+        "word": "war",
+        "theme": "security",
+        "sentiment": -0.10301635220125786,
+        "frequency": 477
+    },
+    {
+        "word": "peace",
+        "theme": "security",
+        "sentiment": 0.5625126984126984,
+        "frequency": 63
+    },
+    {
+        "word": "violence",
+        "theme": "security",
+        "sentiment": -0.6678124999999999,
+        "frequency": 40
+    },
+    {
+        "word": "violent",
+        "theme": "security",
+        "sentiment": -0.7416666666666667,
+        "frequency": 9
+    },
+    {
+        "word": "attack",
+        "theme": "security",
+        "sentiment": -0.3976047619047619,
+        "frequency": 63
+    },
+    {
+        "word": "attacks",
+        "theme": "security",
+        "sentiment": -0.40675,
+        "frequency": 16
+    },
+    {
+        "word": "conflict",
+        "theme": "security",
+        "sentiment": -0.2204941176470588,
+        "frequency": 17
+    },
+    {
+        "word": "crisis",
+        "theme": "security",
+        "sentiment": -0.5460200000000001,
+        "frequency": 85
+    },
+    {
+        "word": "emergency",
+        "theme": "security",
+        "sentiment": -0.2566952380952381,
+        "frequency": 21
+    },
+    {
+        "word": "risk",
+        "theme": "security",
+        "sentiment": -0.16076521739130437,
+        "frequency": 69
+    },
+    {
+        "word": "danger",
+        "theme": "security",
+        "sentiment": -0.4338358974358974,
+        "frequency": 78
+    },
+    {
+        "word": "stability",
+        "theme": "security",
+        "sentiment": 0.2772,
+        "frequency": 6
+    },
+    {
+        "word": "destabilize",
+        "theme": "security",
+        "sentiment": -0.7469,
+        "frequency": 1
+    },
+    {
+        "word": "surveillance",
+        "theme": "security",
+        "sentiment": -0.049977777777777774,
+        "frequency": 18
+    },
+    {
+        "word": "monitoring",
+        "theme": "security",
+        "sentiment": -0.028425000000000002,
+        "frequency": 8
+    },
+    {
+        "word": "weapon",
+        "theme": "security",
+        "sentiment": -0.34793214285714286,
+        "frequency": 28
+    },
+    {
+        "word": "weapons",
+        "theme": "security",
+        "sentiment": -0.38217500000000004,
+        "frequency": 20
+    },
+    {
+        "word": "armed",
+        "theme": "security",
+        "sentiment": -0.08019090909090909,
+        "frequency": 33
+    },
+    {
+        "word": "force",
+        "theme": "security",
+        "sentiment": -0.0715731884057971,
+        "frequency": 138
+    },
+    {
+        "word": "forces",
+        "theme": "security",
+        "sentiment": 0.0680265306122449,
+        "frequency": 49
+    },
+    {
+        "word": "defend",
+        "theme": "security",
+        "sentiment": 0.008297368421052626,
+        "frequency": 38
+    },
+    {
+        "word": "alliance",
+        "theme": "security",
+        "sentiment": 0.053899999999999997,
+        "frequency": 16
+    },
+    {
+        "word": "nato",
+        "theme": "security",
+        "sentiment": 0.10911739130434783,
+        "frequency": 23
+    },
+    {
+        "word": "cybersecurity",
+        "theme": "security",
+        "sentiment": 0.4939,
+        "frequency": 1
+    },
+    {
+        "word": "intelligence",
+        "theme": "security",
+        "sentiment": 0.40149999999999997,
+        "frequency": 17
+    },
+    {
+        "word": "health",
+        "theme": "health_social",
+        "sentiment": 0.10666608187134502,
+        "frequency": 171
+    },
+    {
+        "word": "healthcare",
+        "theme": "health_social",
+        "sentiment": 0.232376,
+        "frequency": 25
+    },
+    {
+        "word": "hospital",
+        "theme": "health_social",
+        "sentiment": 0.16821886792452828,
+        "frequency": 53
+    },
+    {
+        "word": "medicine",
+        "theme": "health_social",
+        "sentiment": 0.022344444444444448,
+        "frequency": 27
+    },
+    {
+        "word": "medical",
+        "theme": "health_social",
+        "sentiment": 0.15402745098039214,
+        "frequency": 51
+    },
+    {
+        "word": "disease",
+        "theme": "health_social",
+        "sentiment": 0.018916393442622952,
+        "frequency": 61
+    },
+    {
+        "word": "pandemic",
+        "theme": "health_social",
+        "sentiment": 0.014912903225806452,
+        "frequency": 62
+    },
+    {
+        "word": "covid",
+        "theme": "health_social",
+        "sentiment": -0.024390624999999996,
+        "frequency": 32
+    },
+    {
+        "word": "vaccination",
+        "theme": "health_social",
+        "sentiment": -0.019294181818181814,
+        "frequency": 275
+    },
+    {
+        "word": "public health",
+        "theme": "health_social",
+        "sentiment": -0.13192500000000001,
+        "frequency": 4
+    },
+    {
+        "word": "social welfare",
+        "theme": "health_social",
+        "sentiment": -0.15445,
+        "frequency": 2
+    },
+    {
+        "word": "social security",
+        "theme": "health_social",
+        "sentiment": 0.43115555555555557,
+        "frequency": 9
+    },
+    {
+        "word": "education",
+        "theme": "health_social",
+        "sentiment": 0.196418,
+        "frequency": 50
+    },
+    {
+        "word": "school",
+        "theme": "health_social",
+        "sentiment": -0.03906567164179105,
+        "frequency": 67
+    },
+    {
+        "word": "university",
+        "theme": "health_social",
+        "sentiment": -0.01226470588235294,
+        "frequency": 17
+    },
+    {
+        "word": "student",
+        "theme": "health_social",
+        "sentiment": 0.13904999999999998,
+        "frequency": 14
+    },
+    {
+        "word": "teacher",
+        "theme": "health_social",
+        "sentiment": 0.12252222222222223,
+        "frequency": 9
+    },
+    {
+        "word": "social",
+        "theme": "health_social",
+        "sentiment": 0.08442046783625731,
+        "frequency": 171
+    },
+    {
+        "word": "housing",
+        "theme": "health_social",
+        "sentiment": -0.02741935483870968,
+        "frequency": 31
+    },
+    {
+        "word": "homelessness",
+        "theme": "health_social",
+        "sentiment": -0.032,
+        "frequency": 4
+    },
+    {
+        "word": "poverty",
+        "theme": "health_social",
+        "sentiment": -0.6335333333333334,
+        "frequency": 3
+    },
+    {
+        "word": "vulnerable",
+        "theme": "health_social",
+        "sentiment": -0.30415000000000003,
+        "frequency": 2
+    },
+    {
+        "word": "elderly",
+        "theme": "health_social",
+        "sentiment": -0.13864285714285712,
+        "frequency": 7
+    },
+    {
+        "word": "disability",
+        "theme": "health_social",
+        "sentiment": -0.743,
+        "frequency": 1
+    },
+    {
+        "word": "mental health",
+        "theme": "health_social",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "childcare",
+        "theme": "health_social",
+        "sentiment": 0.64515,
+        "frequency": 2
+    },
+    {
+        "word": "family policy",
+        "theme": "health_social",
+        "sentiment": 0.7999,
+        "frequency": 1
+    },
+    {
+        "word": "social justice",
+        "theme": "health_social",
+        "sentiment": 0.6134999999999999,
+        "frequency": 2
+    },
+    {
+        "word": "inequality",
+        "theme": "health_social",
+        "sentiment": 0.0,
+        "frequency": 1
+    },
+    {
+        "word": "discrimination",
+        "theme": "health_social",
+        "sentiment": 0.23504999999999998,
+        "frequency": 4
+    },
+    {
+        "word": "equity",
+        "theme": "health_social",
+        "sentiment": -0.16463333333333333,
+        "frequency": 3
+    },
+    {
+        "word": "inclusive",
+        "theme": "health_social",
+        "sentiment": -0.5267,
+        "frequency": 1
+    },
+    {
+        "word": "exclusion",
+        "theme": "health_social",
+        "sentiment": -0.1849,
+        "frequency": 11
+    },
+    {
+        "word": "fairness",
+        "theme": "health_social",
+        "sentiment": -0.035074999999999995,
+        "frequency": 4
+    }
+]
