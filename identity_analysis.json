@@ -1,0 +1,770 @@
+[
+    {
+        "word": "people",
+        "count": 971,
+        "sentiment": 0.0,
+        "percentage": 0.6374821097966097,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "us",
+        "count": 592,
+        "sentiment": 0.0,
+        "percentage": 0.38866056539607924,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "citizens",
+        "count": 333,
+        "sentiment": 0.0,
+        "percentage": 0.2186215680352946,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "party",
+        "count": 252,
+        "sentiment": 0.0,
+        "percentage": 0.16544334878346617,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "public",
+        "count": 212,
+        "sentiment": 0.0,
+        "percentage": 0.13918249977021757,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "different",
+        "count": 166,
+        "sentiment": 0.0,
+        "percentage": 0.10898252340498168,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "voters",
+        "count": 127,
+        "sentiment": 0.0,
+        "percentage": 0.0833781956170643,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "others",
+        "count": 113,
+        "sentiment": 0.0,
+        "percentage": 0.07418689846242729,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "society",
+        "count": 106,
+        "sentiment": 0.0,
+        "percentage": 0.06959124988510879,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "national",
+        "count": 77,
+        "sentiment": 0.0,
+        "percentage": 0.05055213435050355,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "foreign",
+        "count": 68,
+        "sentiment": 0.0,
+        "percentage": 0.04464344332252262,
+        "category": "cultural",
+        "group": "they_group"
+    },
+    {
+        "word": "family",
+        "count": 61,
+        "sentiment": 0.0,
+        "percentage": 0.04004779474520411,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "local",
+        "count": 54,
+        "sentiment": 0.0,
+        "percentage": 0.035452146167885605,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "taxpayers",
+        "count": 44,
+        "sentiment": 0.0,
+        "percentage": 0.02888693391457346,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "illegal",
+        "count": 38,
+        "sentiment": -0.5574,
+        "percentage": 0.02494780656258617,
+        "category": "national",
+        "group": "they_group"
+    },
+    {
+        "word": "community",
+        "count": 37,
+        "sentiment": 0.0,
+        "percentage": 0.024291285337254952,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "families",
+        "count": 36,
+        "sentiment": 0.0,
+        "percentage": 0.023634764111923737,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "official",
+        "count": 35,
+        "sentiment": 0.0,
+        "percentage": 0.022978242886592525,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "domestic",
+        "count": 33,
+        "sentiment": 0.0,
+        "percentage": 0.021665200435930093,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "culture",
+        "count": 32,
+        "sentiment": 0.0,
+        "percentage": 0.02100867921059888,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "conservative",
+        "count": 28,
+        "sentiment": 0.0,
+        "percentage": 0.018382594309274018,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "soil",
+        "count": 28,
+        "sentiment": 0.0,
+        "percentage": 0.018382594309274018,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "citizen",
+        "count": 27,
+        "sentiment": 0.0,
+        "percentage": 0.017726073083942803,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "nation",
+        "count": 25,
+        "sentiment": 0.0,
+        "percentage": 0.016413030633280375,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "origin",
+        "count": 25,
+        "sentiment": 0.0,
+        "percentage": 0.016413030633280375,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "establishment",
+        "count": 24,
+        "sentiment": 0.0,
+        "percentage": 0.01575650940794916,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "generation",
+        "count": 23,
+        "sentiment": 0.0,
+        "percentage": 0.015099988182617943,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "socialist",
+        "count": 23,
+        "sentiment": 0.0,
+        "percentage": 0.015099988182617943,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "established",
+        "count": 22,
+        "sentiment": 0.0,
+        "percentage": 0.01444346695728673,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "generations",
+        "count": 21,
+        "sentiment": 0.0,
+        "percentage": 0.013786945731955515,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "refugees",
+        "count": 21,
+        "sentiment": 0.0,
+        "percentage": 0.013786945731955515,
+        "category": "national",
+        "group": "they_group"
+    },
+    {
+        "word": "nazi",
+        "count": 20,
+        "sentiment": 0.0,
+        "percentage": 0.0131304245066243,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "politician",
+        "count": 19,
+        "sentiment": 0.0,
+        "percentage": 0.012473903281293086,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "pure",
+        "count": 19,
+        "sentiment": 0.0,
+        "percentage": 0.012473903281293086,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "extremist",
+        "count": 18,
+        "sentiment": 0.0,
+        "percentage": 0.011817382055961868,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "voter",
+        "count": 17,
+        "sentiment": 0.0,
+        "percentage": 0.011160860830630654,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "migrants",
+        "count": 17,
+        "sentiment": 0.0,
+        "percentage": 0.011160860830630654,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "genuine",
+        "count": 17,
+        "sentiment": 0.0,
+        "percentage": 0.011160860830630654,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "historic",
+        "count": 16,
+        "sentiment": 0.0,
+        "percentage": 0.01050433960529944,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "enemy",
+        "count": 16,
+        "sentiment": -0.5423,
+        "percentage": 0.01050433960529944,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "fellow",
+        "count": 16,
+        "sentiment": 0.0,
+        "percentage": 0.01050433960529944,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "tradition",
+        "count": 15,
+        "sentiment": 0.0,
+        "percentage": 0.009847818379968225,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "guests",
+        "count": 15,
+        "sentiment": 0.0,
+        "percentage": 0.009847818379968225,
+        "category": "national",
+        "group": "they_group"
+    },
+    {
+        "word": "strange",
+        "count": 15,
+        "sentiment": -0.2023,
+        "percentage": 0.009847818379968225,
+        "category": "cultural",
+        "group": "they_group"
+    },
+    {
+        "word": "guest",
+        "count": 14,
+        "sentiment": 0.0,
+        "percentage": 0.009191297154637009,
+        "category": "national",
+        "group": "they_group"
+    },
+    {
+        "word": "familiar",
+        "count": 14,
+        "sentiment": 0.0,
+        "percentage": 0.009191297154637009,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "islam",
+        "count": 14,
+        "sentiment": 0.0,
+        "percentage": 0.009191297154637009,
+        "category": "religious",
+        "group": "they_group"
+    },
+    {
+        "word": "constituency",
+        "count": 13,
+        "sentiment": 0.0,
+        "percentage": 0.008534775929305795,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "guardian",
+        "count": 13,
+        "sentiment": 0.0,
+        "percentage": 0.008534775929305795,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "terrorist",
+        "count": 13,
+        "sentiment": -0.6908,
+        "percentage": 0.008534775929305795,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "foreigners",
+        "count": 13,
+        "sentiment": 0.0,
+        "percentage": 0.008534775929305795,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "christian",
+        "count": 13,
+        "sentiment": 0.0,
+        "percentage": 0.008534775929305795,
+        "category": "religious",
+        "group": "you_group"
+    },
+    {
+        "word": "minority",
+        "count": 13,
+        "sentiment": 0.0,
+        "percentage": 0.008534775929305795,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "enemies",
+        "count": 12,
+        "sentiment": -0.4939,
+        "percentage": 0.00787825470397458,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "stock",
+        "count": 12,
+        "sentiment": 0.0,
+        "percentage": 0.00787825470397458,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "civilian",
+        "count": 11,
+        "sentiment": 0.0,
+        "percentage": 0.007221733478643365,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "homeland",
+        "count": 11,
+        "sentiment": 0.0,
+        "percentage": 0.007221733478643365,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "blood",
+        "count": 11,
+        "sentiment": 0.0,
+        "percentage": 0.007221733478643365,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "traditional",
+        "count": 11,
+        "sentiment": 0.0,
+        "percentage": 0.007221733478643365,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "electorate",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "taxpayer",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "radical",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "opponents",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "muslim",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "religious",
+        "group": "they_group"
+    },
+    {
+        "word": "muslims",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "religious",
+        "group": "they_group"
+    },
+    {
+        "word": "nazis",
+        "count": 10,
+        "sentiment": 0.0,
+        "percentage": 0.00656521225331215,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "extremists",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "mixed",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "clans",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "clans",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "officials",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "customs",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "liberal",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "ancestors",
+        "count": 9,
+        "sentiment": 0.0,
+        "percentage": 0.005908691027980934,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "leftists",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "compatriots",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "national",
+        "group": "you_group"
+    },
+    {
+        "word": "religious",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "religious",
+        "group": "they_group"
+    },
+    {
+        "word": "socialists",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "comrades",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "clan",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "clan",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "opponent",
+        "count": 8,
+        "sentiment": 0.0,
+        "percentage": 0.00525216980264972,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "allies",
+        "count": 7,
+        "sentiment": 0.0,
+        "percentage": 0.0045956485773185046,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "refugee",
+        "count": 7,
+        "sentiment": 0.0,
+        "percentage": 0.0045956485773185046,
+        "category": "national",
+        "group": "they_group"
+    },
+    {
+        "word": "migrant",
+        "count": 7,
+        "sentiment": 0.0,
+        "percentage": 0.0045956485773185046,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "sister",
+        "count": 7,
+        "sentiment": 0.0,
+        "percentage": 0.0045956485773185046,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "deniers",
+        "count": 7,
+        "sentiment": -0.2732,
+        "percentage": 0.0045956485773185046,
+        "category": "religious",
+        "group": "they_group"
+    },
+    {
+        "word": "communist",
+        "count": 7,
+        "sentiment": 0.0,
+        "percentage": 0.0045956485773185046,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "insider",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "cultural",
+        "group": "you_group"
+    },
+    {
+        "word": "brothers",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "base",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "ideological_political",
+        "group": "you_group"
+    },
+    {
+        "word": "church",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "religious",
+        "group": "you_group"
+    },
+    {
+        "word": "immigrants",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "racial_ethnic",
+        "group": "they_group"
+    },
+    {
+        "word": "terrorists",
+        "count": 6,
+        "sentiment": -0.6249,
+        "percentage": 0.00393912735198729,
+        "category": "ideological_political",
+        "group": "they_group"
+    },
+    {
+        "word": "countrymen",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "racial_ethnic",
+        "group": "you_group"
+    },
+    {
+        "word": "conventional",
+        "count": 6,
+        "sentiment": 0.0,
+        "percentage": 0.00393912735198729,
+        "category": "cultural",
+        "group": "you_group"
+    }
+]
