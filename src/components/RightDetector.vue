@@ -43,7 +43,9 @@
           </div>
         </div>
     </div>
-
+    <div v-if="error" class="error-message">
+        {{ error }}
+      </div>
     <div class="detector-interface">
       <textarea 
         v-model="inputText" 
@@ -54,16 +56,14 @@
       ></textarea>
       
       <button 
-        @click="getJsonResponse"
+        @click="getJsonResponse" 
         class="analyze-btn" 
         :disabled="isLoading || !inputText.trim()"
       >
         {{ isLoading ? 'Analyzing...' : 'Analyze Text' }}
       </button>
       
-      <div v-if="error" class="error-message">
-        {{ error }}
-      </div>
+      
     </div>
   </div>
 </template>
@@ -86,6 +86,10 @@ export default {
   methods: {
     async getJsonResponse() {
       if (!this.inputText.trim()) return;
+      if (this.inputText.length < 2500) {
+        this.error = "Please enter a longer text. At least 1000 words";
+        return;
+      }
     
       this.isLoading = true;
       this.error = null;
