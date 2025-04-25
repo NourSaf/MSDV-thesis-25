@@ -22,7 +22,8 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@gradio/client": "^1.14.2",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@types/d3": "^7.4.3",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
