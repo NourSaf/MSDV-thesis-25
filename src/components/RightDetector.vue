@@ -16,10 +16,11 @@
 
     <!-- Input Interface -->
     <div 
-      v-if="!showResults && !isLoading" 
-      class="detector-interface fade-in-out"
-      :class="{ 'fade-out': isProcessing }"
-      >
+    v-if="!showResults && !isLoading" 
+    class="detector-interface fade-in-out"
+    :class="{ 'fade-out': isProcessing }"
+    >
+    <div class="detector-interface fade-in-out ">Hi, let's detect party speeches</div>
       
       <div class="relative-text-container">
           <div class="text-area-section">
