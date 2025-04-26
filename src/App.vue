@@ -23,8 +23,7 @@
     </div>
     <div class="snap-section">
         <h3 class="separator-section">
-          PART 01 - MOTIVATION
-        THE RISE OF THE RIGHT-WING PARTY IN GERMANY 
+          MAPPING THE RISE OF THE ALTERNATIVE FOR GERMANY (AFD) PARTY
         </h3>
         
       </div>
@@ -59,7 +58,9 @@
         <div class="step">
           <div class="step-content">
             <h3>2017 Election Results</h3>
-            <p>In 2017, the AfD won 10% of the votes, marking their initial rise to prominence in German politics.</p>
+            <p>
+                In 2017 the AfD secured 12.6 % of the vote and won three constituency seats, marking its first significant entry into Germany’s political landscape.
+            </p>
           </div>
         </div>
       </article>
@@ -68,7 +69,7 @@
         <div class="step">
           <div class="step-content">
             <h3>2021 Election Results</h3>
-            <p>By 2021, the AfD managed to maintain their position with 10.3% of the vote despite challenges from the pandemic.</p>
+            <p>In 2021 the AfD won 16 constituency seats—13 more than in 2017.</p>
           </div>
         </div>
       </article>
@@ -77,7 +78,9 @@
         <div class="step">
           <div class="step-content">
             <h3>2025 Election Results</h3>
-            <p>In 2025, the AfD saw a dramatic increase to 22.6% of the vote, more than doubling their previous results.</p>
+            <p>
+                In 2025 the AfD’s vote share jumped to 20.6 %, twice its 2021 result, and it captured 42 constituency seats.
+            </p>
           </div>
         </div>
       </article>
@@ -86,7 +89,8 @@
     <div class="scroll-snap-container">
       <div class="snap-section">
         <h3 class="separator-section">
-          PART 02 - SPEECH ANALYSIS: COUNT AND FREQUENCY
+          HOW DOES THEIR LANGUAGE HELP REINFORCE THIS DIVISION? <br>
+          WORD COUNT AND FREQUENCIES
         </h3>
       </div>
     
@@ -106,7 +110,7 @@
 
       <div class="snap-section">
         <h3 class="separator-section">
-          PART 3 - SPEECH ANALYSIS: SENTIMENT ANALYSIS <br>
+         THEMAIC DICTIONARY
         </h3>
       </div>
 
@@ -547,8 +551,11 @@ html {
 }
 .separator-section{
   display: flex;
-  align-items: center;
+  justify-content: center;
   font-size: 24px;
+  min-width: 1200px;
+  align-items: center;
+  text-align: center;
 }
 
 .scroll-snap-container, .main-section, html, body {
