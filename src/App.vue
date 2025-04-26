@@ -405,11 +405,6 @@ el-button:hover{
   color: rgb(71, 71, 71) !important;
 }
 
-/* .con-btn span {
-  background-color: rgba(255, 0, 0, 0) !important;
-  color: red !important;
-} */
- 
 .slide-in{
   transform: translateX(-100%);
 }
