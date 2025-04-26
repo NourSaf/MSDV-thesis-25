@@ -361,6 +361,8 @@ export default {
 
 .main-section{
   z-index: 0;
+  font-family: "Funnel Display", sans-serif;
+
 }
 
 .you-they{
@@ -389,12 +391,25 @@ export default {
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: #121212;
+  background-color: #212121;
   transition: transform 0.5s ease;
   z-index: 10;
   flex-direction: column;
 }
+el-button:hover{
+  background-color: #212121 !important;
+  color: #fff !important;
+}
+.con-btn span {
+  background-color: rgba(255, 0, 0, 0) !important;
+  color: rgb(71, 71, 71) !important;
+}
 
+/* .con-btn span {
+  background-color: rgba(255, 0, 0, 0) !important;
+  color: red !important;
+} */
+ 
 .slide-in{
   transform: translateX(-100%);
 }
@@ -541,5 +556,16 @@ html {
   font-size: 24px;
 }
 
+.scroll-snap-container, .main-section, html, body {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.scroll-snap-container::-webkit-scrollbar, 
+.main-section::-webkit-scrollbar, 
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
 
 </style>
