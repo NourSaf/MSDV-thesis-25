@@ -3,15 +3,12 @@
     <!-- Title and Subtitle -->
     <div class="text">
       <div class="title">
-        <!-- The Right-Detector AI -->
+        The Right-Detector AI
       </div>
-      <!-- <div class="sub-title">
-        This model was trained on 1912 speeches from both right-wing and left-wing parties.
-        <br>
-        The speeches were collected from the official YouTube channels of the parties.
-        <br>
-        Enter any text to analyze its political leaning.
-      </div> -->
+      <div class="sub-title">
+        This model is traind on 1912 speeches from both <br> Germany's left-wing party "Die Linke" and right-wing party the "AfD". <br>
+        The Right-Detector AI allows users to enter any <br> speech and get a result wether the speech is considered left or right party speech.
+      </div>
     </div>
 
     <!-- Input Interface -->

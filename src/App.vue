@@ -21,12 +21,13 @@
     <div class="component-chart-section">
       <Landing/>
     </div>
+
     <div class="snap-section">
         <h3 class="separator-section">
           MAPPING THE RISE OF THE ALTERNATIVE FOR GERMANY (AFD) PARTY
-        </h3>
-        
-      </div>
+        </h3>   
+    </div>
+
     <div id="scrolly">
       <figure >
         <ElectionMap17 
@@ -79,7 +80,7 @@
           <div class="step-content">
             <h3>2025 Election Results</h3>
             <p>
-                In 2025 the AfD’s vote share jumped to 20.6 %, twice its 2021 result, and it captured 42 constituency seats.
+                In 2025 the AfD’s vote share jumped to 20.6 %, twice its 2021 result, and it captured 42 constituencies.
             </p>
           </div>
         </div>
@@ -90,12 +91,10 @@
       <div class="snap-section">
         <h3 class="separator-section">
           HOW DOES THEIR LANGUAGE HELP REINFORCE THIS DIVISION? <br>
-          WORD COUNT AND FREQUENCIES
+          <!-- WORD COUNT AND FREQUENCIES -->
         </h3>
       </div>
     
-     
-      
       <div class="snap-section" ref="identitySection">
         <IdentityComponent 
           v-if="isIdentitySectionVisible"
@@ -110,7 +109,7 @@
 
       <div class="snap-section">
         <h3 class="separator-section">
-         THEMAIC DICTIONARY
+         THEMAIC ANALYSIS - KEY THEM TOPICS ACROSS SPEECHES
         </h3>
       </div>
 
@@ -124,24 +123,18 @@
           :data="key_sentiment"/>
       </div>
 
-
       <div class="snap-section">
         <h3 class="separator-section">
-          PART 4 - The Right Detector <br>
-          This model is traind on 1912 speeches. 
-          The shortest speech was XX words 
-          The logest was XX words. 
+          The RIGHT-DETECTOR AI <br>
         </h3>
       </div>
+      
       <div class="snap-section">
         <RightDetector/>
       </div>
       
-     
-      
-
-      
     </div>
+
   </div>
 
 </template>
@@ -555,7 +548,7 @@ html {
   font-size: 24px;
   min-width: 1200px;
   align-items: center;
-  text-align: center;
+  text-align: left;
 }
 
 .scroll-snap-container, .main-section, html, body {
@@ -569,5 +562,7 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
+
+
 
 </style>
