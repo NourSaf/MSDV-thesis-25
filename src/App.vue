@@ -2,8 +2,8 @@
   <Modal :scrollPosition="scrollTop"></Modal>
 
   <div class="you-they">
-    <div class="you-section">YOU</div>
-    <div class="they-section">THEY</div>
+    <div class="you-section" :style="{ transform: `scale(${youScale})` }">YOU</div>
+    <div class="they-section" :style="{ transform: `scale(${theyScale})` }">THEY</div>
   </div>
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
@@ -19,7 +19,7 @@
 
   <div class="main-section">
     <div class="component-chart-section">
-      <Landing/>
+      <Landing :thematicDictionary="thematic_dictionary"/>
     </div>
 
     <div class="snap-section">
@@ -101,11 +101,11 @@
           :data="identity_analysis"/>
       </div>
       
-      <div class="snap-section">
+      <!-- <div class="snap-section">
         <ThematicDictionary 
           :data="thematic_dictionary" 
         />
-      </div>
+      </div> -->
 
       <div class="snap-section">
         <h3 class="separator-section">
@@ -147,7 +147,7 @@ import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
-import ThematicDictionary from './components/ThematicDictionary.vue'
+// import ThematicDictionary from './components/ThematicDictionary.vue'
 import IdentityComponent from './components/IdentityComponent.vue'
 import RightDetector from './components/RightDetector.vue'
 import KeyTermSentiment from './components/KeyTermSentiment.vue'
@@ -180,6 +180,8 @@ export default {
       key_sentiment: null,
       isKeySentimentSectionVisible: false,
       keySentimentObserver: null,
+      mouseX: 0,
+      windowWidth: 0,
     }
   },
   computed:{
@@ -199,7 +201,16 @@ export default {
       const div = document.getElementById("con-div")
       return this.show_all_text_info ? div.style.display = "block" : div.style.display = "none"
     },
-
+    youScale() {
+      const bufferZoneWidth = this.windowWidth * 0.03; // 20% of screen width for buffer
+      const leftZoneEnd = (this.windowWidth - bufferZoneWidth) / 2;
+      return this.mouseX < leftZoneEnd ? 2 : 1;
+    },
+    theyScale() {
+      const bufferZoneWidth = this.windowWidth * 0.03; // 20% of screen width for buffer
+      const rightZoneStart = (this.windowWidth + bufferZoneWidth) / 2;
+      return this.mouseX > rightZoneStart ? 2 : 1;
+    }
   },
   components: {
     Landing,
@@ -209,7 +220,7 @@ export default {
     ElectionMap21,
     ElectionMap25,
     SentimentBarChart,
-    ThematicDictionary,
+    // ThematicDictionary,
     IdentityComponent,
     RightDetector,
     KeyTermSentiment,
@@ -239,6 +250,7 @@ export default {
         this.election_results_25 = data[6];
         this.land_data = data[7];
         this.thematic_dictionary = data[8];
+        console.log('Thematic Dictionary:', this.thematic_dictionary);
       })
       .then (() =>{
         scroller
@@ -259,6 +271,12 @@ export default {
         console.error("Error loading data:", error);
       });
       
+    // Add window width tracking
+    this.windowWidth = window.innerWidth;
+    window.addEventListener('resize', this.handleResize);
+    
+    // Add mouse movement tracking
+    document.addEventListener('mousemove', this.handleMouseMove);
     
     window.addEventListener("scroll", this.onScroll);
   },
@@ -272,6 +290,9 @@ export default {
     if (this.keySentimentObserver) {
       this.keySentimentObserver.disconnect();
     }
+    
+    window.removeEventListener('resize', this.handleResize);
+    document.removeEventListener('mousemove', this.handleMouseMove);
   },
   methods: {
     onScroll(/*event*/){
@@ -349,6 +370,12 @@ export default {
             console.error("Error loading key sentiment data:", error);
           });
       }
+    },
+    handleMouseMove(event) {
+      this.mouseX = event.clientX;
+    },
+    handleResize() {
+      this.windowWidth = window.innerWidth;
     }
   }
 }
@@ -375,9 +402,13 @@ export default {
 
 .they-section{
   padding: 60px;
+  transition: transform 0.3s ease;
+  transform-origin: right center;
 }
 .you-section{
   padding: 60px;
+  transition: transform 0.3s ease;
+  transform-origin: left center;
 }
 
 .con-section{

@@ -55,8 +55,9 @@
         </div>
         
         <div id="charts-container">
-                <div id="chart-you-id" class="bubbel-chart-id"></div>
-                <div id="chart-they-id" class="bubbel-chart-id"></div>
+            <div id="chart-you-id" class="bubbel-chart-id"></div>
+            <div class="chart-divider"></div>
+            <div id="chart-they-id" class="bubbel-chart-id"></div>
         </div>
 
         <div id="tool-tip-identity" class="id-tool-tip"></div>
@@ -276,7 +277,7 @@ export default {
                             tooltip
                                 .style("opacity", 0.9)
                                 .html(`
-                                    <div class="tooltip-title">${d.data.name}</div>
+                                    <div class="id-tool-tip-title">${d.data.name}</div>
                                     <div>Count: ${d.data.value}</div>
                                     <div>Category: ${d.data.category}</div>
                                 `)
@@ -452,18 +453,21 @@ export default {
 #charts-container {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    align-items: center;
+    gap: 0px;
     height: 100%;    
+    position: relative;
 }
 
-.charts-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.chart-divider {
+    width: 2px;
+    height: 50%;
+    background-color: rgba(255, 255, 255);
+    margin: 0 10px;
 }
 
 .bubbel-chart-id {
-    width: 1200px;
+    width: 580px; /* Adjusted to account for divider */
     display: flex;
     align-items: center;
     position: relative;
@@ -477,20 +481,21 @@ export default {
     padding: 12px;
     border-radius: 6px;
     pointer-events: none;
-    font-size: 14px;
+    font-size: 16px;
     max-width: 200px;
     z-index: 10;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: opacity 0.3s;
 }
 
-.tooltip-title {
+.id-tool-tip-title {
     font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 15px;
     border-bottom: 1px solid rgba(255,255,255,0.3);
     padding-bottom: 3px;
 }
+
 .bubble-node circle {
     transition: stroke-width 0.2s, stroke 0.2s;
 }
