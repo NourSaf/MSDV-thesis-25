@@ -218,6 +218,8 @@ export default {
         .attr('height', this.yScale.bandwidth())
         .attr('x', d => d.sentiment < 0 ? this.xScale(this.normalizeScore(d.sentiment)) : this.xScale(0))
         .attr('width', d => Math.abs(this.xScale(this.normalizeScore(d.sentiment)) - this.xScale(0)))
+        .attr("rx", 4) // Rounded corners
+        .attr("ry", 4)
         .attr('fill', d => this.colorScale(this.normalizeScore(d.sentiment)));
       
       // Add mouseover effects

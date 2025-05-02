@@ -329,10 +329,8 @@ export default {
             // Get leaf nodes
             const nodes = root.leaves();
             
-            // Create the tooltip
             const tooltip = d3.select('#tool-tip-identity');
             
-            // Add circles
             const node = g.selectAll("g")
                 .data(nodes)
                 .join("g")

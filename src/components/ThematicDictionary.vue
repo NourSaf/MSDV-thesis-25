@@ -86,7 +86,7 @@ export default {
             
             this.svg = svg;
             
-            // Create nodes (circles)
+            // Create nodes (circles) with pointer cursor
             const node = svg.append('g')
                 .selectAll('circle')
                 .data(root.descendants().slice(1)) 
@@ -95,6 +95,7 @@ export default {
                 .attr('stroke', d => d.children ? 'white' : 'gray') // White stroke for themes, gray for words
                 .attr('stroke-width', 1.5)
                 .attr('pointer-events', d => !d.children ? 'none' : null)
+                .style('cursor', 'pointer') // Add pointer cursor
                 .on('mouseover', function() {
                     d3.select(this)
                         .attr('stroke', d => d.children ? 'white' : 'black')
@@ -112,7 +113,7 @@ export default {
                     }
                 });
 
-            // Update text color for better visibility against dark background
+            // Update text styling with white text for parent circles with background
             const label = svg.append('g')
                 .style('font-size', '20px')
                 .attr('pointer-events', 'none')
@@ -120,10 +121,15 @@ export default {
                 .selectAll('text')
                 .data(root.descendants())
                 .join('text')
-                .style('fill', d => d.children && d.depth > 0 ? 'white' : 'black') // White text on dark themes
+                .style('fill', d => d.children ? 'black' : 'black') // White text for parents, black for leaves
                 .style('fill-opacity', d => d.parent === root ? 1 : 0)
                 .style('display', d => d.parent === root ? 'inline' : 'none')
                 .style('font-weight', d => d.children ? 'bold' : 'normal') // Make theme labels bold
+                .style('paint-order', 'stroke')  // Setting paint order to add background
+                .style('stroke', d => d.children ? 'rgba(255, 255, 255)' : 'none') // Semi-transparent white background for parent labels
+                .style('stroke-width', d => d.children ? '10px' : '0') // Background width
+                .style('stroke-linecap', 'round')
+                .style('stroke-linejoin', 'round')
                 .text(d => d.data.name);
 
             // Create word count labels (only for leaf nodes)
@@ -246,5 +252,10 @@ export default {
     /* width: 1000px; */
     /* height: 1000px; */
     position: relative;
+}
+
+/* Add additional style to ensure cursor pointer works consistently */
+#thematic-chart circle {
+    cursor: pointer;
 }
 </style>
