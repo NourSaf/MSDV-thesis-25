@@ -91,19 +91,19 @@ export default {
                 .selectAll('circle')
                 .data(root.descendants().slice(1)) 
                 .join('circle')
-                .attr('fill', 'white')
-                .attr('stroke', 'gray')
+                .attr('fill', d => d.children ? '#212121' : 'white') // Dark fill for themes, white for words
+                .attr('stroke', d => d.children ? 'white' : 'gray') // White stroke for themes, gray for words
                 .attr('stroke-width', 1.5)
                 .attr('pointer-events', d => !d.children ? 'none' : null)
                 .on('mouseover', function() {
                     d3.select(this)
-                        .attr('stroke', 'black')
+                        .attr('stroke', d => d.children ? 'white' : 'black')
                         .attr('stroke-width', 3);
                 })
                 .on('mouseout', function() {
                     d3.select(this)
-                        .attr('stroke', '#000')
-                        .attr('stroke-width', 1);
+                        .attr('stroke', d => d.children ? 'white' : 'gray')
+                        .attr('stroke-width', 1.5);
                 })
                 .on('click', (event, d) => {
                     if (focus !== d) {
@@ -111,8 +111,8 @@ export default {
                         event.stopPropagation();
                     }
                 });
-            
-            // Create theme labels
+
+            // Update text color for better visibility against dark background
             const label = svg.append('g')
                 .style('font-size', '20px')
                 .attr('pointer-events', 'none')
@@ -120,12 +120,12 @@ export default {
                 .selectAll('text')
                 .data(root.descendants())
                 .join('text')
-                .style('fill', 'black')
+                .style('fill', d => d.children && d.depth > 0 ? 'white' : 'black') // White text on dark themes
                 .style('fill-opacity', d => d.parent === root ? 1 : 0)
                 .style('display', d => d.parent === root ? 'inline' : 'none')
-                .style('font-weight', d => d.children ? 'normal' : 'normal')
+                .style('font-weight', d => d.children ? 'bold' : 'normal') // Make theme labels bold
                 .text(d => d.data.name);
-            
+
             // Create word count labels (only for leaf nodes)
             const wordCount = svg.append('g')
                 .style('font-size', '20px')

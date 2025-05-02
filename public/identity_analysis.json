@@ -248,14 +248,6 @@
         "group": "they_group"
     },
     {
-        "word": "politician",
-        "count": 19,
-        "sentiment": 0.0,
-        "percentage": 0.012473903281293086,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
-    {
         "word": "pure",
         "count": 19,
         "sentiment": 0.0,
@@ -428,7 +420,7 @@
         "count": 12,
         "sentiment": -0.4939,
         "percentage": 0.00787825470397458,
-        "category": "ideological_political",
+        "category": "national",
         "group": "they_group"
     },
     {
@@ -488,19 +480,11 @@
         "group": "you_group"
     },
     {
-        "word": "radical",
-        "count": 10,
-        "sentiment": 0.0,
-        "percentage": 0.00656521225331215,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
-    {
         "word": "opponents",
         "count": 10,
         "sentiment": 0.0,
         "percentage": 0.00656521225331215,
-        "category": "ideological_political",
+        "category": "national",
         "group": "they_group"
     },
     {
@@ -549,24 +533,9 @@
         "sentiment": 0.0,
         "percentage": 0.005908691027980934,
         "category": "racial_ethnic",
-        "group": "you_group"
-    },
-    {
-        "word": "clans",
-        "count": 9,
-        "sentiment": 0.0,
-        "percentage": 0.005908691027980934,
-        "category": "racial_ethnic",
         "group": "they_group"
     },
-    {
-        "word": "officials",
-        "count": 9,
-        "sentiment": 0.0,
-        "percentage": 0.005908691027980934,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
+
     {
         "word": "customs",
         "count": 9,
@@ -575,14 +544,7 @@
         "category": "cultural",
         "group": "you_group"
     },
-    {
-        "word": "liberal",
-        "count": 9,
-        "sentiment": 0.0,
-        "percentage": 0.005908691027980934,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
+
     {
         "word": "ancestors",
         "count": 9,
@@ -591,14 +553,7 @@
         "category": "racial_ethnic",
         "group": "you_group"
     },
-    {
-        "word": "leftists",
-        "count": 8,
-        "sentiment": 0.0,
-        "percentage": 0.00525216980264972,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
+
     {
         "word": "compatriots",
         "count": 8,
@@ -613,14 +568,6 @@
         "sentiment": 0.0,
         "percentage": 0.00525216980264972,
         "category": "religious",
-        "group": "they_group"
-    },
-    {
-        "word": "socialists",
-        "count": 8,
-        "sentiment": 0.0,
-        "percentage": 0.00525216980264972,
-        "category": "ideological_political",
         "group": "they_group"
     },
     {
@@ -655,14 +602,7 @@
         "category": "ideological_political",
         "group": "they_group"
     },
-    {
-        "word": "allies",
-        "count": 7,
-        "sentiment": 0.0,
-        "percentage": 0.0045956485773185046,
-        "category": "ideological_political",
-        "group": "you_group"
-    },
+
     {
         "word": "migrant",
         "count": 7,
@@ -688,14 +628,6 @@
         "group": "they_group"
     },
     {
-        "word": "communist",
-        "count": 7,
-        "sentiment": 0.0,
-        "percentage": 0.0045956485773185046,
-        "category": "ideological_political",
-        "group": "they_group"
-    },
-    {
         "word": "insider",
         "count": 6,
         "sentiment": 0.0,
@@ -709,14 +641,6 @@
         "sentiment": 0.0,
         "percentage": 0.00393912735198729,
         "category": "racial_ethnic",
-        "group": "you_group"
-    },
-    {
-        "word": "base",
-        "count": 6,
-        "sentiment": 0.0,
-        "percentage": 0.00393912735198729,
-        "category": "ideological_political",
         "group": "you_group"
     },
     {

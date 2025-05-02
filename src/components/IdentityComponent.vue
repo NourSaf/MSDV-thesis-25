@@ -56,7 +56,7 @@
         
         <div id="charts-container">
             <div id="chart-you-id" class="bubbel-chart-id"></div>
-            <!-- <div class="chart-divider"></div> -->
+            <div class="chart-divider"></div>
             <div id="chart-they-id" class="bubbel-chart-id"></div>
         </div>
 
@@ -128,7 +128,7 @@ export default {
                         value: d.count,
                         category: d.category,
                         group: d.group,
-                        data: d // Keep original data for reference
+                        data: d 
                     }))
                 }))
             };
@@ -206,79 +206,162 @@ export default {
             const filteredYouHierarchy = this.getFilteredHierarchy(this.youHierarchy);
             const filteredTheyHierarchy = this.getFilteredHierarchy(this.theyHierarchy);
             
-            // Update both charts with animation
-            this.updateChart(this.youSvg, filteredYouHierarchy);
-            this.updateChart(this.theySvg, filteredTheyHierarchy);
+            // Find the maximum value across both datasets for consistent scaling
+            let maxValue = 0;
+            
+            // Check "You" hierarchy
+            if (filteredYouHierarchy && filteredYouHierarchy.children) {
+                filteredYouHierarchy.children.forEach(category => {
+                    if (category.children) {
+                        category.children.forEach(word => {
+                            maxValue = Math.max(maxValue, word.value);
+                        });
+                    }
+                });
+            }
+            
+            // Check "They" hierarchy
+            if (filteredTheyHierarchy && filteredTheyHierarchy.children) {
+                filteredTheyHierarchy.children.forEach(category => {
+                    if (category.children) {
+                        category.children.forEach(word => {
+                            maxValue = Math.max(maxValue, word.value);
+                        });
+                    }
+                });
+            }
+            
+            // Update both charts with animation and consistent scale
+            this.updateChart(this.youSvg, filteredYouHierarchy, maxValue);
+            this.updateChart(this.theySvg, filteredTheyHierarchy, maxValue);
         },
         
-        updateChart(svg, hierarchyData) {
+        updateChart(svg, hierarchyData, maxValue) {
             const width = this.width;
             const height = this.height;
-            const margin = 10;
+            // Increase margin to prevent overflow
+            const margin = 60;
+            const isTheySvg = svg === this.theySvg;
+            const isYouSvg = svg === this.youSvg;
+            const isHighestFilter = this.activeCategory === 'highest';
+            
+            // Apply scaling factor of 4 to you-group SVG when using highest filter
+            const scalingFactor = (isYouSvg && isHighestFilter) ? 4 : 1;
             
             // Clear existing content for a fresh start
             svg.selectAll('*').remove();
+
+            // Create a size scale function with different scaling factors
+            const sizeScale = d3.scaleSqrt()
+                .domain([0, maxValue])
+                .range([10 * scalingFactor, Math.min(width, height) / 6 * scalingFactor]); 
             
-            // Create pack layout
-            const pack = d3.pack()
+            // Prepare data for pack layout
+            const packData = {
+                name: "root",
+                children: []
+            };
+            
+            if (hierarchyData.children) {
+                hierarchyData.children.forEach(category => {
+                    if (category.children) {
+                        category.children.forEach(item => {
+                            packData.children.push({
+                                name: item.name,
+                                value: item.value,
+                                category: item.category,
+                                originalValue: item.value
+                            });
+                        });
+                    }
+                });
+            }
+            
+            // Sort by value (largest first) 
+            packData.children.sort((a, b) => b.value - a.value);
+            
+            // Adjust the number of displayed circles based on scaling factor
+            const availableArea = (width - margin * 2) * (height - margin * 2);
+            // Fewer circles when scaled up
+            const maxCircles = Math.min(isHighestFilter && isYouSvg ? 5 : 40, 
+                                       Math.floor(availableArea / (5000 * (isYouSvg && isHighestFilter ? 4 : 1))));
+            packData.children = packData.children.slice(0, maxCircles);
+            
+            // Use a different approach - create the pack layout first
+            const packLayout = d3.pack()
                 .size([width - margin * 2, height - margin * 2])
-                .padding(3);
+                .padding(isYouSvg && isHighestFilter ? 8 : 2) // Reduced padding values
+                .radius(d => sizeScale(d.value)); // Using sizeScale here with scaling factor
             
-            // Create the hierarchy and apply the pack layout
-            const root = pack(d3.hierarchy(hierarchyData)
-                .sum(d => d.value)
-                .sort((a, b) => b.value - a.value));
+            // Create hierarchy and apply pack layout
+            let root = packLayout(d3.hierarchy(packData)
+                .sum(d => d.value));
+            
+            // Check if any circles exceed boundaries and rescale if needed
+            const leaves = root.leaves();
+            let maxRadius = 0;
+            leaves.forEach(leaf => {
+                maxRadius = Math.max(maxRadius, leaf.r);
+            });
+            
+            // If largest circle is too big, recreate with smaller scale
+            if (maxRadius * 2 > Math.min(width, height) - margin * 2) {
+                // Reduce the scale range, but maintain the scaling factor for highest you-group
+                const adjustedScale = d3.scaleSqrt()
+                    .domain([0, maxValue])
+                    .range([5 * scalingFactor, Math.min(width, height) / 8 * scalingFactor]);
+                
+                // Create new pack layout with adjusted radius function
+                const adjustedPackLayout = d3.pack()
+                    .size([width - margin * 2, height - margin * 2])
+                    .padding(isYouSvg && isHighestFilter ? 8 : 2) // Reduced padding values 
+                    .radius(d => adjustedScale(d.value));
+                
+                // Recreate the hierarchy with adjusted scale
+                root = adjustedPackLayout(d3.hierarchy(packData)
+                    .sum(d => d.value));
+            }
             
             // Create a group element for positioning
             const g = svg.append("g")
                 .attr("transform", `translate(${margin}, ${margin})`);
             
-            // Get leaf nodes (actual word bubbles)
+            // Get leaf nodes
             const nodes = root.leaves();
-
-            // Only render nodes that are in view or close to view
-            const visibleNodes = nodes.filter(d => {
-                return d.x >= -100 && d.x <= width + 100 && 
-                       d.y >= -100 && d.y <= height + 100;
-            });
-            
-            // Limit number of nodes for performance
-            const nodesToRender = visibleNodes.length > 100 
-                ? visibleNodes.sort((a, b) => b.value - a.value).slice(0, 100)
-                : visibleNodes;
             
             // Create the tooltip
             const tooltip = d3.select('#tool-tip-identity');
             
-            // Add bubbles with animation - create groups for each node
+            // Add circles
             const node = g.selectAll("g")
-                .data(nodesToRender)
+                .data(nodes)
                 .join("g")
-                .attr("transform", d => `translate(${d.x},${d.y})`)
-                .attr('class', 'bubble-node');
+                .attr("class", "bubble-node")
+                .attr("transform", d => `translate(${d.x},${d.y})`);
             
-            
-            node.append("circle")
-                .attr("fill", "#ffffff") // Use fixed white color instead of sentiment
-                .attr("stroke", "#ffffff")
+            // Add circle elements with animations
+            const circles = node.append("circle")
+                .attr("fill", isTheySvg ? "#ffffff" : "#212121")
+                .attr("stroke", isTheySvg ? "#212121" : "white")
                 .attr("stroke-width", 1)
-                .attr("r", 0) 
-                .attr("fill-opacity", 0) 
-                .transition() 
-                .duration(800) 
-                .delay((d, i) => i * 30) 
-                .ease(d3.easeCubicOut) 
-                .attr("r", d => d.r) 
-                .attr("fill-opacity", 1) // Fade in to full opacity
+                .attr("r", 0)
+                .attr("fill-opacity", isTheySvg ? 0 : null);
+            
+            
+            circles.transition()
+                .duration(isYouSvg && isHighestFilter ? 1200 : 800) 
+                .delay((d, i) => i * 30)
+                .ease(d3.easeCubicOut)
+                .attr("r", d => d.r)
+                .attr("fill-opacity", isTheySvg ? 1 : null)
                 .on("end", function() {
-                    // After animation completes, attach event handlers
                     d3.select(this)
                         .on("mouseover", function(event, d) {
                             tooltip
                                 .style("opacity", 0.9)
                                 .html(`
                                     <div class="id-tool-tip-title">${d.data.name}</div>
-                                    <div>Count: ${d.data.value}</div>
+                                    <div>Count: ${d.data.originalValue}</div>
                                     <div>Category: ${d.data.category}</div>
                                 `)
                                 .style("left", (event.pageX + 10) + "px")
@@ -293,44 +376,60 @@ export default {
                             tooltip.style("opacity", 0);
                         });
                 });
-            
-            // Add text labels with delayed fade-in animation
-            node.filter(d => d.r > 20)
+
+            // Adjust text size thresholds for scaled circles
+            const textThreshold = isYouSvg && isHighestFilter ? 30 : 15;
+            const countThreshold = isYouSvg && isHighestFilter ? 40 : 20;
+
+            // Add text labels showing the word with animations
+            node.filter(d => d.r > textThreshold)
                 .append("text")
                 .attr("text-anchor", "middle")
-                .style("font-size", d => Math.min(2 * d.r / 7, 14) + "px")
-                .style("fill", "black")
+                .attr("dy", "-0.1em")
+                // Larger max font size for scaled circles
+                .style("font-size", d => Math.min(d.r / 3, isYouSvg && isHighestFilter ? 24 : 16) + "px")
+                .style("fill", isTheySvg ? "#212121" : "white")
                 .style("pointer-events", "none")
-                .style("opacity", 0) // Start invisible
-                .text(d => d.data.name)
+                .style("opacity", 0)
+                .style("transform", "translateY(10px)")
+                .text(d => {
+                    // Adjust truncation thresholds for scaled circles
+                    if ((isYouSvg && isHighestFilter) ? d.r < 80 : d.r < 20) {
+                        return d.data.name.slice(0, 5) + (d.data.name.length > 5 ? "..." : "");
+                    }
+                    if ((isYouSvg && isHighestFilter) ? d.r < 120 : d.r < 30) {
+                        return d.data.name.slice(0, 8) + (d.data.name.length > 8 ? "..." : "");
+                    }
+                    return d.data.name;
+                })
                 .transition()
-                .duration(400)
-                .delay(600) // Wait for circles to mostly grow
-                .style("opacity", 1); // Fade in
-            
-            // Add counts with delayed fade-in animation
-            node.filter(d => d.r > 30)
+                .duration(600)
+                // Longer delay for scaled animation
+                .delay((d, i) => i * 30 + (isYouSvg && isHighestFilter ? 900 : 600))
+                .ease(d3.easeCubicOut)
+                .style("opacity", 1)
+                .style("transform", "translateY(0px)");
+
+            // Add count values with animations
+            node.filter(d => d.r > countThreshold)
                 .append("text")
                 .attr("text-anchor", "middle")
                 .attr("dy", "1em")
-                .style("font-size", d => Math.min(d.r / 7, 12) + "px")
-                .style("fill", "black")
+                // Larger max font size for count in scaled circles
+                .style("font-size", d => Math.min(d.r / 4, isYouSvg && isHighestFilter ? 20 : 14) + "px")
+                .style("fill", isTheySvg ? "#212121" : "white")
+                .style("opacity", 0)
+                .style("transform", "translateY(10px)")
+                // .style("font-weight", "bold")
                 .style("pointer-events", "none")
-                .style("opacity", 0) // Start invisible
-                .text(d => d.data.value)
+                .text(d => d.data.originalValue)
                 .transition()
-                .duration(400)
-                .delay(800) // Wait longer than labels
-                .style("opacity", 0.7);
-            
-            // Create a single mousemove handler at the SVG level
-            svg.on("mousemove", function(event) {
-                if (tooltip.style("opacity") > 0) {
-                    tooltip
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                }
-            });
+                .duration(600)
+                // Longer delay for scaled animation
+                .delay((d, i) => i * 30 + (isYouSvg && isHighestFilter ? 1100 : 800))
+                .ease(d3.easeCubicOut)
+                .style("opacity", 1)
+                .style("transform", "translateY(0px)");
         },
         
         formatCategory(category) {
@@ -452,25 +551,35 @@ export default {
 
 #charts-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 0px;
+    gap: 20px;
     height: 100%;    
     position: relative;
 }
 
 .chart-divider {
-    width: 2px;
-    height: 50%;
-    background-color: rgba(255, 255, 255);
-    margin: 0 10px;
+    width: 1px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .bubbel-chart-id {
     width: 580px; /* Adjusted to account for divider */
     display: flex;
+    flex-direction: column;
     align-items: center;
     position: relative;
+}
+
+.bubbel-chart-id::before {
+    content: attr(data-title);
+    position: absolute;
+    top: -40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
 .id-tool-tip {
@@ -494,6 +603,10 @@ export default {
     margin-bottom: 15px;
     border-bottom: 1px solid rgba(255,255,255,0.3);
     padding-bottom: 3px;
+}
+
+.bubble-node {
+    cursor: pointer; /* Add pointer cursor to all bubble nodes */
 }
 
 .bubble-node circle {

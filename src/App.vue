@@ -14,7 +14,7 @@
       :class="{ 'bold-text': theyScale > 1 }"
       :style="{ transform: `scale(${theyScale})` }"
     >
-      THEY
+      THEM
     </div>
   </div>
   <el-button class="con-btn"
@@ -72,7 +72,7 @@
           <div class="step-content">
             <h3>2017 Election Results</h3>
             <p>
-                In 2017 the AfD secured 12.6 % of the vote and won three constituency seats, marking its first significant entry into Germany’s political landscape.
+                In 2017 the AfD secured <span class="blue-text-highlight">12.6 %</span>  of the vote and won <span class="blue-text-highlight">three constituencies</span>, marking its first significant entry into Germany’s political landscape.
             </p>
           </div>
         </div>
@@ -82,7 +82,7 @@
         <div class="step">
           <div class="step-content">
             <h3>2021 Election Results</h3>
-            <p>In 2021 the AfD won 16 constituency seats—13 more than in 2017.</p>
+            <p>In 2021 the AfD won <span class="blue-text-highlight">16 constituencies</span>, 13 more than in 2017.</p>
           </div>
         </div>
       </article>
@@ -92,7 +92,7 @@
           <div class="step-content">
             <h3>2025 Election Results</h3>
             <p>
-                In 2025 the AfD’s vote share jumped to 20.6 %, twice its 2021 result, and it captured 42 constituencies.
+                In 2025 the AfD’s vote share jumped to <span class="blue-text-highlight">20.6%</span>, twice its 2021 result, and it captured  <span class="blue-text-highlight">42 constituencies</span>.
             </p>
           </div>
         </div>
@@ -612,6 +612,11 @@ body::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
 
-
+.blue-text-highlight{
+  background:#36A7E4 !important;
+  border-radius: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
 
 </style>
