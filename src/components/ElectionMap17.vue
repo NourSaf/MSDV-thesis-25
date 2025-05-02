@@ -105,7 +105,7 @@ export default {
           .attr('d', path)
           .attr('fill', d => {
             // Color AfD districts light blue, others gray
-            return d.properties['17_winners_Winner'] === 'AfD' ? '#36A7E4' : '#CCCCCC';
+            return d.properties['17_winners_Winner'] === 'AfD' ? '#e74c3c' : '#CCCCCC';
           })
           .attr('stroke', '#000000')
           .attr('stroke-width', 0.3);

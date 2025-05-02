@@ -613,10 +613,11 @@ body::-webkit-scrollbar {
 }
 
 .blue-text-highlight{
-  background:#36A7E4 !important;
+  background:#e74c3c !important;
   border-radius: 2px;
   padding-left: 3px;
   padding-right: 3px;
 }
 
 </style>
+
