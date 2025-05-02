@@ -97,13 +97,13 @@ export default {
                 .attr('pointer-events', d => !d.children ? 'none' : null)
                 .on('mouseover', function() {
                     d3.select(this)
-                        .attr('stroke', 'blue')
-                        .attr('stroke-width', 5);
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 3);
                 })
                 .on('mouseout', function() {
                     d3.select(this)
                         .attr('stroke', '#000')
-                        .attr('stroke-width', 1.5);
+                        .attr('stroke-width', 1);
                 })
                 .on('click', (event, d) => {
                     if (focus !== d) {

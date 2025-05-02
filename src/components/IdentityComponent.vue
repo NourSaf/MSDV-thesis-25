@@ -56,7 +56,7 @@
         
         <div id="charts-container">
             <div id="chart-you-id" class="bubbel-chart-id"></div>
-            <div class="chart-divider"></div>
+            <!-- <div class="chart-divider"></div> -->
             <div id="chart-they-id" class="bubbel-chart-id"></div>
         </div>
 
@@ -440,14 +440,14 @@ export default {
     color: black;
 }
 
-.filter-btn.highest {
+/* .filter-btn.highest {
     border-color: #E16036;
     border-width: 2px;
-}
+} */
 
 .filter-btn.highest.active {
-    background-color: #E16036;
-    color: white;
+    background-color: #ffffff;
+    color: black;
 }
 
 #charts-container {

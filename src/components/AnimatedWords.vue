@@ -1,5 +1,5 @@
 <template>
-  <div class="animated-words-container">
+  <div class="animated-words-container" :class="{ 'fade-out': shouldFadeOut }">
     <transition-group name="word" tag="div">
       <div 
         v-for="word in visibleWords" 
@@ -30,12 +30,17 @@ export default {
     return {
       visibleWords: [],
       wordQueue: [],
-      currentId: 0
+      currentId: 0,
+      shouldFadeOut: false
     }
   },
   mounted() {
     this.initializeWordQueue();
     this.startAnimation();
+    
+    setTimeout(() => {
+      this.shouldFadeOut = true;
+    }, 5000);
   },
   methods: {
     initializeWordQueue() {
@@ -59,15 +64,13 @@ export default {
             if (index !== -1) {
               this.visibleWords[index].opacity = 0;
               
-              // Remove word after fade out
               setTimeout(() => {
                 this.visibleWords = this.visibleWords.filter(w => w.id !== word.id);
               }, 1000);
             }
-          }, 2000);
+          }, 1000);
           
-          // Schedule next word
-          setTimeout(addWord, Math.random() * 200 + 100);
+          setTimeout(addWord, Math.random() * 300 + 100);
         }
       };
       
@@ -86,13 +89,29 @@ export default {
   height: 100vh;
   pointer-events: none;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 4s ease;
+}
+
+.animated-words-container.fade-out {
+  opacity: 0;
+  animation: smoothFadeOut 4s forwards;
+}
+
+@keyframes smoothFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .floating-word {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: all 3s ease;
+  transition: all 10s ease;
   color: rgba(255, 255, 255, 0.8);
   white-space: nowrap;
 }

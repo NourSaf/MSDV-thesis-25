@@ -1,16 +1,17 @@
 <template>
   <div class="landing-container">
-    <!-- Add v-show to control visibility of main section -->
     <div class="main-section-landing" :class="{ 'fade-in': showMainSection }">
-        <div class="project-info-wrapper">
-            <h1 class="project-title">Language of Division</h1>
-            <p class="project-description">
+        <div class="project-info-wrapper" :class="{ 'slide-in': showMainSection }">
+            <h1 class="project-title" :class="{ 'fade-in-text': showMainSection }">
+              Language of Division
+            </h1>
+            <p class="project-description" :class="{ 'fade-in-text': showMainSection }">
                 The project investigates the rhetoric of Germany's far-right party. It analyzes transcribed speeches from the party's official YouTube channel using artificial intelligence, word frequency analysis, and natural language processing (NLP). Additionally, it introduces a predictive AI model trained on thousands of far-right speeches and the Left Party's election program to classify how closely a speech aligns with far-right discourse. The project reveals how language fosters political division and explores the potential of AI to identify early warning signs of right-wing radicalization.
             </p>
         </div>
     </div>
     <AnimatedWords 
-      v-if="thematicWords && !showMainSection"
+      v-if="thematicWords && !hideAnimatedWords"
       :words="thematicWords"
       :class="{ 'fade-out': showMainSection }"
     />
@@ -27,7 +28,8 @@ export default {
   },
   data() {
     return {
-      showMainSection: false
+      showMainSection: false,
+      hideAnimatedWords: false
     }
   },
   props: {
@@ -37,10 +39,13 @@ export default {
     }
   },
   mounted() {
-    // Show main section after 10 seconds
     setTimeout(() => {
       this.showMainSection = true
-    }, 10000)
+    }, 7000);
+
+    setTimeout(() => {
+      this.hideAnimatedWords = true
+    }, 8000);
   },
   computed: {
     thematicWords() {
@@ -56,7 +61,7 @@ export default {
         
         return wordArray.map(word => ({
           term: typeof word === 'object' ? word.term : word,
-          frequency: typeof word === 'object' ? word.frequency : 1,
+          frequency: typeof word === 'object' ? word.frequency - 50 : 10,
           category
         }));
       });
@@ -81,7 +86,7 @@ export default {
 
 /* Add fade-in animation */
 .main-section-landing.fade-in {
-  animation: fadeInSection 1.5s forwards;
+  animation: fadeInSection 0.5s forwards;
 }
 
 @keyframes fadeInSection {
@@ -95,29 +100,68 @@ export default {
   }
 }
 
-/* Keep existing styles */
 .project-info-wrapper {
   width: 50%;
   padding-left: auto;
   padding-right: auto;
+  transform: translateX(-100%); /* Start off-screen */
+  opacity: 0;
+}
+
+.project-info-wrapper.slide-in {
+  animation: slideIn 1s forwards;
+  animation-delay: 0.3s; /* Reduced delay */
 }
 
 .project-title {
   margin: 0;
   font-size: 56px;
+  opacity: 0;
+}
+
+.project-title.fade-in-text {
+  animation: fadeInText 1s forwards;
+  animation-delay: 0.8s; /* Reduced delay */
 }
 
 .project-description {
   text-align: justify;
+  opacity: 0;
 }
 
-/* Add fade-out animation for AnimatedWords */
+.project-description.fade-in-text {
+  animation: fadeInText 1s forwards;
+  animation-delay: 1.3s; /* Reduced delay */
+}
+
 .animated-words-container {
-  transition: opacity 1.9s ease;
+  transition: opacity 1s ease; /* Reduced from 1.9s */
 }
 
 .fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

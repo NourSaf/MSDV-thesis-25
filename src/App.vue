@@ -2,8 +2,20 @@
   <Modal :scrollPosition="scrollTop"></Modal>
 
   <div class="you-they">
-    <div class="you-section" :style="{ transform: `scale(${youScale})` }">YOU</div>
-    <div class="they-section" :style="{ transform: `scale(${theyScale})` }">THEY</div>
+    <div 
+      class="you-section" 
+      :class="{ 'bold-text': youScale > 1 }"
+      :style="{ transform: `scale(${youScale})` }"
+    >
+      YOU
+    </div>
+    <div 
+      class="they-section" 
+      :class="{ 'bold-text': theyScale > 1 }"
+      :style="{ transform: `scale(${theyScale})` }"
+    >
+      THEY
+    </div>
   </div>
   <el-button class="con-btn"
     @click="show_all_text_info = !show_all_text_info" 
@@ -101,15 +113,15 @@
           :data="identity_analysis"/>
       </div>
       
-      <!-- <div class="snap-section">
+      <div class="snap-section">
         <ThematicDictionary 
           :data="thematic_dictionary" 
         />
-      </div> -->
+      </div>
 
       <div class="snap-section">
         <h3 class="separator-section">
-         THEMAIC ANALYSIS - KEY THEM TOPICS ACROSS SPEECHES
+         SENTIMENT ANALYSIS - WHAT IS THE TONE OF THE SPEECHES?
         </h3>
       </div>
 
@@ -125,7 +137,7 @@
 
       <div class="snap-section">
         <h3 class="separator-section">
-          The RIGHT-DETECTOR AI <br>
+          WHAT ARE THE PATTERNS IN THE SPEECHES?
         </h3>
       </div>
       
@@ -147,7 +159,7 @@ import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
-// import ThematicDictionary from './components/ThematicDictionary.vue'
+import ThematicDictionary from './components/ThematicDictionary.vue'
 import IdentityComponent from './components/IdentityComponent.vue'
 import RightDetector from './components/RightDetector.vue'
 import KeyTermSentiment from './components/KeyTermSentiment.vue'
@@ -202,12 +214,12 @@ export default {
       return this.show_all_text_info ? div.style.display = "block" : div.style.display = "none"
     },
     youScale() {
-      const bufferZoneWidth = this.windowWidth * 0.03; // 20% of screen width for buffer
+      const bufferZoneWidth = this.windowWidth * 0.06; // 20% of screen width for buffer
       const leftZoneEnd = (this.windowWidth - bufferZoneWidth) / 2;
       return this.mouseX < leftZoneEnd ? 2 : 1;
     },
     theyScale() {
-      const bufferZoneWidth = this.windowWidth * 0.03; // 20% of screen width for buffer
+      const bufferZoneWidth = this.windowWidth * 0.06; // 20% of screen width for buffer
       const rightZoneStart = (this.windowWidth + bufferZoneWidth) / 2;
       return this.mouseX > rightZoneStart ? 2 : 1;
     }
@@ -220,7 +232,7 @@ export default {
     ElectionMap21,
     ElectionMap25,
     SentimentBarChart,
-    // ThematicDictionary,
+    ThematicDictionary,
     IdentityComponent,
     RightDetector,
     KeyTermSentiment,
@@ -402,13 +414,19 @@ export default {
 
 .they-section{
   padding: 60px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   transform-origin: right center;
+  font-weight: normal;
 }
 .you-section{
   padding: 60px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   transform-origin: left center;
+  font-weight: normal;
+}
+
+.bold-text {
+  font-weight: 800;
 }
 
 .con-section{

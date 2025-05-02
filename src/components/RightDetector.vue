@@ -12,7 +12,7 @@
     </div>
 
     <!-- Input Interface -->
-    <div class="input-greet fade-in-out ">Hi, let's detect party speeches</div>
+    <!-- <div class="input-greet fade-in-out ">Hi, let's detect party speeches</div> -->
     <div 
     v-if="!showResults && !isLoading" 
     class="detector-interface fade-in-out"
@@ -243,8 +243,8 @@ export default {
 .relative-text-container{
   position: relative;
   width: 100%;
-  padding: 10px;
-  height: 32px;
+  padding: 20px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
