@@ -220,8 +220,8 @@ export default {
         .attr('width', d => Math.abs(this.xScale(this.normalizeScore(d.sentiment)) - this.xScale(0)))
         .attr("rx", 4) // Rounded corners
         .attr("ry", 4)
-        .attr('fill', d => this.colorScale(this.normalizeScore(d.sentiment)));
-      
+        .attr('fill', d => this.colorScale(this.normalizeScore(d.sentiment)))
+        .style("cursor", 'pointer');
       // Add mouseover effects
       allGroups.selectAll('.bar')
         .on('mouseover', (event, d) => {
@@ -236,10 +236,9 @@ export default {
               <div>Sentiment: ${normalizedScore}%</div>
               <div>Frequency: ${d.frequency}</div>
             `)
-            .style('left', (event.clientX + 10) + 'px')  // Changed to clientX for better positioning
-            .style('top', (event.clientY - 28) + 'px');  // Changed to clientY for better positioning
+            .style('left', (event.clientX + 10) + 'px')  
+            .style('top', (event.clientY - 28) + 'px');
           
-          // Just highlight the bar
           d3.select(event.target)
             .style('opacity', 1)
             .style('stroke', '#333')

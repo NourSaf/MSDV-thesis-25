@@ -82,7 +82,7 @@ export default {
         .attr("height", y.bandwidth()) 
         .attr("width", 0) // Start with width 0 for animation
         .attr("fill", "#ffffff")
-        .attr("opacity", 0.8)
+        .attr("opacity", 1)
         .attr("rx", 4) // Rounded corners
         .attr("ry", 4)
         .on("mouseover", function(event, d) {
@@ -97,9 +97,10 @@ export default {
           
           // Highlight the hovered bar
           d3.select(this)
-            .attr("opacity", 1)
+            .attr("opacity", 0.7)
             .attr("stroke", "#FFF")
-            .attr("stroke-width", 2);
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer");
         })
         .on("mousemove", function(event) {
           // Move tooltip with cursor
@@ -111,7 +112,7 @@ export default {
           // Hide tooltip and remove highlight
           tooltip.style("opacity", 0);
           d3.select(this)
-            .attr("opacity", 0.8)
+            .attr("opacity", 1)
             .attr("stroke", "none");
         })
         .transition() 
