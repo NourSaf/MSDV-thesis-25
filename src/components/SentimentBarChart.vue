@@ -1,8 +1,10 @@
 <template>
   <div class="component-wrapper">
     <div class="text">
-      <div class="title">Emotional Emphasis</div>
-      <div class="sub-title">Total word usage per emotion category</div>
+      <div class="title">Mood Barometer</div>
+      <div class="sub-title">
+        This bar chart measures ten core emotions, positive, negative, trust, fear, anticipation, sadness, anger, joy, surprise, and disgust—embedded in AfD speeches.
+      </div>
     </div>
     <div id="chart-container">
       <div id="sentiment-bar"></div>

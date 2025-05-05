@@ -2,10 +2,10 @@
     <div class="component-wrapper">
         <div class="text">
             <div class="title">
-                Thematic Dictionary
+                AfD Issues Dictionary 
             </div>
             <div class="sub-title">
-                Thematic Dictionary of words that reflect the themes across the speeches
+                This stacked bubble chart sizes each theme by the total words the AfD devotes to it, letting you spot at a glance which issues dominate the party’s discourse and how their emphasis stacks up against one another. 
             </div>
         </div>
         <div id="chart-container">

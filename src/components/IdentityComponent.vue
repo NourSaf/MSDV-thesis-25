@@ -2,10 +2,10 @@
     <div class="component-wrapper">
         <div class="text">
             <div class="title">
-                Identity Words Analysis
+                Mapping <span class="outlined-text">“You”</span> and “Them”
             </div>
             <div class="sub-title">
-                Comparing "Us" vs. "Them" identity words across speeches
+                This interactive bubble chart compares the frequency of in-group (“you”) and out-group (“they”) words across AfD speeches. Filter by theme—national, religious, ideological, cultural, or racial—to see how the party’s rhetoric shifts and intensifies around different topics.
             </div>
                     <!-- Category filter buttons -->
         <div class="filter-controls">
@@ -74,8 +74,8 @@ export default {
     },
     data() {
         return {
-            width: 600,
-            height: 620,
+            width: 800,
+            height: 700,
             activeCategory: 'all',
             youGroupData: [],
             theyGroupData: [],
@@ -499,7 +499,8 @@ export default {
 
 .sub-title {
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    width: 70%;
 }
 
     
@@ -514,7 +515,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 30px;
+
 }
 
 .filter-btn {
@@ -537,10 +538,10 @@ export default {
     color: black;
 }
 
-/* .filter-btn.highest {
-    border-color: #E16036;
-    border-width: 2px;
-} */
+.outlined-text {
+    color: transparent;
+    -webkit-text-stroke: 0.7px white;
+}
 
 .filter-btn.highest.active {
     background-color: #ffffff;

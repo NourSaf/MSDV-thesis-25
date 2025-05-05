@@ -7,7 +7,7 @@
       :class="{ 'bold-text': youScale > 1 }"
       :style="{ transform: `scale(${youScale})` }"
     >
-      YOU
+    <span class="outlined-text">YOU</span>
     </div>
     <div 
       class="they-section" 
@@ -26,7 +26,10 @@
   </el-button>
 
   <div class="con-section" :class="{'slide-in': show_all_text_info, 'slide-out': !show_all_text_info}">
-    <AllScripts :script_data="speeches_data"/>
+    <AllScripts 
+      :script_data="speeches_data" 
+      :is-visible="!show_all_text_info" 
+    />
   </div>
 
   <div class="main-section">
@@ -36,7 +39,7 @@
 
     <div class="snap-section">
         <h3 class="separator-section">
-          MAPPING THE RISE OF THE ALTERNATIVE FOR GERMANY (AFD) PARTY
+          MAPPING THE RISE OF THE ALTERNATIVE FOR GERMANY (AFD)
         </h3>   
     </div>
 
@@ -103,7 +106,6 @@
       <div class="snap-section">
         <h3 class="separator-section">
           HOW DOES THEIR LANGUAGE HELP REINFORCE THIS DIVISION? <br>
-          <!-- WORD COUNT AND FREQUENCIES -->
         </h3>
       </div>
     
@@ -121,7 +123,7 @@
 
       <div class="snap-section">
         <h3 class="separator-section">
-         SENTIMENT ANALYSIS - WHAT IS THE TONE OF THE SPEECHES?
+         SENTIMENT ANALYSIS - HOW DOES THE AfD SOUND?
         </h3>
       </div>
 
@@ -136,9 +138,16 @@
       </div>
 
       <div class="snap-section">
-        <h3 class="separator-section">
-          WHAT ARE THE PATTERNS IN THE SPEECHES?
-        </h3>
+        <div class="separator-section">
+            <h3 class="sep-title">
+              CAN AN ALGORITHM DETECT A SPEECH'S POLITICAL LEANING? <br>
+            </h3>
+            <h6 class="sep-subtitle">
+              Division Detector AI converts any speech into a numerical embedding and pass it to a classifier trained on thousands of parliamentary and campaign texts. The model returns a wether the speech is left, neutral, or right leaning, making it possible to flag right-leaning rhetoric as an early warning signal of growing political polarization. Visitors can  paste any statement into the interface to see how the model evaluates its ideological lean.
+            </h6>  
+        </div>
+
+       
       </div>
       
       <div class="snap-section">
@@ -400,7 +409,16 @@ export default {
   font-family: "Funnel Display", sans-serif;
 
 }
+.sep-title{
+  margin: 0;
+}
 
+.sep-subtitle{
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: 200;
+}
 .you-they{
   position: fixed;
   display: flex;
@@ -409,17 +427,17 @@ export default {
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  font-size: large;
+  font-size: 35px;
 }
 
 .they-section{
-  padding: 60px;
+  padding: 20px;
   transition: all 0.3s ease;
   transform-origin: right center;
   font-weight: normal;
 }
 .you-section{
-  padding: 60px;
+  padding: 20px;
   transition: all 0.3s ease;
   transform-origin: left center;
   font-weight: normal;
@@ -446,7 +464,7 @@ el-button:hover{
   background-color: #212121 !important;
   color: #fff !important;
 }
-.con-btn span {
+.con-btn span{
   background-color: rgba(255, 0, 0, 0) !important;
   color: rgb(71, 71, 71) !important;
 }
@@ -459,7 +477,7 @@ el-button:hover{
 }
 .con-btn{
   position:fixed;
-  right: 40px;
+  right: 20px;
   z-index: 200;
   margin: 20px; 
 }
@@ -594,10 +612,16 @@ html {
 .separator-section{
   display: flex;
   justify-content: center;
+  flex-direction: column;
   font-size: 24px;
-  min-width: 1200px;
-  align-items: center;
+  max-width: 800px;
+  /* align-items: center; */
   text-align: left;
+}
+
+.sep-title{
+  max-width: 1200px;
+  width: 600px;
 }
 
 .scroll-snap-container, .main-section, html, body {

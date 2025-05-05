@@ -62,7 +62,7 @@
       <div class="result-header">Analysis Results</div>
       
       <div class="classification fade-in">
-        <strong>{{ analysisConclusion }}</strong>
+        {{ analysisConclusion }}
       </div>
       
       <div class="result-visualization fade-in">
@@ -71,14 +71,12 @@
         
         <div class="charts-container">
           <div class="chart-column">
-            <div class="chart-title">Similarity</div>
             <div class="radial-chart" ref="similarityChart"></div>
-            <div class="chart-value">{{ result.similarity.toFixed(1) }}%</div>
+            <div class="chart-title">Similarity</div>
           </div>
           <div class="chart-column">
-            <div class="chart-title">{{ dominantParty }} Confidence</div>
             <div class="radial-chart" ref="confidenceChart"></div>
-            <div class="chart-value">{{ dominantConfidence.toFixed(1) }}%</div>
+            <div class="chart-title">{{ dominantParty }} Confidence</div>
           </div>
         </div>
         <div class="probability">
@@ -134,16 +132,16 @@ export default {
     analysisDescription() {
       if (!this.result) return "";
       
-      const similarityHighlight = `<span style="background:#4CAF50; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.similarity.toFixed(1)}%</span>`;
+      const similarityHighlight = `<span style="background:white; color:#212121; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.similarity.toFixed(1)}%</span>`;
       
       if (this.result.rightConfidence > 60) {
         const confidenceHighlight = `<span style="background:#e74c3c; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.rightConfidence.toFixed(1)}%</span>`;
         return `The speech is ${similarityHighlight} similar to AfD party speeches <br> in Germany with ${confidenceHighlight} confidence.`;
       } else if (this.result.leftConfidence > 70) {
-        const confidenceHighlight = `<span style="background:#3498db; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.leftConfidence.toFixed(1)}%</span>`;
+        const confidenceHighlight = `<span style="background:#3d5ec9; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.leftConfidence.toFixed(1)}%</span>`;
         return `The speech is ${similarityHighlight} similar to Die Linke party speeches <br> in Germany with ${confidenceHighlight} confidence.`;
       } else {
-        const confidenceHighlight = `<span style="background:${this.dominantParty === "Right-wing" ? "#e74c3c" : "#3498db"}; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.dominantConfidence.toFixed(1)}%</span>`;
+        const confidenceHighlight = `<span style="background:${this.dominantParty === "Right-wing" ? "#e74c3c" : "#3d5ec9"}; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.dominantConfidence.toFixed(1)}%</span>`;
         return `The speech appears neutral but has ${similarityHighlight} similarity to ${this.result.party === "AFD" ? "AfD" : "Die Linke"} speeches <br> with ${confidenceHighlight} confidence.`;
       }
     },
@@ -296,18 +294,18 @@ export default {
       d3.select(this.$refs.similarityChart).selectAll("*").remove();
       d3.select(this.$refs.confidenceChart).selectAll("*").remove();
       
-      // Create similarity chart with light green color
+      // Create similarity chart with a more neutral color that fits the overall theme
       this.createSingleRadialChart(
         this.$refs.similarityChart, 
         this.result.similarity, 
-        "#4CAF50" // Nice light green color
+        "white" // similarity color
       );
       
       // Create confidence chart
       this.createSingleRadialChart(
         this.$refs.confidenceChart, 
         this.dominantConfidence, 
-        this.dominantParty === "Right-wing" ? "#e74c3c" : "#3498db"
+        this.dominantParty === "Right-wing" ? "#e74c3c" : "#3d5ec9"
       );
     },
     
@@ -326,7 +324,6 @@ export default {
         .append("g")
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       
-    
       const scale = d3.scaleLinear()
         .domain([0, 100])
         .range([0, 2 * Math.PI]);
@@ -368,9 +365,25 @@ export default {
       // Add center circle
       svg.append("circle")
         .attr("r", innerRadius - 2)
-        .style("fill", "none")
+        .style("fill", "#212121") // Use dark background for contrast
         .style("stroke", "white")
         .style("stroke-width", 1);
+      
+      // Add percentage text in the center
+      const percentText = svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.35em")
+        .style("fill", "white")
+        .style("font-size", "16px") 
+        .style("opacity", 0) 
+        .text(`${Math.round(value)}%`);
+        
+      
+      percentText.transition()
+        .delay(650) 
+        .duration(1000)
+        .ease(d3.easeQuadOut) 
+        .style("opacity", 1); 
     }
   }
 };
@@ -454,7 +467,7 @@ export default {
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 800px;
-  gap: 20px;
+  gap: 5px;
   opacity: 1;
   transition: opacity 0.5s ease;
   align-items: center;
@@ -517,7 +530,7 @@ export default {
 }
 
 .result-header {
-  font-size: 50px;
+  font-size: 36px;
   margin-bottom: 10px;
   text-align: center;
   font-weight: bold;
@@ -554,7 +567,7 @@ export default {
 }
 
 .left-color {
-  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  background-color: #3d5ec9;
 }
 
 .similar-speech {
@@ -645,7 +658,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin: 30px 0;
+  margin-bottom: 35px;
 }
 
 .chart-column {
@@ -663,7 +676,7 @@ export default {
 }
 
 .chart-value {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   margin-top: 10px;
 }
