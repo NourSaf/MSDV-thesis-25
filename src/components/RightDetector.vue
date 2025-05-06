@@ -121,6 +121,11 @@ export default {
     analysisConclusion() {
       if (!this.result) return "";
       
+      // Special message for low similarity speeches
+      if (this.result.similarity < 20) {
+        return "This is an undefinable speech";
+      }
+      
       if (this.result.rightConfidence > 60) {
         return "This is right-wing party speech";
       } else if (this.result.leftConfidence > 70) {
@@ -134,6 +139,13 @@ export default {
       
       const similarityHighlight = `<span style="background:white; color:#212121; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.similarity.toFixed(1)}%</span>`;
       
+      // Check if similarity is too low (less than 25%)
+      if (this.result.similarity < 20) {
+        const zeroConfidenceHighlight = `<span style="background:#888; border-radius: 2px; padding-left: 3px; padding-right: 3px;">0.0%</span>`;
+        return `This is an undefinable speech with only ${similarityHighlight} similarity to our dataset and ${zeroConfidenceHighlight} confidence.<br>Please try another speech with more political content.`;
+      }
+      
+      // Original logic for speeches with sufficient similarity
       if (this.result.rightConfidence > 60) {
         const confidenceHighlight = `<span style="background:#e74c3c; border-radius: 2px; padding-left: 3px; padding-right: 3px;">${this.result.rightConfidence.toFixed(1)}%</span>`;
         return `The speech is ${similarityHighlight} similar to AfD party speeches <br> in Germany with ${confidenceHighlight} confidence.`;
@@ -163,6 +175,9 @@ export default {
     },
     dominantConfidence() {
       if (!this.result) return 0;
+      
+      // Return 0 confidence when similarity is too low
+      if (this.result.similarity < 20) return 0;
       
       return this.result.rightConfidence > this.result.leftConfidence 
         ? this.result.rightConfidence 
