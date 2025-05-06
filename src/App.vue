@@ -115,11 +115,11 @@
           :data="identity_analysis"/>
       </div>
       
-      <div class="snap-section">
+      <!-- <div class="snap-section">
         <ThematicDictionary 
           :data="thematic_dictionary" 
         />
-      </div>
+      </div> -->
 
       <div class="snap-section">
         <h3 class="separator-section">
@@ -168,7 +168,7 @@ import ElectionMap17 from './components/ElectionMap17.vue'
 import ElectionMap21 from './components/ElectionMap21.vue'
 import ElectionMap25 from './components/ElectionMap25.vue'
 import SentimentBarChart from './components/SentimentBarChart.vue'
-import ThematicDictionary from './components/ThematicDictionary.vue'
+// import ThematicDictionary from './components/ThematicDictionary.vue'
 import IdentityComponent from './components/IdentityComponent.vue'
 import RightDetector from './components/RightDetector.vue'
 import KeyTermSentiment from './components/KeyTermSentiment.vue'
@@ -241,7 +241,7 @@ export default {
     ElectionMap21,
     ElectionMap25,
     SentimentBarChart,
-    ThematicDictionary,
+    // ThematicDictionary,
     IdentityComponent,
     RightDetector,
     KeyTermSentiment,

@@ -21,8 +21,14 @@ export default {
   props: {
     data: Array
   },
+  data() {
+    return {
+      observer: null,
+      hasAnimated: false
+    }
+  },
   methods: {
-    drawBarChart() {
+    drawBarChart(withAnimation = true) {
       d3.select("#sentiment-bar").selectAll("*").remove();
 
       const margin = { top: 50, right: 100, bottom: 50, left: 150 }; 
@@ -64,17 +70,18 @@ export default {
         .enter()
         .append("text")
         .attr("class", "emotion-label")
-        .attr("x", -10) // Position to the left of the bars
+        .attr("x", -10)
         .attr("y", d => y(d.emotion) + y.bandwidth() / 2)
-        .attr("text-anchor", "end") // Right-align text
-        .attr("dominant-baseline", "middle") // Center vertically
+        .attr("text-anchor", "end")
+        .attr("dominant-baseline", "middle")
         .text(d => d.emotion)
         .style("font-size", "16px")
         .style("fill", "#ffffff")
+        .style("opacity", withAnimation ? 0 : 1) // Start invisible if animating
         .style("font-weight", "500");
       
-      // Draw horizontal bars with animation
-      svg.selectAll(".bar")
+      // Draw horizontal bars with enhanced animation
+      const bars = svg.selectAll(".bar")
         .data(aggregated)
         .enter()
         .append("rect")
@@ -82,9 +89,9 @@ export default {
         .attr("y", d => y(d.emotion)) 
         .attr("x", 0) 
         .attr("height", y.bandwidth()) 
-        .attr("width", 0) // Start with width 0 for animation
+        .attr("width", 0) // Start with width 0
         .attr("fill", "#ffffff")
-        .attr("opacity", 1)
+        .attr("opacity", withAnimation ? 0 : 1) // Start invisible if animating
         .attr("rx", 4) // Rounded corners
         .attr("ry", 4)
         .on("mouseover", function(event, d) {
@@ -94,8 +101,8 @@ export default {
               <div class="tooltip-title">${d.emotion}</div>
               <div class="tooltip-count">Count: ${d.total}</div>
             `)
-            .style("left", (event.clientX + 10) + "px") // Changed from pageX to clientX
-            .style("top", (event.clientY - 40) + "px"); // Changed from pageY to clientY
+            .style("left", (event.clientX + 10) + "px")
+            .style("top", (event.clientY - 40) + "px");
           
           // Highlight the hovered bar
           d3.select(this)
@@ -107,8 +114,8 @@ export default {
         .on("mousemove", function(event) {
           // Move tooltip with cursor
           tooltip
-            .style("left", (event.clientX + 10) + "px") // Changed from pageX to clientX
-            .style("top", (event.clientY - 40) + "px"); // Changed from pageY to clientY
+            .style("left", (event.clientX + 10) + "px")
+            .style("top", (event.clientY - 40) + "px");
         })
         .on("mouseout", function() {
           // Hide tooltip and remove highlight
@@ -116,23 +123,76 @@ export default {
           d3.select(this)
             .attr("opacity", 1)
             .attr("stroke", "none");
-        })
-        .transition() 
-        .duration(1200) 
-        .delay((d, i) => i * 100) 
-        .ease(d3.easeElasticOut.amplitude(0.5)) 
-        .attr("width", d => x(d.total)); 
+        });
+
+      // If animation is enabled, create a more dramatic entrance
+      if (withAnimation) {
+        // Animate labels
+        svg.selectAll(".emotion-label")
+          .transition()
+          .duration(800)
+          .delay((d, i) => 300 + i * 100)
+          .style("opacity", 1);
+
+        
+        bars.transition()
+          .duration(1500)
+          .delay((d, i) => i ) 
+          // .ease(d3.easeElasticOut.amplitude(0.001)) // More pronounced elastic effect
+          .attr("width", d => x(d.total))
+          .attr("opacity", 1);
+      } else {
+        bars.attr("width", d => x(d.total));
+      }
+    },
+
+    setupIntersectionObserver() {
+      // Create observer to detect when chart is in viewport
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of the element is visible
+      };
+
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.hasAnimated) {
+            // Chart is now visible, draw with animation
+            this.drawBarChart(true);
+            this.hasAnimated = true;
+          }
+        });
+      }, options);
+
+      // Start observing the chart container
+      const chartContainer = document.getElementById('chart-container');
+      if (chartContainer) {
+        this.observer.observe(chartContainer);
+      }
     }
   },
+  
   mounted() {
     if (this.data && this.data.length) {
-      this.drawBarChart();
+      this.setupIntersectionObserver();
+      // Initial render without animation, will be replaced when in view
+      this.drawBarChart(false);
     }
   },
+  
+  beforeUnmount() {
+    // Clean up the observer when component is destroyed
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  },
+  
   watch: {
     data(newData) {
       if (newData && newData.length) {
-        this.drawBarChart();
+        this.hasAnimated = false;
+        this.setupIntersectionObserver();
+        this.drawBarChart(false);
       }
     }
   }
