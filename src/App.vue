@@ -418,6 +418,7 @@ export default {
   margin-bottom: 0;
   font-size: 18px;
   font-weight: 200;
+  text-align: justify;
 }
 .you-they{
   position: fixed;
@@ -621,7 +622,7 @@ html {
 
 .sep-title{
   max-width: 1200px;
-  width: 600px;
+  width: 550px;
 }
 
 .scroll-snap-container, .main-section, html, body {
