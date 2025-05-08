@@ -49,7 +49,7 @@
 
     <!-- Loading Indicator -->
     <div v-if="isLoading" class="loading-indicator">
-      <div class="spinner"></div>
+      <div class="loader"></div>
       <div class="loading-text">Thinking</div>
     </div>
 
@@ -76,7 +76,7 @@
           </div>
           <div class="chart-column">
             <div class="radial-chart" ref="confidenceChart"></div>
-            <div class="chart-title">{{ dominantParty }} Confidence</div>
+            <div class="chart-title">Confidence Score</div>
           </div>
         </div>
         <div class="probability">
@@ -127,7 +127,7 @@ export default {
       }
       
       if (this.result.rightConfidence > 60) {
-        return "This is right-wing party speech";
+        return "This is very likely a right-wing party speech";
       } else if (this.result.leftConfidence > 70) {
         return "This is very likely to be left-wing party speech";
       } else {
@@ -188,21 +188,18 @@ export default {
     async handleSubmit() {
       if (!this.inputText.trim()) return;
       
-      // Reset error state for each new submission attempt
       this.showError = false;
       this.error = null;
       
-      // Word count validation
       const wordCount = this.inputText.trim().split(/\s+/).length;
       if (wordCount < 100) {
         this.error = "This is an invalid speech. Please enter a speech with at least 100 words.";
         this.showError = true;
         return;
       }
-      
+
       this.isProcessing = true;
 
-      // Simulate fade-out before processing
       setTimeout(async () => {
         this.isLoading = true;
         this.error = null;
@@ -249,13 +246,13 @@ export default {
             const jsonArray = JSON.parse(jsonData);
             console.log("Parsed JSON array:", jsonArray);
             
-            // Structure the full data from the response
+            //data restructuring
             const structuredData = {
-              party: jsonArray[0],                 // "AFD" or "Die Linke"
-              similarity: jsonArray[1],            // Similarity score
-              rightConfidence: jsonArray[2],       // Right-wing confidence
-              leftConfidence: jsonArray[3],        // Left-wing confidence
-              similarSpeech: jsonArray[4] || ""    // Most similar speech
+              party: jsonArray[0],                 
+              similarity: jsonArray[1],            
+              rightConfidence: jsonArray[2],       
+              leftConfidence: jsonArray[3],        
+              similarSpeech: jsonArray[4] || ""    
             };
             console.log("Structured data:", structuredData);
 
@@ -269,19 +266,19 @@ export default {
           console.error("Error analyzing text:", error);
           this.error = `Analysis failed: ${error.message}`;
         } finally {
-          // Ensure the spinner is shown for at least 2 seconds
+          
           setTimeout(() => {
             this.isLoading = false;
             this.isProcessing = false;
             this.showResults = true;
             
-            // Create radial chart after results are shown
+            
             this.$nextTick(() => {
               this.createRadialChart();
             });
-          }, 2000); // 2-second delay
+          }, 2500); 
         }
-      }, 500); // Delay for fade-out animation
+      }, 500); 
     },
     
     resetInterface() {
@@ -617,21 +614,23 @@ export default {
   text-align: center;
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top: 5px solid white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+.loader {
+  width: 120px;
+  height: 20px;
+  background: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 33%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.1) 66%)
+    #212121;
+  background-size: 300% 100%;
+  animation: loaderAnimation 1.5s infinite linear;
+  border-radius: 10px;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@keyframes loaderAnimation {
+  0% {
+    background-position: 100% 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    background-position: 0 0;
   }
 }
 
@@ -639,7 +638,6 @@ export default {
   margin-top: 10px;
   color: white;
   font-size: 16px;
-
 }
 
 .result-visualization {

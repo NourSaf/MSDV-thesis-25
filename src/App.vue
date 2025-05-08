@@ -143,7 +143,7 @@
               CAN AN ALGORITHM DETECT A SPEECH'S POLITICAL LEANING? <br>
             </h3>
             <h6 class="sep-subtitle">
-              Division Detector AI converts any speech into a numerical embedding and pass it to a classifier trained on thousands of parliamentary and campaign texts. The model returns a wether the speech is left, neutral, or right leaning, making it possible to flag right-leaning rhetoric as an early warning signal of growing political polarization. Visitors can  paste any statement into the interface to see how the model evaluates its ideological lean.
+              Division Detector AI converts any speech into a numerical embedding and pass it to a classifier trained on thousands of parliamentary and campaign texts. The model returns whether the speech is left, neutral, or right leaning, making it possible to flag right-leaning rhetoric as an early warning signal of growing political polarization. Visitors can  paste any statement into the interface to see how the model evaluates its ideological lean.
             </h6>  
         </div>
 

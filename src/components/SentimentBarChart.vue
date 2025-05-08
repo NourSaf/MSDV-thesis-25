@@ -87,12 +87,12 @@ export default {
         .append("rect")
         .attr("class", "bar")
         .attr("y", d => y(d.emotion)) 
-        .attr("x", 0) 
-        .attr("height", y.bandwidth()) 
-        .attr("width", 0) // Start with width 0
+        .attr("x", 0)
+        .attr("height", y.bandwidth())
+        .attr("width", 0)
         .attr("fill", "#ffffff")
-        .attr("opacity", withAnimation ? 0 : 1) // Start invisible if animating
-        .attr("rx", 4) // Rounded corners
+        .attr("opacity", withAnimation ? 0 : 1)
+        .attr("rx", 4)
         .attr("ry", 4)
         .on("mouseover", function(event, d) {
           // Show tooltip on hover
