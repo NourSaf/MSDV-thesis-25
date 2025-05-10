@@ -2,7 +2,7 @@
     <div class="component-wrapper">
         <div class="text">
             <div class="title">
-                Mapping <span class="outlined-text">“You”</span> and “Them”
+                Mapping “<span class="outlined-text">You</span>” and “Them”
             </div>
             <div class="sub-title">
                 This interactive bubble chart compares the frequency of in-group (“you”) and out-group (“they”) words across AfD speeches. Filter by theme—national, religious, ideological, cultural, or racial—to see how the party’s rhetoric shifts and intensifies around different topics.
