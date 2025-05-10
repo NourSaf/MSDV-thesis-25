@@ -45,9 +45,9 @@
         <div>
             The analysis is supplemented by official German federal election results data from:
             <ul class="dataset-sources">
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2017). <br> <a class="link-data" href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results (Open Data)</a></li>
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2021). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2025). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
+                <li>Bundeswahlleiterin. (2017). <br> <a class="link-data" href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results (Open Data)</a></li>
+                <li>Bundeswahlleiterin. (2021). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
+                <li>Bundeswahlleiterin. (2025). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
             </ul>
         </div>
         <a href="https://huggingface.co/spaces/NourSafadi95/right-detector-ai/tree/main" target="_blank" class="source-link">
