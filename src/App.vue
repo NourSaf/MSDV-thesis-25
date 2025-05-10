@@ -1,4 +1,18 @@
 <template>
+  <!-- Add responsive overlay -->
+  <div class="screen-size-overlay" v-if="isSmallScreen">
+    <div class="overlay-content">
+      <div class="overlay-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm1 3a1 1 0 0 0-2 0v5a1 1 0 0 0 2 0V3zm0 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"/>
+        </svg>
+      </div>
+      <h2>Screen Size Too Small</h2>
+      <p>This website is only available on bigger screens.</p>
+      <p>Please use a laptop or tablet to see the full content.</p>
+    </div>
+  </div>
+
   <Modal :scrollPosition="scrollTop"></Modal>
 
   <div class="you-they">
@@ -206,6 +220,9 @@ export default {
       keySentimentObserver: null,
       mouseX: 0,
       windowWidth: 0,
+      isSmallScreen: false,
+      screenWidth: window.innerWidth,
+      minScreenWidth: 1024
     }
   },
   computed:{
@@ -304,6 +321,12 @@ export default {
     document.addEventListener('mousemove', this.handleMouseMove);
     
     window.addEventListener("scroll", this.onScroll);
+
+    // Check screen size on initial load
+    this.checkScreenSize();
+    
+    // Add resize event listener to check screen size on resize
+    window.addEventListener('resize', this.checkScreenSize);
   },
   unmounted() {
     window.removeEventListener("scroll", this.onScroll);
@@ -318,6 +341,9 @@ export default {
     
     window.removeEventListener('resize', this.handleResize);
     document.removeEventListener('mousemove', this.handleMouseMove);
+
+    // Remove the resize event listener
+    window.removeEventListener('resize', this.checkScreenSize);
   },
   methods: {
     onScroll(/*event*/){
@@ -401,6 +427,10 @@ export default {
     },
     handleResize() {
       this.windowWidth = window.innerWidth;
+    },
+    checkScreenSize() {
+      this.screenWidth = window.innerWidth;
+      this.isSmallScreen = this.screenWidth < this.minScreenWidth;
     }
   }
 }
@@ -654,5 +684,57 @@ body::-webkit-scrollbar {
   min-height: 100vh;
 }
 
+/* Add styles for the screen size overlay */
+.screen-size-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #121212;
+  z-index: 10000; /* Ensure it's above everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.overlay-content {
+  max-width: 90%;
+  padding: 2rem;
+  background-color: #212121;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.overlay-icon {
+  margin-bottom: 1rem;
+  color: #e74c3c;
+}
+
+.overlay-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.overlay-content p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1023px) {
+  /* Hide scrollbars on small screens */
+  body {
+    overflow: hidden;
+  }
+}
 </style>
 
