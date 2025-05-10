@@ -154,6 +154,9 @@
         <RightDetector/>
       </div>
       
+      <div class="snap-section sources-section">
+        <Sources />
+      </div>
     </div>
 
   </div>
@@ -172,7 +175,7 @@ import SentimentBarChart from './components/SentimentBarChart.vue'
 import IdentityComponent from './components/IdentityComponent.vue'
 import RightDetector from './components/RightDetector.vue'
 import KeyTermSentiment from './components/KeyTermSentiment.vue'
-
+import Sources from './components/Sources.vue'
 
 import * as d3 from 'd3'
 import scrollama from "scrollama";
@@ -245,6 +248,7 @@ export default {
     IdentityComponent,
     RightDetector,
     KeyTermSentiment,
+    Sources
   },
   mounted(){
     this.setupIdentityObserver();
@@ -580,7 +584,7 @@ figure {
   
 }
 
-/* Keep figure sticky while maintaining scrollama behavior */
+
 #scrolly figure {
   position: sticky;
   top: 0;
@@ -591,7 +595,7 @@ figure {
 }
 
 .scroll-snap-container {
-  height: 100vh; /* Ensure container takes full height */
+  height: 100vh; 
   overflow-y: auto;
 }
 
@@ -642,6 +646,11 @@ body::-webkit-scrollbar {
   border-radius: 2px;
   padding-left: 3px;
   padding-right: 3px;
+}
+
+.sources-section {
+  background-color: #212121;
+  min-height: 100vh;
 }
 
 </style>
