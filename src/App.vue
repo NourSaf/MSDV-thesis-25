@@ -482,7 +482,8 @@ el-button:hover{
 }
 .con-btn{
   position:fixed;
-  right: 20px;
+  right: 10px;
+  top: 5px;
   z-index: 200;
   margin: 20px; 
 }

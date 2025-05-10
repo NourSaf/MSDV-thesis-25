@@ -2,7 +2,6 @@
   <div class="sources-wrapper">
     <div class="sources-content">
       
-      
       <div class="tech-section">
         <h3>This project was built with</h3>
         <div class="tech-grid">
@@ -30,6 +29,10 @@
             <div class="tech-icon"><img src="../assets/qgis-logo.svg" alt="QGIS" /></div>
             <div class="tech-name">QGIS</div>
           </div>
+          <div class="tech-item">
+            <div class="tech-icon"><img src="../assets/git-logo.svg" alt="git" /></div>
+            <div class="tech-name">git</div>
+          </div>
         </div>
       </div>
       
@@ -42,9 +45,9 @@
         <div>
             The analysis is supplemented by official German federal election results data from:
             <ul class="dataset-sources">
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2017). <a href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results</a></li>
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2021). <a href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
-                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2025). <a href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2017). <br> <a class="link-data" href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results (Open Data)</a></li>
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2021). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2025). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
             </ul>
         </div>
         <a href="https://huggingface.co/spaces/NourSafadi95/right-detector-ai/tree/main" target="_blank" class="source-link">
@@ -54,7 +57,7 @@
       </div>
       
       <div class="implementation-section">
-        <h3>Technical Implementation</h3>
+        <h3>Machine Learning Model Implementation</h3>
         <p>
           The AI model is hosted on Hugging Face and integrated with this webpage using Gradio clients. <br>
           The interface allows real-time analysis of political speech patterns and ideological leanings.
@@ -106,8 +109,8 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
-  margin: 30px 0 15px;
+  font-size: 20px;
+  margin: 15px 0 15px;
   font-weight: 400;
 }
 
@@ -128,7 +131,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100px;
+  width: 95px;
 }
 
 .tech-icon {
@@ -146,7 +149,7 @@ p {
 }
 
 .tech-name {
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -177,9 +180,15 @@ p {
 }
 
 .thesis-info {
-  margin-top: 40px;
+  margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.link-data {
+    color: #757575;
+    text-decoration: none;
+    text-decoration: underline;
 }
 
 .copyright {
