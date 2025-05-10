@@ -10,4 +10,4 @@ This project is part of the **Master's of Science in Data Visualization** thesis
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the MIT License. See the `MIT License` file for more details.
