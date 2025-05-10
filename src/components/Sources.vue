@@ -23,18 +23,30 @@
             <div class="tech-name">Node.js</div>
           </div>
           <div class="tech-item">
-            <div class="tech-icon"><img src="../assets/npm.svg" alt="Node.js" /></div>
+            <div class="tech-icon"><img src="../assets/npm.svg" alt="npm" /></div>
             <div class="tech-name">npm</div>
+          </div>
+          <div class="tech-item">
+            <div class="tech-icon"><img src="../assets/qgis-logo.svg" alt="QGIS" /></div>
+            <div class="tech-name">QGIS</div>
           </div>
         </div>
       </div>
       
       <div class="dataset-section">
-        <h3>Dataset Information</h3>
+        <h3>Data Information</h3>
         <p>
           This project analyzes 1,912 speeches from Germany's political spectrum, primarily from the AfD and Die Linke parties. 
           The speeches were transcribed, translated, and processed using natural language processing techniques.
         </p>
+        <div>
+            The analysis is supplemented by official German federal election results data from:
+            <ul class="dataset-sources">
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2017). <a href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results</a></li>
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2021). <a href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
+                <li>Federal Returning Officer of Germany (Bundeswahlleiterin). (2025). <a href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
+            </ul>
+        </div>
         <a href="https://huggingface.co/spaces/NourSafadi95/right-detector-ai/tree/main" target="_blank" class="source-link">
           <img src="../assets/huggingface-logo.svg" alt="Hugging Face" class="source-icon" />
           View the model on Hugging Face
