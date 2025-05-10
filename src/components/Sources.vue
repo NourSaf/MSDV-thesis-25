@@ -22,6 +22,10 @@
             <div class="tech-icon"><img src="../assets/nodejs-logo.svg" alt="Node.js" /></div>
             <div class="tech-name">Node.js</div>
           </div>
+          <div class="tech-item">
+            <div class="tech-icon"><img src="../assets/npm.svg" alt="Node.js" /></div>
+            <div class="tech-name">npm</div>
+          </div>
         </div>
       </div>
       
