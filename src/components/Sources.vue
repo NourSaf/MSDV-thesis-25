@@ -1,10 +1,10 @@
 <template>
   <div class="sources-wrapper">
     <div class="sources-content">
-      <h2>Technical Information</h2>
+      
       
       <div class="tech-section">
-        <h3>Built with</h3>
+        <h3>This project was built with</h3>
         <div class="tech-grid">
           <div class="tech-item">
             <div class="tech-icon"><img src="../assets/vue-logo.svg" alt="Vue.js" /></div>
@@ -66,7 +66,7 @@
       
       <div class="thesis-info">
         <p>
-          This project was created as part of a Master's of Science thesis at Parsons School of Design and Technology, The New School in New York.
+          This project was created as part of a Master's of Science thesis at Parsons School of Design and Technology, The New School in New York under the supervision of Professor of Data Visualization Daniel Sauter and Machine Learning Professor Thiago Hersan.
         </p>
       </div>
       
