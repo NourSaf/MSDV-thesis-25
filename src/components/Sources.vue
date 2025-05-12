@@ -59,8 +59,7 @@
       <div class="implementation-section">
         <h3>Machine Learning Model Implementation</h3>
         <p>
-          The AI model is hosted on Hugging Face and integrated with this webpage using Gradio client. <br>
-          The interface allows real-time analysis of political speech patterns and ideological leanings.
+          The AI model is hosted on Hugging Face Spaces and integrated with this webpage using Gradio client, via standard HTTP requests (fetch/axios) to the auto-generated REST endpoints.
         </p>
         <p>
           Visualizations were created using D3.js and deployed through GitHub Pages.
@@ -69,12 +68,12 @@
       
       <div class="thesis-info">
         <p>
-          This project was created as part of a Master's of Science thesis at Parsons School of Design and Technology, The New School in New York under the supervision of Professor of Data Visualization Daniel Sauter and Machine Learning Professor Thiago Hersan.
+          This project was created as part of a Master's of Science thesis at Parsons School of Design and Technology, The New School in New York under the supervision of Professor of Data Visualization Daniel Sauter for the whole project and the Machine Learning part was supervised by Professor Thiago Hersan.
         </p>
       </div>
       
       <div class="copyright">
-        © 2025 Nour Safadi
+        © 2025 Nour Al Safadi
       </div>
     </div>
   </div>
