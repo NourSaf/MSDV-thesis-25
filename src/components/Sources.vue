@@ -59,7 +59,7 @@
       <div class="implementation-section">
         <h3>Machine Learning Model Implementation</h3>
         <p>
-          The AI model is hosted on Hugging Face and integrated with this webpage using Gradio clients. <br>
+          The AI model is hosted on Hugging Face and integrated with this webpage using Gradio client. <br>
           The interface allows real-time analysis of political speech patterns and ideological leanings.
         </p>
         <p>
