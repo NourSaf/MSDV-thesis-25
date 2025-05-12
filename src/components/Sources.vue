@@ -10,6 +10,10 @@
             <div class="tech-name">Vue.js</div>
           </div>
           <div class="tech-item">
+            <div class="tech-icon"><img src="../assets/python-logo.svg" alt="python" /></div>
+            <div class="tech-name">Python</div>
+          </div>
+          <div class="tech-item">
             <div class="tech-icon"><img src="../assets/d3-logo.svg" alt="D3.js" /></div>
             <div class="tech-name">D3.js</div>
           </div>
@@ -39,21 +43,18 @@
       <div class="dataset-section">
         <h3>Data Information</h3>
         <p>
-          This project analyzes 1,912 speeches from Germany's political spectrum, primarily from the AfD and Die Linke parties. 
+          1,912 official speeches from Germany's right- and left-wing parties, primarily from the AfD and Die Linke parties. 
           The speeches were transcribed, translated, and processed using natural language processing techniques.
         </p>
         <div>
-            The analysis is supplemented by official German federal election results data from:
+            The analysis is supplemented by official German federal election results data for geographic mapping from:
             <ul class="dataset-sources">
                 <li>Bundeswahlleiterin. (2017). <br> <a class="link-data" href="https://bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse.html" target="_blank">2017 Federal Election Results (Open Data)</a></li>
                 <li>Bundeswahlleiterin. (2021). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/opendata.html" target="_blank">2021 Federal Election Results (Open Data)</a></li>
                 <li>Bundeswahlleiterin. (2025). <br> <a class="link-data" href="https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata.html" target="_blank">2025 Federal Election Results (Open Data)</a></li>
             </ul>
         </div>
-        <a href="https://huggingface.co/spaces/NourSafadi95/right-detector-ai/tree/main" target="_blank" class="source-link">
-          <img src="../assets/huggingface-logo.svg" alt="Hugging Face" class="source-icon" />
-          View the model on Hugging Face
-        </a>
+       
       </div>
       
       <div class="implementation-section">
@@ -61,14 +62,18 @@
         <p>
           The AI model is hosted on Hugging Face Spaces and integrated with this webpage using Gradio client, via standard HTTP requests (fetch/axios) to the auto-generated REST endpoints.
         </p>
+        <a href="https://huggingface.co/spaces/NourSafadi95/right-detector-ai/tree/main" target="_blank" class="source-link">
+          <img src="../assets/huggingface-logo.svg" alt="Hugging Face" class="source-icon" />
+          View the model on Hugging Face
+        </a>
         <p>
-          Visualizations were created using D3.js and deployed through GitHub Pages.
+          Visualizations were created using D3.js and deployed through GitHub Pages using git.
         </p>
       </div>
       
       <div class="thesis-info">
         <p>
-          This project was created as part of a Master's of Science thesis at Parsons School of Design and Technology, The New School in New York under the supervision of Professor of Data Visualization Daniel Sauter for the whole project and the Machine Learning part was supervised by Professor Thiago Hersan.
+          This project was created as part of my Master's of Science thesis at Parsons School of Design and Technology, The New School in New York under the supervision of Professor of Data Visualization Daniel Sauter and the Machine Learning part was supervised by Professor Thiago Hersan.
         </p>
       </div>
       
@@ -122,15 +127,15 @@ p {
 .tech-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin: 20px 0;
+  gap: 15px;
+  margin: 10px 0;
 }
 
 .tech-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95px;
+  width: 80px;
 }
 
 .tech-icon {
