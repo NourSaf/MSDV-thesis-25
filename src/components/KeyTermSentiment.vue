@@ -2,10 +2,10 @@
   <div class="component-wrapper">
     <div class="text">
       <div class="title">
-        Keywords wihtin Themes Sentiment Index
+        Keywords within Themes Sentiment Index
       </div>
       <div class="sub-title">
-        This view zooms in on individual keywords, charting their average sentiment—from –100 (strongly negative) to +100 (strongly positive)—across all AfD speeches. Filter by theme to see how tone shifts when the party talks about identity, economics, environment, political, security, and health.
+        This view zooms in on individual keywords, charting their average sentiment across sentences, from –100 (strongly negative) to +100 (strongly positive), across all AfD speeches. Filter by theme to see how tone shifts when the party talks about identity, economics, environment, political, security, and health.
       </div>
       
       <div class="theme-filters">

@@ -6,7 +6,9 @@
               Language of Division
             </h1>
             <p class="project-description" :class="{ 'fade-in-text': showMainSection }">
-              Language of Division investigates the rhetoric of Germany’s far-right AfD by applying artificial intelligence to transcripts of speeches from the party’s official YouTube channel, first uncovering recurrent themes and linguistic patterns and then deploying a custom model, trained on thousands of parliamentary and campaign speeches, to predict the political leaning of any new text. In doing so, the project shows how carefully crafted language fuels polarization and illustrates the potential of AI to flag early warning signs of radicalization and societal fracture.
+              Language of Division explores how Germany’s far-right party, the AfD, uses language by analyzing their official parliamentary speeches and interviews from their YouTube channels. The project uses Natural Language Processing (NLP) to find common themes and patterns in their speech.
+              <br><br>
+              It then uses a custom-built model, trained on thousands of political speeches, to predict the political leaning of new texts. This shows how political language can increase division in society and how AI can help detect early signs of radicalization and social tension.
             </p>
         </div>
     </div>
